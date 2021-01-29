@@ -1,4 +1,4 @@
-# Git Cheatsheet
+# Python 3 Cheatsheet
 #### References:
 
 These notes came from the following sources:
@@ -11,23 +11,20 @@ These notes came from the following sources:
 
 The `print()` function adds spaces between strings, and a newline at the end
 ```python
-print(99,'bottles','would be enough.\n') 
+print(99,'bottles','would be enough.\n')   # 99 bottles would be enough
 ```
-    99 bottles would be enough
 
 Strings can be enclosed by either single or double quotes
 ```python
-a = 'snap'; print(a)            #snap
-b = "crackle"; print(b,'\n')    #crackle
+a = 'snap'; print(a)            # snap
+b = "crackle"; print(b,'\n')    # crackle
 ```
 
 You can combine quotes so that strings can contain ' or "
 ```python
-c = "and I said 'nay' to him"; print(c)     
-d = 'a captive double quote (")'; print(d)
+c = "and I said 'nay' to him"; print(c)     # and I said 'nay' to him 
+d = 'a captive double quote (")'; print(d)  # a captive double quote (") 
 ```
-    and I said 'nay' to him 
-    a captive double quote (") 
 
 You can also just use escape characters
 ```python
@@ -172,7 +169,7 @@ print(setup.upper())       #A DUCK GOES INTO A BAR...
 
 Uncapitalize all letters
 ```python
-print(setup.lower())       #a duck foes into a bar...
+print(setup.lower())       #a duck goes into a bar...
 ```
 
 Swap upper and lower case
@@ -225,9 +222,173 @@ print(list(a_tiple))
 ```
     ['ready', 'fire', 'aim']
 
-Access elements in a list
+Access/assign elements in a list
 ```python
-marxes = ['Grucho', 'Chico', 'Harpo']
+marxes = ['Groucho', 'Chico', 'Harpo']
 print(marxes[0])  #Groucho
 print(marxes[-1]) #Harpo
+marxes[2] = 'Wanda'
+marxes;  #['Groucho', 'Chico', 'Wanda']
 ```
+
+Lists of lists
+```python
+small_birds = ['hummingbird', 'finch']
+extinct_birds = ['dodo', 'pigeon']
+all_birds = [small_birds, extinct_birds, 'macaw']
+all_birds; all_birds[0]; allbirds[1][0];
+```
+    [['hummingbird', 'finch'], ['dodo', 'pigeon'], 'macaw']
+    ['hummingbird', 'finch']
+    'dodo' 
+    
+Slicing
+* think of indices as pointing between elements
+     +---+---+---+---+---+
+     | A | b | c | d | e |
+     +---+---+---+---+---+
+     0   1   2   3   4   5
+    -5  -4  -3  -2  -1
+```python
+marxes = ['Groucho', 'Chico', 'Harpo']
+marxes[0:2]   # ['Groucho', 'Chico']
+marxes[::2]   # ['Groucho', 'Harpo']  (stepsize=2 right)
+marxes[::-2]  # ['Harpo', 'Groucho']  (start at end and go left)
+marxes[::-1]  # ['Harpo', 'Chico', 'Groucho']  (reverse the list)
+```
+
+Append single element to end of list
+```python
+marxes = ['Groucho', 'Chico', 'Harpo']
+marxes.append('Zeppo'); marxes
+```
+    ['Groucho', 'Chico', 'Harpo', 'Zeppo']
+
+Append single element at specific point in list
+```python
+marxes = ['Groucho', 'Chico', 'Harpo']
+marxes.insert(3, 'Gummo'); marxes
+marxes.insert(10, 'Karl'); marxes  # offset beyond end of list inserts at end
+marxes.insert(0, 'Bobbo'); marxes  # offset 0 inserts at beginning of list
+```
+    ['Groucho', 'Chico', 'Gummo', 'Harpo']
+    ['Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
+    ['Bobbo', 'Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
+   
+Delete single element of a list   
+```python
+marxes = ['Groucho', 'Chico', 'Harpo', 'Gummo', 'Zeppo']
+del marxes[2]; marxes
+del marxes[-1]; marxes
+```
+    ['Groucho', 'Chico', 'Gummo', 'Zeppo']
+    ['Groucho', 'Chico', 'Gummo']
+
+Delete single element of list by name
+```python
+marxes = ['Groucho', 'Chico', 'Harpo', 'Gummo', 'Zeppo']
+marxes.remove('Gummo'); marxes
+```
+    ['Groucho', 'Chico', 'Harpo', 'Zeppo']
+   
+Get item from list and delete using pop()   
+* note that `pop(0)` returns head of the list, `pop(-1)` returns tail
+```python
+marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
+marxes.pop()   # 'Zeppo'
+marxes;        # ['Groucho', 'Chico', 'Harpo']
+marxes.pop(1); # 'Chico'
+marxes;        # ['Groucho', 'Harpo']
+```
+  
+Get index of item in list by name
+```python
+marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
+marxes.index('Chico')  # 1
+```
+  
+Combine/merge lists
+```python
+marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
+others = ['Gummo', 'Karl']
+marxes.extend(others); marxes;  # alternatively, marxes += others
+```
+    ['Groucho', 'Chico', 'Harpo', 'Zeppo', 'Gummo', 'Karl']
+    
+Check for element in list
+```python
+marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
+'Groucho' in marxes  # True
+'Bob' in marxes      # False
+```
+
+Count occurances of element in a list
+```python
+marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
+marxes.count('Harpo')  # 1
+```
+
+Convert elements of list to string
+```python
+marxes = ['Groucho', 'Chico', 'Harpo']
+', '.join(marxes)  # 'Groucho, Chico, Harpo'
+```
+
+Sort a list
+```python
+marxes = ['Groucho', 'Chico', 'Harpo']
+sorted_marxes = sorted(marxes)  # creates a copy
+sorted_marxes; # ['Chico', 'Groucho', 'Harpo']
+marxes.sort()  # overwrites original list
+marxes;        # ['Chico', 'Groucho', 'Harpo']
+numbers = [2, 1, 4.0, 3]
+numbers.sort(reverse=True)  # reverse sort
+numbers;       # [4.0, 3, 2, 1]
+```
+
+Get length of list
+```python
+marxes = ['Groucho', 'Chico', 'Harpo']
+len(marxes)  # 3
+```
+
+Copy a list
+* note that if you just use `b=a` then `b` and `a` will point to the same object in memory, which you probably don't want
+```python
+a = [1, 2, 3]
+b = a.copy()
+c = list(a)
+d = a[:]
+```
+
+### Tuples
+
+* tuples are just immutable lists and elements can't be added or deleted after the tuple is defined
+
+```python
+empty_tuple = ()
+one_marx    = ('Groucho')                    # ('Groucho',)
+marx_tuple  = ('Groucho', 'Chico', 'Harpo')  # ('Groucho', 'Chico', 'Harpo')
+a, b, c = marx_tuple
+a  # 'Groucho'
+b  # 'Chico'
+c  # 'Harpo'
+```
+
+Swap values/strings using tuples
+```python
+password = 'swordfish'
+icecream = 'tuttifrutti'
+password, icecream = icecream, password
+password  # 'tuttifrutti'
+icecream  # 'swordfish'
+```
+
+Convert list to tuple
+```python
+marx_list  = ['Groucho', 'Chico', 'Harpo']
+tuple(marx_list)  # ('Groucho', 'Chico', 'Harpo')
+```
+
+### Dictionaries
+
