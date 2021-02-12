@@ -196,7 +196,7 @@ print(setup.replace('a ','a famous ', 100))
 ```
     a famous duck goes into a famous bar...
 
-### Define some lists
+### Lists
 ```python
 empty_list = [ ]
 weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -244,11 +244,12 @@ all_birds; all_birds[0]; allbirds[1][0];
     
 Slicing
 * think of indices as pointing between elements
-     +---+---+---+---+---+
+```     +---+---+---+---+---+
      | A | b | c | d | e |
      +---+---+---+---+---+
      0   1   2   3   4   5
     -5  -4  -3  -2  -1
+```
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo']
 marxes[0:2]   # ['Groucho', 'Chico']
@@ -391,4 +392,118 @@ tuple(marx_list)  # ('Groucho', 'Chico', 'Harpo')
 ```
 
 ### Dictionaries
+
+Converting tuples/lists to dictionaries
+```python
+# Convert a list (of two-item lists) to dict
+alphabet1 = [ ['a', 'b'], ['c', 'd'], ['e', 'f'] ]
+dict(alphabet1)  # {'c': 'd', 'a': 'b', 'e': 'f'}
+
+# Convert a list (of two-item tuples) to dict
+alphabet2 = [ ('a', 'b'), ('c', 'd'), ('e', 'f') ]
+dict(alphabet2)  # {'c': 'd', 'a': 'b', 'e': 'f'}
+
+# Convert a tuple (of two-item lists) to dict
+alphabet3 = ( ['a', 'b'], ['c', 'd'], ['e', 'f'] )
+dict(alphabet3)  # {'c': 'd', 'a': 'b', 'e': 'f'}
+
+# Convert a tuple (of two-character strings) to dict
+alphabet4 = [ 'ab', 'cd', 'ef' ]
+dict(alphabet4)  # {'c': 'd', 'a': 'b', 'e': 'f'}
+
+# Convert a list (of two-character strings) to dict
+alphabet4 = ( 'ab', 'cd', 'ef' )
+dict(alphabet4)  # {'c': 'd', 'a': 'b', 'e': 'f'}
+
+```
+
+Add or change item by key
+```python
+pythons = { 'Chapman':'Graham', 'Cleese':'John', 'Idle':'Eric', 'Jones':'Terry', 'Palin':'Michael', }
+pythons['Gilliam'] = 'Gerry'  # add an item
+pythons['Gilliam'] = 'Terry'  # change an item
+pythons
+```
+    {'Cleese': 'John', 'Gilliam': 'Terry', 'Palin': 'Michael','Chapman': 'Graham', 'Idle': 'Eric', 'Jones': 'Terry'}
+
+Repeated entries are clobbered
+```python
+pythons = {'Graham':'Chapman', 'John':'Cleese', 'Eric':'Idle', 'Terry':'Gilliam', 'Michael':'Palin', 'Terry':'Jones'}  # first Terry gets clobbered
+pythons
+```
+    {'Terry':'Jones', 'Eric':'Idle', 'Graham':'Chapman', 'John':'Cleese', 'Michael':'Palin'}
+
+Combine dictionaries
+```python
+pythons= { 'Chapman':'Graham', 'Cleese':'John', 'Gilliam':'Terry', 'Idle':'Eric', 'Jones':'Terry', 'Palin':'Michael', }
+others = { 'Marx':'Groucho', 'Howard':'Moe' }
+python.update(others)  # entries will be mixed together
+```
+
+Combining dictionaries with repeated entries will cause the second to overwrite the first
+```python
+first  = { 'a':1, 'b':2 }
+second = { 'b':'platypus' }
+first.update(second)
+first  # { 'b':'platypus', 'a':1 }
+```
+
+Remove entries
+```python
+others = { 'Marx':'Groucho', 'Howard':'Moe' }
+del others['Marx']
+
+# remove all entries
+others.clear()
+others;  # {}
+```
+
+Test for a key in dictionaries
+```python
+others = { 'Marx':'Groucho', 'Howard':'Moe' }
+'Marx' in python  # True
+```
+
+Get item in dictionary
+```python
+others = { 'Marx':'Groucho', 'Howard':'Moe' }
+others.get('Marx', 'not in dict!')  # 'Groucho'
+```
+
+Get all keys in a dictionary
+```python
+letters = {'a':'b', 'c':'d', 'e':'f'}
+letters.keys()        # dict_keys(['a', 'c', 'e'])
+list(letters.keys())  # ['a', 'c', 'e']
+```
+Get all values in a dictionary
+```python
+letters = {'a':'b', 'c':'d', 'e':'f'}
+list(letters.values())  # ['b', 'd', 'f']
+```
+
+Get all key-value pairs in a dictionary
+```python
+letters = {'a':'b', 'c':'d', 'e':'f'}
+list(letters.items())  # [('a','b'), ('c','d'), ('e','f')]
+```
+
+Assigning and copying dictionaries
+```python
+# using = will create a pointer to the dictionary, basically
+letters = {'a':'b', 'c':'d', 'e':'f'}
+letters2 = letters
+letters['g'] = 'h'
+letters2  # {'a':'b', 'c':'d', 'e':'f', 'g':'h'}
+
+# to actually copy a dictionary, use copy()
+letters = {'a':'b', 'c':'d', 'e':'f'}
+letters2 = letters.copy()
+letters['g'] = 'h'
+letters2  # {'a':'b', 'c':'d', 'e':'f'}
+letters   # {'a':'b', 'c':'d', 'e':'f', 'g':'h'}
+}
+```
+
+### Sets
 
