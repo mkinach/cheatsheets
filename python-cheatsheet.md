@@ -507,3 +507,97 @@ letters   # {'a':'b', 'c':'d', 'e':'f', 'g':'h'}
 
 ### Sets
 
+* sets are fundamentally just a sequence of values
+
+Creating sets (sets are unsorted, like dictionary keys)
+```python
+empty_set = set()
+even_numbers = {0, 2, 4, 6, 8}
+even_numbers # {0, 8, 2, 4, 6}
+```
+
+Convert string, list, tuple, dictionary to set (discards duplicates)
+```python
+letters = set('letters') # string to set
+letters  # {'l','e','t','r','s'}
+deers = set(['Dasher','Dancer','Prancer','Mason-Dixon']) # list to set
+deers  # {'Dancer','Dasher','Prancer','Mason-Dixon'}
+albums = set( ('Ummagumma', 'Echoes', 'Atom Heart Mother') ) # tuple to set
+albums  # {'Ummagumma','Atom Heart Mother','Echoes'}
+colors = set( {'apple':'red', 'orange':'orange', 'cherry':'red'} ) # dict to set (values discarded)
+colors  # {'apple','cherry','orange'}
+```
+
+Intersection, union, difference, xor, subset, proper subset
+```python
+a = {1,2}
+b = {2,3}
+a & b              # {2}  INTERSECTION
+a.intersection(b)  # {2}  INTERSECTION
+a | b              # {1,2,3}  UNION
+a.union(b)         # {1,2,3}  UNION
+a - b              # {1}  DIFFERENCE
+a.difference(b)    # {1}  DIFFERENCE
+a ^ b                   # {1,3}  XOR
+a.symmetric_difference  # {1,3}  XOR
+a <= b             # false  SUBSET
+a.issubset(b)      # false  SUBSET
+a < b              # false  PROPER SUBSET
+a >= b             # false  SUPERSET
+a.issuperset(b)    # false  SUPERSET
+a > b              # false  PROPER SUPERSET
+```
+
+Test for values in a set
+```python
+# create a dict
+drinks = {
+...     'martini': {'vodka', 'vermouth'},
+...     'black russian': {'vodka', 'kahlua'},
+...     'white russian': {'cream', 'kahlua', 'vodka'},
+...     'manhattan': {'rye', 'vermouth', 'bitters'},
+...     'screwdriver': {'orange juice', 'vodka'}}
+
+for name, contents in drinks.items():
+        if 'vodka' in contents and not ('vermouth' in contents or
+...        'cream' in contents):
+            print(name)
+# screwdriver
+# black russian
+```
+
+Find common values in a set
+```python
+for name, contents in drinks.items():
+        if contents & {'vermouth', 'orange juice'}
+            print(name)
+# screwdriver
+# martini 
+# manhattan
+
+# exclude some values
+for name, contents in drinks.items():
+        if 'vodka' in contents and not contents & {'vermouth', 'cream'}
+            print(name)
+# screwdriver
+# black russian
+```
+
+### Combining Data Structures
+
+```python
+# start with three lists
+marxes  = ['Groucho', 'Chico', 'Harpo']
+pythons = ['Chapman', 'Cleese', 'Gilliam', 'Jones', 'Palin']
+stooges = ['Moe', 'Curly', 'Larry']
+
+tuple_of_lists = marxes,python,stooges
+tuple_of_lists  # (['Groucho', 'Chico', 'Harpo'],['Chapman', 'Cleese', 'Gilliam', 'Jones', 'Palin'],['Moe', 'Curly', 'Larry'])
+
+list_of_lists = [marxes, pythons, stooges]
+list_of_lists  # [['Groucho', 'Chico', 'Harpo'],['Chapman', 'Cleese', 'Gilliam', 'Jones', 'Palin'],['Moe', 'Curly', 'Larry']]
+
+dict_of_lists = {'Marxes':marxes, 'Pythons':pythons, 'Stooges':stooges}
+dict_of_lists  # {'Stooges': ['Moe', 'Curly', 'Larry'],'Marxes': ['Groucho', 'Chico', 'Harpo'],'Pythons': ['Chapman', 'Cleese', 'Gilliam', 'Jones', 'Palin']}
+```
+
