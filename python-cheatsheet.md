@@ -756,13 +756,7 @@ range(2,-1,-1)      # 2, 1, 0
 list(range(0,11,2)) # [0, 2, 4, 6, 8, 10]
 ```
 
-<<<<<<< HEAD
 ### List Comprehensions
-=======
-### Comprehensions
-
-# List Comprehensions
->>>>>>> 2adadf6edd607e62555725dd21de9c031361ad36
 
 ```python
 number_list = [number for number in range(1,6)]
@@ -796,11 +790,7 @@ for row, col in cells:
 # 3 2
 ```
 
-<<<<<<< HEAD
 ### Dictionary Comprehensions
-=======
-# Dictionary Comprehensions
->>>>>>> 2adadf6edd607e62555725dd21de9c031361ad36
 
 ```python
 word = 'letters'
@@ -808,22 +798,14 @@ letter_counts = {letter: word.count(letter) for letter in word}
 letter_counts  # {'l': 1, 'e': 2, 't': 2, 'r': 1, 's': 1}
 ```
 
-<<<<<<< HEAD
 ### Set Comprehensions
-=======
-# Set Comprehensions
->>>>>>> 2adadf6edd607e62555725dd21de9c031361ad36
 
 ```python
 a_set = {number for number in range(1,6) if number % 3 == 1}
 a_set  # {1,4}
 ```
 
-<<<<<<< HEAD
 ### Generator Comprehensions
-=======
-# Generator Comprehensions
->>>>>>> 2adadf6edd607e62555725dd21de9c031361ad36
 
 ```python
 number_thing = ( number for number in range(1,6) ) # returns generator object
