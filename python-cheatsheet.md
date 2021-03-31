@@ -601,3 +601,226 @@ dict_of_lists = {'Marxes':marxes, 'Pythons':pythons, 'Stooges':stooges}
 dict_of_lists  # {'Stooges': ['Moe', 'Curly', 'Larry'],'Marxes': ['Groucho', 'Chico', 'Harpo'],'Pythons': ['Chapman', 'Cleese', 'Gilliam', 'Jones', 'Palin']}
 ```
 
+### If, While
+
+Comparison operators
+```python
+==  !=  <  <=  >  >=
+and  or  and not
+```
+
+Structures considered `false`
+```python
+False   # boolean
+None    # null
+0       # zero int
+0.0     # zero float
+''      # empty string
+[]      # empty list
+()      # empty tuple
+{}      # empty dict
+set()   # empty set
+```
+
+Example control structures
+```python
+mybool1 = True
+mybool2 = True
+color   = "red" 
+if mybool:
+    if mybool2:
+        # do something
+    elif color == "red":
+        # do something else
+    else:
+        # do something else
+
+count = 1
+while count <=50
+    # do something
+    count += 1
+    if count == 20
+        continue
+    print(count)
+    if count == 49
+        break
+```
+
+`while` with a "break checker"
+```python
+numbers = [1, 3, 5]
+position = 0
+while position < len(numbers):
+    number = numbers[position]
+    if number % 2 == 0:
+        print('Even number', number)
+        break
+    position += 1
+else:  # break not encountered
+    print('No even number found')
+```
+
+### For
+
+Loop through iterable objects
+```python
+# list
+rabbits = ['Flopsy', 'Mopsy', 'Cottontail', 'Peter']
+for rabbit in rabbits:
+    print(rabbit)
+# Flopsy
+# Mopsy
+# Cottontail
+# Peter
+
+# string
+word = 'cat'
+for letter in word:
+    print(letter)
+# c
+# a
+# t
+
+# dictionary
+accusation = {'room': 'ballroom', 'weapon': 'lead pipe', 'person': 'Col. Mustard'}
+for card in accusation.keys:
+    print(card)
+# room
+# weapon
+# person
+
+for value in accusation.values:
+    print(value)
+# ballroom
+# lead pipe
+# Col. Mustard
+
+for item in accusation.items():
+    print(item)
+# ('room', 'ballroom')
+# ('weapon', 'lead pipe')
+# ('person', 'Col. Mustard')
+
+for card, contents in accusation.items():
+    print('Card', card, 'has the contents', contents)
+# Card weapon has the contents lead pipe
+# Card person has the contents Col. Mustard
+# Card room has the contents ballroom
+```
+
+`for` with a "break checker"
+```python
+cheeses = []
+for cheese in cheeses:
+    print('Lovely', cheese)
+    break
+else:  # break not encountered
+    print('No cheese available :(')
+# No cheese available :(
+```
+
+### Zip
+
+Iterate over multiple sequences in parallel (`zip` stops at the end of the shortest sequence)
+```python
+days = ['Monday', 'Tuesday', 'Wednesday']
+fruits = ['banana', 'orange', 'peach']
+drinks = ['coffee', 'tea', 'beer']
+desserts = ['tiramisu', 'ice cream', 'pie', 'pudding']
+for day, fruit, drink, dessert in zip(days, fruits, drinks, desserts)
+    print(day, drink, fruit, dessert)
+# Monday coffee banana tiramisu
+# Tuesday tea orange ice cream
+# Wednesday beer peach pie
+```
+
+Combine sequences into a list or dictionary with `zip`
+```python
+english = 'Monday', 'Tuesday', 'Wednesday'
+french  = 'Lundi', 'Mardi', 'Mercredi'
+
+list(zip(english,french))
+# [('Monday', 'Lundi'), ('Tuesday', 'Mardi'), ('Wednesday', 'Mercredi')]
+
+dict(zip(english,french))
+# {'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi'}
+```
+
+### Ranges
+
+Ranges of number can be generated with `range(start,stop,step)`
+```python
+range(0,3)          # 0, 1, 2
+list(range(0,3))    # [0, 1, 2]
+range(2,-1,-1)      # 2, 1, 0
+list(range(0,11,2)) # [0, 2, 4, 6, 8, 10]
+```
+
+### Comprehensions
+
+# List Comprehensions
+
+```python
+number_list = [number for number in range(1,6)]
+number_list  # [1, 2, 3, 4, 5]
+
+number_list = [number-1 for number in range(1,6)]
+number_list  # [0, 1, 2, 3, 4]
+
+a_list = [number for number in range(1,6) if number % 2 == 1]
+a_list  # [1, 3, 5]
+
+rows = range(1,4)
+cols = range(1,3)
+cells = [(row,col) for row in rows for col in cols]
+for cell in cells:
+    print(cells)
+# (1, 1)
+# (1, 2)
+# (2, 1)
+# (2, 2)
+# (3, 1)
+# (3, 2)
+
+for row, col in cells:
+    print(row, col)
+# 1 1
+# 1 2
+# 2 1
+# 2 2
+# 3 1
+# 3 2
+```
+
+# Dictionary Comprehensions
+
+```python
+word = 'letters'
+letter_counts = {letter: word.count(letter) for letter in word}
+letter_counts  # {'l': 1, 'e': 2, 't': 2, 'r': 1, 's': 1}
+```
+
+# Set Comprehensions
+
+```python
+a_set = {number for number in range(1,6) if number % 3 == 1}
+a_set  # {1,4}
+```
+
+# Generator Comprehensions
+
+```python
+number_thing = ( number for number in range(1,6) ) # returns generator object
+
+for number in number_thing:
+    print number
+# 1
+# 2
+# 3
+# 4
+# 5
+
+number_list = list(number_thing)
+number_list  # [1, 2, 3, 4, 5]
+```
+
