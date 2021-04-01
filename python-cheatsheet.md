@@ -822,3 +822,116 @@ number_list = list(number_thing)
 number_list  # [1, 2, 3, 4, 5]
 ```
 
+### Functions
+
+Nested functions
+```python
+def knight(saying):
+    def inner(quote):
+        return "The knights say: '%s'" % quote
+    return inner(saying)
+    
+knights('Ni!')
+# "The knights say: 'Ni!'"
+```
+
+Keyword arguments can prevent positional argument confusion
+```python
+def menu(wine, entree, dessert):
+    return {'wine': wine, 'entree': entree, 'dessert': dessert}
+    
+menu('beef', 'bagel', 'bordeaux') # bad
+# {'dessert': 'bordeaux', 'wine': 'beef', 'entree': 'bagel'}
+
+menu(entree='beef', dessert='bagel', wine='bordeaux') # good
+# {'dessert': 'bagel', 'wine': 'bordeaux', 'entree': 'beef'}
+```
+
+Default parameters in functions
+```python
+def menu(wine, entree, dessert='pudding'):
+    return {'wine': wine, 'entree': entree, 'dessert': dessert}
+
+menu('chardonnay', 'chicken')
+# {'dessert': 'pudding', 'wine': 'chardonnay', 'entree': 'chicken'}
+
+menu('chardonnay', 'chicken', 'doughnut')
+# {'dessert': 'doughnut', 'wine': 'chardonnay', 'entree': 'chicken'}
+```
+
+Gather multiple *positional* arguments with `*`
+```python
+# the asterisk groups a variable number of position arguments into a tuple
+def print_args(*args):
+    print('Positional argument tuple:', args)
+    
+print_args()
+# Positional argument tuple: ()
+
+print_args(3, 2, 1, 'go!')
+# Positional argument tuple: ( 3, 2, 1, 'go!' )
+
+def print_more(required1, required2, *args):
+    print('Needed:', required1)
+    print('Needed:', required2)
+    print('All the rest:', args)
+   
+print_more('a', 'b', 'c', 'd', 'e')
+# Needed: a
+# Needed: b
+# All the rest: ( 'c', 'd', 'e' )
+```
+
+Gather multiple *keyword* arguments with `**`
+```python
+# the double asterisk groups a variable number of keyword arguments into a dictionary
+def print_kwargs(**kwargs):
+    print('Keyword arguments:', kwargs)
+    # inside the function, kwargs is a dictionary
+    
+print_kwargs(wine='merlot', entree='mutton', dessert='macaroon')
+# Keyword arguments: {'dessert': 'macaroon', 'wine': 'merlot', 'entree': 'mutton'}
+```
+
+Closures (dynamically-generated functions)
+```python
+def knight(saying):
+    def inner():
+        return "The knights say: '%s'" % saying
+    return inner
+    
+a = knights('Duck')   # a new function called 'a'
+b = knights('Goose')  # a new function called 'b'
+
+a()
+# "The knights say: 'Duck'"
+
+b()
+# "The knights say: 'Goose'"
+```
+
+Anonymous functions (`lambda()`)
+```python
+def edit_story(words, func):
+    for word in words:
+        print(func(word))
+
+def enliven(word): 
+    return word.capitalize() + '!'
+
+stairs = ['thud', 'meow', 'thud', 'hiss']
+
+edit_story(stairs, enliven)
+# Thud!
+# Meow!
+# Thud!
+# Hiss!
+
+# alternatively, lambda() allows you to do it in one line:
+edit_story(stairs, lambda word: word.capitalize() + '!')
+# Thud!
+# Meow!
+# Thud!
+# Hiss!
+```
+
