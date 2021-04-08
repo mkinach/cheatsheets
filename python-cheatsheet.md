@@ -935,3 +935,119 @@ edit_story(stairs, lambda word: word.capitalize() + '!')
 # Hiss!
 ```
 
+### Generator Function
+
+Generators are sequence-creation objects
+```python
+def my_range(first=0, last=10, step=1):
+    number = first
+    while number < last:
+        yield number  # note the yield instead of return
+        number += step
+        
+# it's a normal function that returns a generator object
+my_range                 # <function my_range at 0x10193e268>
+ranger = my_range(1, 5)  # <generator object my_range at 0x101a0a168>
+
+for x in range(1,5):
+    print(x)
+# 1
+# 2
+# 3
+# 4
+
+for x in ranger:
+    print(x)
+# 1
+# 2
+# 3
+# 4
+```
+
+### Decorator Function
+
+Decorators allow you modify a function without changing its source code (e.g. for debug purposes)
+```python
+# a simple debug decorator
+def document_it(func):
+    def new_function(*args, **kwargs):
+        print('Running function:', func.__name__)
+        print('Positional arguments:', args)
+        print('Keyword arguments:', kwargs)
+        result = func(*args, **kwargs)
+        print('Result:', result)
+        return result
+    return new_function
+    
+def add_ints(a, b):
+    return a+b
+
+add_ints2 = document_it(add_ints)  # manual decorator assignment
+add_ints2(3,5)
+# Running function: add_ints
+# Positional arguments: (3, 5)
+# Keyword arguments: {}
+# Result: 8
+# 8
+
+@document_it  # alternative decorator assignment
+def add_ints3(a, b):
+    return a + b
+    
+add_ints3(3, 5)
+# Start function add_ints3
+# Positional arguments: (3, 5)
+# Keyword arguments: {}
+# Result: 8
+# 8
+
+# you can have more than one decorator for a function
+def square_it(func):
+    def new_function(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result * result
+    return new_function
+
+# the decorator written closest to the function is run first
+@document_it
+@square_it
+def add_ints4(a, b):
+    return a + b
+ 
+add_ints4(3,5)
+# Running function: new_function
+# Positional arguments: (3, 5)
+# Keyword arguments: {}
+# Result: 64
+# 64
+
+@square_it
+@document_it
+def add_ints5(a, b):
+    return a + b
+    
+add_ints5(3,5)
+# Running function: add_ints
+# Positional arguments: (3, 5)
+# Keyword arguments: {}
+# Result: 8
+# 64
+
+ ```
+
+### Namespaces
+
+Namespaces are sections within which a particular name is unique
+```python
+# the main part of the program defines the global namespace
+animal = 'fruitbat'
+def print_global():
+    print('inside_print_global', animal)
+
+print('at the top level:', animal)
+# at the top level: fruitbat
+
+print_global()
+# inside_print_global: fruitbat
+```
+
