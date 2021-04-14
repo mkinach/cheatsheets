@@ -1190,3 +1190,101 @@ except OopsException as exc:
     print(exc)
 # panic
 ```
+
+### Creating Modules
+
+A module called `report.py`:
+```python
+def get_description():  # note the docstring
+    """Return random weather, just like the pros"""
+    from random import choice
+    possibilities = ['rain', 'snow', 'sleet', 'fog', 'sun', 'who knows']
+    return choice(possibilities)
+```
+
+The main program called `weatherman.py`:
+```python
+import report
+
+description = report.get_description()  # a function within the module
+print("Today's weather:", description)
+```
+
+Putting it together:
+```python
+$ python weatherman.py
+Today's weather: who knows
+$ python weatherman.py
+Today's weather: sun
+$ python weatherman.py
+Today's weather: sleet
+```
+
+### Packages
+
+If modules are properly organized in a subdirectory then Python can treat the subdirectory as a package. Note that you will also need a file `./sources/__init__.py` to exist so that Python knows the subdirectory is intended to be a package.
+
+Main program: `./weather.py`
+```python
+from sources import daily, weekly
+
+print("Daily forecast:", daily.forecast())
+print("Weekly forecast:")
+for number, outlook in enumerate(weekly.forecast(), 1):
+    print(number, outlook)
+```
+
+Module 1: `./sources/daily.py`
+```python
+def forecast():
+    'fake daily forecast'
+    return 'like yesterday'
+```
+
+Module 2: `./sources/weekly.py`
+```python
+def forecast():
+    """Fake weekly forecast"""
+    return ['snow', 'more snow', 'sleet', 'freezing rain', 'rain', 'fog', 'hail']
+```
+
+The result:
+```python
+$ python weather.py
+Daily forecast: like yesterday
+Weekly forecast:
+1 snow
+2 more snow
+3 sleet
+4 freezing rain
+5 rain
+6 fog
+7 hail
+```
+
+### Miscellaneous
+
+Grabbing command-line arguments
+```python
+import sys
+print('Program arguments:', sys.argv)
+```
+```python
+$ python test2.py
+Program arguments: ['test2.py']
+$ python test2.py tra la la
+Program arguments: ['test2.py', 'tra', 'la', 'la']
+```
+
+Display the Python search path (note the empty line is an empty string `''` which represents the current directory)
+```python
+import sys
+for place in sys.path:
+    print(place)
+#    
+# /usr/lib/python38.zip
+# /usr/lib/python3.8
+# /usr/lib/python3.8/lib-dynload
+# /usr/local/lib/python3.8/dist-packages
+# /usr/lib/python3/dist-packages
+```
