@@ -1042,12 +1042,151 @@ Namespaces are sections within which a particular name is unique
 # the main part of the program defines the global namespace
 animal = 'fruitbat'
 def print_global():
-    print('inside_print_global', animal)
+    # global variables can be called within functions
+    print('inside print_global', animal)
+
+print_global()
+# inside_print_global: fruitbat
 
 print('at the top level:', animal)
 # at the top level: fruitbat
 
-print_global()
-# inside_print_global: fruitbat
+# you cannot both access a global variable and change it within the function
+def change_and_print_global():
+  print('inside change_and_print_global', animal)
+  animal = 'wombat'  # ERROR
+  print('after the change', animal) 
+
+# if you *only* change a global variable then you essentially define a local variable
+def change_local():
+  animal = 'wombat'  # this one is defined in the function's local namespace
+  print('inside change_local:', animal, id(animal))
+  
+change_local()
+# inside change_local: wombat 4330406160
+
+animal
+# 'fruitbat'
+id(animal)
+# 4330390832 
 ```
 
+If you don't say `global` within a function then variables are assumed to be in the function's local namespace
+```python
+# you can explicitly access a global variable inside a function
+animal = 'fruitbat'
+def change_and_print_global2():
+    global animal
+    animal = 'wombat'
+    print('inside change_and_print_global2', animal)
+    
+animal
+# 'fruitbat'
+
+change_and_print_global2()
+# 'fruitbat'
+
+animal
+# 'wombat'
+```
+
+Global and local namespaces can be accessed using `globals()` and `locals()`
+```python
+animal = 'fruitbat'
+def change_local():
+  animal = 'wombat' # local variable
+  print('locals:', locals())
+  
+animal
+# 'fruitbat'
+
+change_local()
+# locals: {'animal': 'wombat'}
+
+print('globals:',globals())
+# globals: {'animal': 'fruitbat',
+# '__doc__': None,
+# 'change_local': <function change_it at 0x1006c0170>,
+# '__package__': None,
+# '__name__': '__main__',
+# '__loader__': <class '_frozen_importlib.BuiltinImporter'>,
+# '__builtins__': <module 'builtins'>}
+
+animal
+# 'fruitbat'
+```
+
+### Exception Handling
+
+A generic exception
+```python
+short_list = [1, 2, 3]
+position = 5
+short_list[position]
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# IndexError: list index out of range
+```
+
+`try` is run first; if an exception occurs then `except` is run
+```python
+short_list = [1, 2, 3]
+position = 5
+try: 
+    short_list[position]
+except:
+    print('An exception occured')
+# An exception occurred
+```
+
+You can also specify the exception type
+```python
+short_list = [1, 2, 3]
+while True:
+    value = input('Position [q to quit]? ')
+    if value == 'q':
+        break
+    try:
+        position = int(value)
+        print(short_list[position])
+    except IndexError as err:
+        print('Bad index:', position)
+    except Exception as other:
+        print('Something else broke:', other)
+        
+# Position [q to quit]? 1
+# 2
+# Position [q to quit]? 0
+# 1
+# Position [q to quit]? 2
+# 3
+# Position [q to quit]? 3
+# Bad index: 3
+# Position [q to quit]? 2
+# 3
+# Position [q to quit]? two
+# Something else broke: invalid literal for int() with base 10: 'two'
+# Position [q to quit]? q
+```
+
+You can define your own exceptions
+```python
+# an exception is a class (a child of the class 'Exception')
+class UppercaseException(Exception):
+    pass  # let the parent class figure out what to print
+    
+words = ['eenie', 'meenie', 'miny', 'MO']
+for word in words:
+    if word.isupper():
+        raise UppercaseException(word)
+# Traceback (most recent call last):
+#   File "<stdin>", line 3, in <module>
+# __main__.UppercaseException: MO
+
+# you can access the exception object itself and print it
+try:
+    raise OopsException('panic')
+except OopsException as exc:
+    print(exc)
+# panic
+```
