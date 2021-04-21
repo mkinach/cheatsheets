@@ -30,8 +30,8 @@ You can also just use escape characters
 ```python
 esc = "\"I did nothing!\" he said. \"Not that either! Or the other thing.\""
 print(esc)
+# "I did nothing!" he said. "Not that either! Or the other thing."
 ```
-    "I did nothing!" he said. "Not that either! Or the other thing."
 
 Triple quotes are useful for multiline strings without having to use \n (note that if you had used single quotes here, you would get an EOL error)
 ```python
@@ -39,9 +39,9 @@ multi = '''
 Here is a multiline string
 containing a double quote (")
 '''; print(multi)
+#  Here is a multiline string
+#  containing a double quote (")
 ```
-    Here is a multiline string
-    containing a double quote (")
 
 Empty strings can be created in a number of ways
 ```python
@@ -57,9 +57,9 @@ duck  = 'Duck.'
 goose = 'Goose.'
 print(duck + duck + goose)
 print(duck,duck,goose)
+# Duck.Duck.Goose.
+# Duck. Duck. Goose.
 ```
-    Duck.Duck.Goose.
-    Duck. Duck. Goose.
 
 Blank strings are useful as a starting point for concatenation
 ```python
@@ -68,18 +68,18 @@ base    = ''
 base   += 'current inventory: '
 base   += str(bottles)
 print(base, '\n')
+# current inventory: 99
 ```
-    current inventory: 99
 
 You can duplicate strings with *
 ```python
 start = 'Na' * 8
 end   = 'Batman!'
 print(start,end,'\n')
+# NaNaNaNaNaNaNaNa Batman!
 ```
-    NaNaNaNaNaNaNaNa Batman!
 
-Yyou can extract a character from a string by specifying its offset, or slicing. The syntax is `[start:end:step]`
+You can extract a character from a string by specifying its offset, or slicing. The syntax is `[start:end:step]`
 ```python
 letters = 'abcdefghijklmnopqrstuvwxyz'
 print(letters[0])      #a
@@ -93,45 +93,50 @@ print(letters[::7])    #ahov; start to end in steps of 7
 print(letters[::-1])   #zyxwvutsrqponmlkjihgfedcba; backwards
 ```
 
+More explicitly: reverse all characters in a string
+```python
+word = 'abcde'
+word[::-1]
+'edcba'
+```
+
 You can split strings quite easily
 ```python
 todos = 'get gloves,get mask,give cat vitamins,call ambulance'
 print(todos.split(',')) # split by commas
-```
-    ['get gloves', 'get mask', 'give cat vitamins', 'call ambulance']
-```python
+# ['get gloves', 'get mask', 'give cat vitamins', 'call ambulance']
+
 print(todos.split())    # default is to split by spaces
+# ['get', 'gloves,get', 'mask,give', 'cat', 'vitamins,call', 'ambulance']
 ```
-    ['get', 'gloves,get', 'mask,give', 'cat', 'vitamins,call', 'ambulance']
 
 Note the split behaviour for repeating separator strings
 ```python
 splitme = 'a/b//c/d///e'
 print(splitme.split('/'))
-```
-    ['a', 'b', '', 'c', 'd', '', '', 'e']
-```python
+#  ['a', 'b', '', 'c', 'd', '', '', 'e']
+
 print(splitme.split('//'))
+# ['a/b', 'c/d', '/e']
 ```
-    ['a/b', 'c/d', '/e']
 
 How to join lists into a single string
 ```python
 crypto_list = ['Yeti', 'Bigfoot', 'Loch Ness Monster']
 crypto_string = ', '.join(crypto_list)
 print('\nFound and signing book deals:', crypto_string)
+# Found and signing book deals: Yeti, Bigfoot, Loch Ness Monster
 ```
-    Found and signing book deals: Yeti, Bigfoot, Loch Ness Monster
 
 How to create a paragraph out of a list
 ```python
 para = ['line 1', 'line 2', 'line 3']
 para_string = '\n'.join(para)
 print(para_string)
+# line 1
+# line 2
+# line 3
 ```
-	  line 1
-	  line 2
-	  line 3
 
 Illustrating some general string functions
 ```python
@@ -187,14 +192,14 @@ print(setup.ljust(30))     # left justify
 String replacement
 ```python
 print(setup.replace('duck','marmoset'))
+# a marmoset goes into a bar...
 ```
-    a marmoset goes into a bar...
 
 String replacement up to 100 times
 ```python
 print(setup.replace('a ','a famous ', 100))
+# a famous duck goes into a famous bar...
 ```
-    a famous duck goes into a famous bar...
 
 ### Lists
 ```python
@@ -414,7 +419,6 @@ dict(alphabet4)  # {'c': 'd', 'a': 'b', 'e': 'f'}
 # Convert a list (of two-character strings) to dict
 alphabet4 = ( 'ab', 'cd', 'ef' )
 dict(alphabet4)  # {'c': 'd', 'a': 'b', 'e': 'f'}
-
 ```
 
 Add or change item by key
@@ -503,6 +507,82 @@ letters['g'] = 'h'
 letters2  # {'a':'b', 'c':'d', 'e':'f'}
 letters   # {'a':'b', 'c':'d', 'e':'f', 'g':'h'}
 }
+```
+
+Handle missing keys with `setdefault()`
+```python
+# setdefault() is like get() except it assigns an item if the key is missing
+periodic_table = {'Hydrogen': 1, 'Helium': 2}
+print(periodic_table)
+# {'Helium': 2, 'Hydrogen': 1}
+
+# if the key is not already in the dictionary then a new value is set
+carbon = periodic_table.setdefault('Carbon', 12)
+carbon 
+# 12
+periodic_table 
+# {'Helium': 2, 'Carbon': 12, 'Hydrogen': 1}
+
+# if the already exists in the dictionary then its original value is returned
+helium = periodic_table.setdefault('Helium',947)
+helium
+# 2
+periodic_table
+# {'Helium': 2, 'Carbon': 12, 'Hydrogen': 1}
+```
+
+Handle missing keys with `defaultdict()`. It can accept the following:
+`int`  -- returns 0
+`list` -- return empty list ([])
+`dict` -- return empty dictionary ({})
+```python
+# defaultdict() is similar to setdefault() but it sets a default for missing values
+from collections import defaultdict
+periodic_table = defaultdict(int)
+
+# now any missing values will return a default value of 0
+periodic_table['Hydrogen'] = 1
+periodic_table['Lead']
+# 0
+periodic_table
+# defaultdict(<class 'int'>, {'Lead': 0, 'Hydrogen': 1})
+
+# an explicit example showing that the argument to defaultdict() must 
+# be a function returning the value to be assigned to a missing key
+from collections import defaultdict
+def no_idea():
+    return 'Huh?'
+
+bestiary = defaultdict(no_idea)
+bestiary['A'] = 'Abominable Snowman'
+bestiary['B'] = 'Basilisk'
+bestiary['A']
+# 'Abominable Snowman'
+bestiary['B'] 
+# 'Basilisk'
+bestiary['C']
+# 'Huh?'
+
+# an easier way
+bestiary = defaultdict(lambda: 'Huh?')
+bestiary('E')
+# 'Huh?'
+```
+
+Create a dictionary that remembers the order of keys with `OrderedDict()`
+```python
+from collections import OrderedDict
+quotes = OrderedDict([
+    ('Moe', 'A wise guy, huh?'),
+    ('Larry', 'Ow!'),
+    ('Curly', 'Nyuk nyuk!'),
+    ])
+
+for stooge in quotes:
+    print(stooge)
+# Moe
+# Larry
+# Curly
 ```
 
 ### Sets
@@ -1288,3 +1368,118 @@ for place in sys.path:
 # /usr/local/lib/python3.8/dist-packages
 # /usr/lib/python3/dist-packages
 ```
+
+Counting items in lists
+```python
+from collections import Counter
+breakfast = ['spam', 'spam', 'eggs', 'spam']
+breakfast_counter = Counter(breakfast)
+breakfast_counter
+# Counter({'spam': 3, 'eggs': 1})
+
+# return all elements in descending order (or just the top n element)
+breakfast_counter.most_common()
+# [('spam', 3), ('eggs', 1)]
+breakfast_counter.most_common(1) # n=1
+# [('spam', 3)]
+
+# you can combine counters
+lunch = ['eggs', 'eggs', 'bacon']
+lunch_counter = Counter(lunch)
+lunch_counter 
+# Counter({'eggs': 2, 'bacon': 1})
+breakfast_counter + lunch_counter
+# Counter({'spam': 3, 'eggs': 3, 'bacon': 1})
+
+# finding the symmetric difference of the counters
+breakfast_counter - lunch_counter
+# Counter({'spam': 3})
+lunch_counter - breakfast_counter
+# Counter({'bacon': 1, 'eggs': 1})
+
+# finding the intersection of the counters
+breakfast_counter & egg_counter
+# Counter({'eggs': 1})  # note that the lower count is used
+
+# find the union of the counters
+breakfast_counter | lunch_counter
+# Counter({'spam': 3, 'eggs': 2, 'bacon': 1})  # note that this doesn't add the counts
+```
+
+Working with a deque (deque = stack + queue, pronounced _deck_)
+```python
+def palindrome(word):
+    from collections import deque
+    dq=deque(word)
+    while len(dq) > 1:
+        if dq.popleft() != dq.pop():
+            return False
+    return True
+    
+palindrome('a')
+# True
+palindrome('racecar')
+# True
+palindrome('')
+# True
+palindrome('halibut')
+# False
+```
+
+Iterate over code structures with `itertools`
+```python
+# run through all arguments as if they were a single iterable
+import itertools  
+for item in itertools.chain([1,2],['a','b']):
+    print(item)
+# 1
+# 2
+# a
+# b
+
+# infinitely cylcle through all arguments
+for item in itertools.cycle([1,2]):
+    print(item)
+# 1
+# 2
+# 1
+# 2
+# ...
+
+# calculate accumulated values
+for item in itertools.accumulate([1,2,3,4]):
+    print(item)
+# 1
+# 3
+# 6
+# 10
+
+# you can customize the accumulate function behaviour
+def multiply(a, b):
+    return a * b
+    
+for item in itertools.accumulate([1,2,3,4], multiply): 
+    print(item)
+# 1
+# 2
+# 6
+# 24
+```
+
+You can pretty print with `pprint()`
+```python
+from pprint import pprint
+quotes = OrderedDict([
+    ('Moe', 'A wise guy, huh?'),
+    ('Larry', 'Ow!'),
+    ('Curly', 'Nyuk nyuk!'),
+])
+
+pprint(quotes)
+# {'Moe': 'A wise guy, huh?',
+#  'Larry': 'Ow!',
+#  'Curly': 'Nyuk nyuk!'}
+```
+
+
+
