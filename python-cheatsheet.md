@@ -369,7 +369,7 @@ d = a[:]
 
 ### Tuples
 
-* tuples are just immutable lists and elements can't be added or deleted after the tuple is defined
+* tuples are just immutable lists and elements that can't be added or deleted after the tuple is defined
 
 ```python
 empty_tuple = ()
@@ -394,6 +394,40 @@ Convert list to tuple
 ```python
 marx_list  = ['Groucho', 'Chico', 'Harpo']
 tuple(marx_list)  # ('Groucho', 'Chico', 'Harpo')
+```
+
+* _named_ tuples are a subclass of tuples that allow you to access values via `.name` as well as position via `[offset]`. They are similar to objects but are more space (and time) efficient
+```python
+from collections import namedtuple
+
+Duck = namedtuple('Duck', 'bill tail')
+duck = Duck('wide orange', 'long')
+
+duck
+# Duck(bill='wide orange', tail='long')
+
+duck.bill
+# 'wide orange'
+duck.tail
+# 'long'
+
+# you can make a named tuple from a dictionary
+parts = {'bill': 'wide orange', 'tail': 'long'}
+duck2 = Duck(**parts)  # **parts is a keyword argument, which extracts the keys and values
+                       # from the parts dictionary and supplies them as arguments to Duck()
+duck2
+# Duck(bill='wide orange', tail='long')
+
+# named tuples are immutable; you have to define a new tuple to make a change
+duck3 = duck2._replace(tail='magnificent', bill='crushing')
+duck3
+# Duck(bill='crushing', tail='magnificent')
+
+# you can't add fields to a named tuple after it has been created
+duck.color = 'green'
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# AttributeError: 'dict' object has no attribute 'color'
 ```
 
 ### Dictionaries
