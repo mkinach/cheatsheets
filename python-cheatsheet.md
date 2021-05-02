@@ -1481,5 +1481,500 @@ pprint(quotes)
 #  'Curly': 'Nyuk nyuk!'}
 ```
 
+### Objects
+
+Creating the simplest classes
+```python
+# the simplest possible class
+class Simplest():
+    pass  # indicate the class is empty (just as we did w/ functions)
+    
+# create an object from a class
+something = Simplest()
+```
+
+Creating a non-trivial class (note that `__init__` is a special function that initializes an individual object from its class definition; `self` specifies that it refers to the individual object itself)
+The example below does the following:
+1. looks up the definition of the `Person` class
+2. creates a new object in memory
+3. calls the object's `__init__` method, passing the newly-created object as `self` and the other argument as `name`
+4. stores the value of `name` in the object
+5. returns the object
+```python
+# a non-trivial class example. Note that __init__() is called
+# automatically every time the class is used to create an object.
+class Person():
+    def __init__(self, name):
+        self.name = name
+    
+# create an object for the Person class
+hunter = Person('Elmer Fudd')    
+
+print(hunter.name)
+# Elmer Fudd
+```
+
+An illustration of how 'self' refers to the object being passed to the class
+```python
+class Car():
+    def exclaim(self):
+        print("I'm a Car!")
+
+car = Car()
+
+# method 1 (the usual way)
+car.exclaim()
+# "I'm a Car!
+
+# method 2 (the illustrative way)
+Car.exclaim(car)
+# "I'm a Car!
+```
+
+Inheritance
+```python
+# define a parent class
+class Car():
+    def exclaim(self):
+        print("I'm a Car!")
+        
+# define a child class
+class Yugo(Car):
+    pass
+    
+give_me_a_car  = Car()
+give_me_a_yugo = Yugo()
+
+give_me_a_car.exclaim()
+# I'm a Car!
+give_me_a_yugo.exclaim()
+# I'm a Car!
+```
+
+Overriding a method
+```python
+class Car():
+    def exclaim(self):
+        print("I'm a Car!")
+        
+# define a child class
+class Yugo(Car):
+    def exclaim(self):
+        print("I'm not just any Car, I'm a Yugo!")
+    
+give_me_a_car  = Car()
+give_me_a_yugo = Yugo()
+
+give_me_a_car.exclaim()
+# I'm a Car!
+give_me_a_yugo.exclaim()
+# I'm not just any Car, I'm a Yugo!!
+
+# you can also override __init__()
+class Person():
+    def __init__(self, name):
+        self.name = name
+
+class MDPerson(Person):
+    def __init__(self, name):
+        self.name = "Doctor " + name
+        
+class JDPerson(Person):
+    def __init__(self, name):
+        self.name = name + ", Esquire"
+        
+person = Person('Fudd')
+doctor = MDPerson('Fudd')
+lawyer = JDPerson('Fudd')
+
+print(person.name)
+# Fudd
+print(doctor.name)
+# Doctor Fudd
+print(lawyer.name)
+# Fudd, Esquire 
+```
+
+Adding a method to an inherited class
+```python
+class Car():
+		def exclaim(self):
+				print("I'm a Car!")
+
+class Yugo(Car):
+		def exclaim(self):
+        print("I'm not just any Car, I'm a Yugo!")
+		def need_a_push(self):
+				print("A little help here?")
+
+give_me_a_car  = Car()
+give_me_a_yugo = Yugo()
+
+give_me_a_yugo.need_a_push()
+# A little help here?
+
+give_me_a_car.need_a_push()
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# AttributeError: 'Car' object has no attribute 'need_a_push'
+```
+
+Call a parent class with `super()`. Note that when you define an `__init__()` method for a child class, you are replacing the `__init__` method of its parent class, so you need to call the parent one explicitly (i.e. it is not called automatically anymore)
+```python
+class Person():
+		def __init__(self, name):
+				self.name = name
+
+class EmailPerson(Person):
+		def __init__(self, name, email):
+				super().__init__(name)
+				self.email = email
+
+bob = EmailPerson('Bob Frapples', 'bob@frapples.com')
+bob.name
+# 'Bob Frapples'
+bob.email
+# 'bob@frapples.com'
+
+# the following (without inheritance) would have also worked:
+class EmailPerson2(Person):
+		def __init__(self, name, email):
+				self.name = name
+				self.name = email
+```
+
+Note that all attributes and methods are public in Python and can be accessed directly, but you can also write _getters_ and _setters_ with `property` in Python (here the `name` property refers to a single attribute which we call `hidden_name` that is stored within the object)
+```python
+class Duck():
+    # we don't want people to access the 'hidden_name' property directly (keep it private)...
+    def __init__(self, input_name):
+        self.hidden_name = input_name
+    # ...so we define a getter and setter...
+    def get_name(self):
+        print('inside the getter')
+        return self.hidden_name
+    def set_name(self, input_name):
+        print('inside the setter')
+        self.hidden_name = input_name
+    # ...and finally define the getter and setter as properies of the 'name' attribute
+    # first argument to 'property' is the getter, second is the setter
+    name = property(get_name, set_name)
+        
+# now whenever you refer to the 'name' of any 'Duck' object, it calls the getter 
+fowl = Duck('Howard')
+fowl.name
+# inside the getter
+# 'Howard'
+
+# you can still use the getter like normal
+fowl.get_name()
+# inside the getter
+# 'Howard'
+
+# if you try to assign a value to the 'name' attribute, the setter is called
+fowl.name = 'Daffy'
+# inside the setter
+fowl.name
+# inside the getter
+# 'Daffy'
+
+# you can still use the setter like normal
+fowl.set_name('Daffy')
+# inside the setter
+fowl.name
+# inside the getter
+# 'Daffy'
+```
+
+Properties can equivalently be defined with _decorators_
+```python
+class Duck():
+    def __init__(self, input_name):
+        self.hidden_name = input_name
+    @property  # this one goes before the getter
+    def get_name(self):
+        print('inside the getter')
+        return self.hidden_name
+    @name.setter  # this one goes before the setter
+    def set_name(self, input_name):
+        print('inside the setter')
+        self.hidden_name = input_name
+ 
+# note that now there are no visible get_name() or set_name() methods
+fowl = Duck('Howard')
+fowl.name
+# inside the getter
+# 'Howard'
+fowl.name = 'Donald'
+# inside the setter
+fowl.name
+# 'inside the getter'
+# 'Donald'
+```
+
+We can also have a property return a _computed_ value instead
+```python
+class Circle():
+    def __init__(self, radius):
+        self.radius = radius
+    # define a getter
+    @property
+    def diameter(self):
+        return 2 * self.radius
+        
+# create a circle object with some radius
+c = Circle(5)
+c.radius
+# 5
+
+# we can refer to diameter as if it was an attibute like radius
+c.diameter
+#10
+
+# changing the radius shows that diameter is a computed value
+c.radius = 7
+c.diameter
+# 14
+
+# note that we didn't define a setter so diameter is effectively read-only
+c.diameter = 20
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# AttributeError: can't set attribute
+```
+
+In previous examples we called our hidden attribute `hidden_name`. We can instead use the Python naming convention for attributes that shouldn't be visible outside their class definition: two underscores `__`
+```python
+class Duck():
+    def __init__(self, input_name):
+        self.__name = input_name
+    # define a getter
+    @property
+    def name(self):
+        print('inside the getter')
+        return self.__name
+    # define a setter
+    @name.setter
+    def name(self, input_name):
+        print('inside the setter')
+        self.__name = input_name
+
+# all the old stuff still works
+fowl = Duck('Howard')
+fowl.name
+# inside the getter
+# 'Howard'
+fowl.name = 'Donald'
+# inside the setter
+fowl.name
+# 'inside the getter'
+# 'Donald'
+
+# now the __name attribute can't be directly accessed
+fowl.__name
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# AttributeError: 'Duck' object has no attribute '__name'
+
+# internally, the name has been mangled to make it unlikely for
+# external code to access it, but here it is:
+fowl._Duck__name 
+# 'Donald'  # notice that it doesn't print 'inside the getter'
+```
+
+Class methods affect the class as a whole (any change you make affects all objects)
+```python
+# we define a class that counts how many object instances have been made from it
+Class A():
+    count = 0
+    def __init__(self):
+        # note we use A.count (class attribute) instead of self.count (object instance attribute)
+        A.count += 1 
+    def exclaim(self):
+        print("I'm an A!")
+    # we need a decorator to indicate that a function is a class method 
+    @classmethod
+    # the first parameter to a class method is the class itself (note that
+    # the word 'class' is reserved so we use 'cls')
+    def kids(cls):
+        print("A has", cls.count, "objects.") # could have used A.count instead
+
+easy_A = A()
+breezy_A = A()
+wheezy_A = A()
+A.kids()
+# A has 3 objects.
+```
+
+Static methods affect neither the class nor its objects
+```python
+class CoyoteWeapon():
+    @staticmethod
+    def commercial():
+        print('This CoyoteWeapon has been brought to you by Acme')
+    
+CoyoteWeapon.commercial()
+# This CoyoteWeapon has been brought to you by Acme
+```
+
+Polymorphism allows you to apply the same operation to different objects regardless of their class (also called _duck typing_: if it walks like a duck and quacks like a duck, it's a duck)
+```python
+class Quote():
+    def __init__(self, person, words):
+        self.person = person
+        self.words  = words
+    # return the value of the save 'person' string
+    def who(self):
+        return self.person
+    # return the saved 'words' string with a period
+    def says(self):
+        return self.words + '.'
+        
+# note that __init__ is not redefined so Python calls the __init__ method of the parent class
+# automatically to store 'person' and 'words', which is why we can access 'self.words'
+class QuestionQuote(Quote):
+    def says(self):  # redefine the says() method
+        return self.words + '?'  
+        
+class ExclamationQuote(Quote):
+    def says(self):  # redefine the says() method
+        return self.words + '!'
+
+# now illustrate that the three different says() methods provide different behaviour for
+# the three classes (polymporphism)
+hunter = Quote('Elmer Fudd', "I'm hunting wabbits")
+print(hunter.who(), 'says:', hunter.says())
+# Elmer Fudd says: I'm hunting wabbits.
+
+hunted1 = QuestionQuote('Bugs Bunny', "What's up, doc")
+print(hunted1.who(), 'says:', hunted1.says())
+# Bugs Bunny says: What's up, doc?
+
+hunted2 = ExclamationQuote('Daffy Duck', "It's rabbit season")
+print(hunted2.who(), 'says:', hunted2.says())
+# Daffy Duck says: It's rabbit season!
+
+# to illustrate polymorphism further, define a completely new class...
+class BabblingBrook():
+    def who(self):
+        return 'Brook'
+    def says(self):
+        return 'Babble'
+
+brook = BabblingBrook()
+
+#...and run the who() and says() methods of the various objects, even if
+# they are completely unrelated to one another (polymorphism)
+def who_says(obj):
+    print(obj.who(), 'says', obj.says())
+    
+who_says(hunter)
+# Elmer Fudd says I'm hunting wabbits.
+who_says(hunted1)
+# Bugs Bunny says What's up, doc?
+who_says(hunted2)
+# Daffy Duck says It's rabbit season!
+who_says(brook)
+# Brook says Babble
+```
+
+Special methods begin and end with two underscores
+```python
+# define a class that compares words and ignores case WITHOUT using special methods
+class Word():
+    def __init__(self, text):
+        self.text = text
+    
+    def equals(self, word2):
+        return self.text.lower() == word2.text.lower()
+        
+first = Word('ha')
+second = Word('HA')
+third = Word('eh')
+
+first.equals(second)
+# True
+first.equals(third)
+# False
+
+# now do the same thing WITH using special methods (equality)
+class Word2():
+    def __init__(self, text):
+        self.text = text
+    def __eq__(self, word2):
+        return self.text.lower() == word2.text.lower()
+
+first2 = Word('ha')
+second2 = Word('HA')
+third2 = Word('eh')
+
+first2 == second2
+# True
+first2 == third2
+# False
+```
+
+Here is a list of common special methods:
+```
+__eq__(self,other)     self==other
+__ne__(self,other)     self!=other
+__lt__(self,other)     self<other
+__gt__(self,other)     self>other
+__le__(self,other)     self<=other
+__ge__(self,other)     self>=other
+
+__add__(self,other)        self+other
+__sub__(self,other)        self-other
+__mul__(self,other)        self*other
+__floordiv__(self,other)   self//other
+__truediv__(self,other)    self/other
+__mod__(self,other)        self%other
+__pow__(self,other)        self**other
+
+__str__(self)          str(self)
+__repr__(self)         repr(self)
+__len__(self)          len(self)
+```
 
 
+An illustration of the `__str__()` and `__repr__()` special methods
+```python
+class Word():
+    def __init__(self, text):
+        self.text = text
+    def __eq__(self, word2):
+        return self.text.lower() == word2.text.lower()
+    def __str__(self):
+        return self.text
+    def __repr__(self):
+        return 'Word("'  self.text  '")'
+        
+first = Word('ha')
+first          # uses __repr__
+# Word('ha')
+print(first)   # uses __str__
+```
+
+Composition (aggregation) is better than inheritance when a child only needs a piece from the parent
+```python
+class Bill():
+    def __init__(self, description):
+        self.description = description
+        
+class Tail():
+    def __init__(self, length):
+        self.length = length
+        
+class Duck():
+    def __init__(self, bill, tail):
+        self.bill = bill
+        self.tail = tail
+    def about(self):
+        print('This duck has a', bill.description, 'bill and a', tail.length, 'tail')
+        
+tail = Tail('long')
+bill = Bill('wide orange')
+duck = Duck(bill, tail)
+duck.about()
+# This duck has a wide orange bill and a long tail
+```
