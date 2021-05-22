@@ -7,6 +7,16 @@ These notes came from the following sources:
     Bill Lubanovic
     O'Reilly 2015
 
+    Quick reference:
+    * Ch. 7 on string manip/regex, binary data handling
+    * Ch. 8 on file I/O
+    * Ch. 10 on system functions, including time functions
+    * Ch. 12 on debugging with pdb 
+    * Appendix C on SciPy and NumPy
+    * Appendix D on installing Python
+
+---
+
 ### Strings
 
 The `print()` function adds spaces between strings, and a newline at the end
@@ -1376,145 +1386,6 @@ Weekly forecast:
 7 hail
 ```
 
-### Miscellaneous
-
-Grabbing command-line arguments
-```python
-import sys
-print('Program arguments:', sys.argv)
-```
-```python
-$ python test2.py
-Program arguments: ['test2.py']
-$ python test2.py tra la la
-Program arguments: ['test2.py', 'tra', 'la', 'la']
-```
-
-Display the Python search path (note the empty line is an empty string `''` which represents the current directory)
-```python
-import sys
-for place in sys.path:
-    print(place)
-#    
-# /usr/lib/python38.zip
-# /usr/lib/python3.8
-# /usr/lib/python3.8/lib-dynload
-# /usr/local/lib/python3.8/dist-packages
-# /usr/lib/python3/dist-packages
-```
-
-Counting items in lists
-```python
-from collections import Counter
-breakfast = ['spam', 'spam', 'eggs', 'spam']
-breakfast_counter = Counter(breakfast)
-breakfast_counter
-# Counter({'spam': 3, 'eggs': 1})
-
-# return all elements in descending order (or just the top n element)
-breakfast_counter.most_common()
-# [('spam', 3), ('eggs', 1)]
-breakfast_counter.most_common(1) # n=1
-# [('spam', 3)]
-
-# you can combine counters
-lunch = ['eggs', 'eggs', 'bacon']
-lunch_counter = Counter(lunch)
-lunch_counter 
-# Counter({'eggs': 2, 'bacon': 1})
-breakfast_counter + lunch_counter
-# Counter({'spam': 3, 'eggs': 3, 'bacon': 1})
-
-# finding the symmetric difference of the counters
-breakfast_counter - lunch_counter
-# Counter({'spam': 3})
-lunch_counter - breakfast_counter
-# Counter({'bacon': 1, 'eggs': 1})
-
-# finding the intersection of the counters
-breakfast_counter & egg_counter
-# Counter({'eggs': 1})  # note that the lower count is used
-
-# find the union of the counters
-breakfast_counter | lunch_counter
-# Counter({'spam': 3, 'eggs': 2, 'bacon': 1})  # note that this doesn't add the counts
-```
-
-Working with a deque (deque = stack + queue, pronounced _deck_)
-```python
-def palindrome(word):
-    from collections import deque
-    dq=deque(word)
-    while len(dq) > 1:
-        if dq.popleft() != dq.pop():
-            return False
-    return True
-    
-palindrome('a')
-# True
-palindrome('racecar')
-# True
-palindrome('')
-# True
-palindrome('halibut')
-# False
-```
-
-Iterate over code structures with `itertools`
-```python
-# run through all arguments as if they were a single iterable
-import itertools  
-for item in itertools.chain([1,2],['a','b']):
-    print(item)
-# 1
-# 2
-# a
-# b
-
-# infinitely cylcle through all arguments
-for item in itertools.cycle([1,2]):
-    print(item)
-# 1
-# 2
-# 1
-# 2
-# ...
-
-# calculate accumulated values
-for item in itertools.accumulate([1,2,3,4]):
-    print(item)
-# 1
-# 3
-# 6
-# 10
-
-# you can customize the accumulate function behaviour
-def multiply(a, b):
-    return a * b
-    
-for item in itertools.accumulate([1,2,3,4], multiply): 
-    print(item)
-# 1
-# 2
-# 6
-# 24
-```
-
-You can pretty print with `pprint()`
-```python
-from pprint import pprint
-quotes = OrderedDict([
-    ('Moe', 'A wise guy, huh?'),
-    ('Larry', 'Ow!'),
-    ('Curly', 'Nyuk nyuk!'),
-])
-
-pprint(quotes)
-# {'Moe': 'A wise guy, huh?',
-#  'Larry': 'Ow!',
-#  'Curly': 'Nyuk nyuk!'}
-```
-
 ### Objects
 
 Creating the simplest classes
@@ -2011,4 +1882,331 @@ bill = Bill('wide orange')
 duck = Duck(bill, tail)
 duck.about()
 # This duck has a wide orange bill and a long tail
+```
+
+### Code Checking with `pylint`
+
+A script with an error
+```python
+a = 1
+b = 2
+print(a)
+print(b)
+print(c)
+``` 
+
+...then running `pylint` on it:
+```
+> pylint script.py
+************* Module script
+script.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+script.py:1:0: C0103: Constant name "a" doesn't conform to UPPER_CASE naming style (invalid-name)
+script.py:2:0: C0103: Constant name "b" doesn't conform to UPPER_CASE naming style (invalid-name)
+script.py:5:6: E0602: Undefined variable 'c' (undefined-variable)
+
+------------------------------------
+Your code has been rated at -6.00/10
+```
+
+Now fix it up:
+```python
+"Module docstring goes here!"
+
+def func():
+    "Function docstring goes here!"
+    first  = 1
+    second = 2
+    third  = 3
+    print(first)
+    print(second)
+    print(third)
+
+func()
+```
+
+...then run `pylint` on it:
+```
+> pylint script.py
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: -6.00/10, +16.00)
+```
+
+### Testing with `unittest`
+
+We will test a script `cap.py` that capitalizes all words in a string
+```python
+def just_do_it(text):
+  return text.capitalize()
+```
+
+Now write a test script called `test_cap.py`
+```python
+import unittest
+import cap
+
+class TestCap(unittest.TestCase):
+  
+  # setUp() and tearDown() are called before each test method to
+  # allocate/free resources, but not needed here
+  def setUp(self):
+    pass
+  def tearDown(self):
+    pass
+    
+  # the first test
+  def test_one_word(self):
+    text = 'duck'
+    result = cap.just_do_it(text)
+    self.assertEqual(result, 'Duck')
+    
+  # the second test 
+  def test_multiple_words(self):
+    text = 'a veritable flock of ducks'
+    result = cap.just_do_it(text)
+    self.assertEqual(result, 'A Veritable Flock Of Ducks')
+
+if __name__ == '__main__':
+  unittest.main()
+```
+
+Now run the test:
+```
+> python test_cap.py
+F.
+======================================================================
+FAIL: test_multiple_words (__main__.TestCap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+File "test_cap.py", line 23, in test_multiple_words
+self.assertEqual(result, 'A Veritable Flock Of Ducks')
+AssertionError: 'A veritable flock of ducks' != 'A Veritable Flock Of Ducks'
+- A veritable flock of ducks
+?   ^         ^     ^  ^
++ A Veritable Flock Of Ducks
+?   ^         ^     ^  ^
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=1)
+```
+
+Note that the test failed because the function `capitalize` only capitalizes the first letter of the first word. A better version would have `cap.py` like so:
+```python
+def just_do_it(text):
+  from string import capwords
+  return capwords(text)
+```
+
+Now run the test:
+```python
+> python test_cap.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+```
+
+### Logging Error Messages with `logging`
+
+The logging levels and their numeric values are (default is `WARNING` 
+* 0  `NOTSET`
+* 10 `DEBUG`
+* 20 `INFO`
+* 30 `WARNING`
+* 40 `ERROR`
+* 50 `CRITICAL`
+
+Basic logging functionality (output to file)
+```python
+import logging
+logging.basicConfig(level='DEBUG', filename='out.log')
+
+# create a logger object
+logger = logging.getLogger('bunyan')
+
+# write to the log at different levels
+logger.debug("Where's my axe?")
+logger.warning("I need my axe")
+```
+
+...and checking the output of `out.log`:
+```
+DEBUG:bunyan:Where's my axe?
+WARNING:bunyan:I need my axe
+```
+
+### Miscellaneous
+
+Grabbing command-line arguments
+```python
+import sys
+print('Program arguments:', sys.argv)
+```
+```python
+$ python test2.py
+Program arguments: ['test2.py']
+$ python test2.py tra la la
+Program arguments: ['test2.py', 'tra', 'la', 'la']
+```
+
+Display the Python search path (note the empty line is an empty string `''` which represents the current directory)
+```python
+import sys
+for place in sys.path:
+    print(place)
+#    
+# /usr/lib/python38.zip
+# /usr/lib/python3.8
+# /usr/lib/python3.8/lib-dynload
+# /usr/local/lib/python3.8/dist-packages
+# /usr/lib/python3/dist-packages
+```
+
+Counting items in lists
+```python
+from collections import Counter
+breakfast = ['spam', 'spam', 'eggs', 'spam']
+breakfast_counter = Counter(breakfast)
+breakfast_counter
+# Counter({'spam': 3, 'eggs': 1})
+
+# return all elements in descending order (or just the top n element)
+breakfast_counter.most_common()
+# [('spam', 3), ('eggs', 1)]
+breakfast_counter.most_common(1) # n=1
+# [('spam', 3)]
+
+# you can combine counters
+lunch = ['eggs', 'eggs', 'bacon']
+lunch_counter = Counter(lunch)
+lunch_counter 
+# Counter({'eggs': 2, 'bacon': 1})
+breakfast_counter + lunch_counter
+# Counter({'spam': 3, 'eggs': 3, 'bacon': 1})
+
+# finding the symmetric difference of the counters
+breakfast_counter - lunch_counter
+# Counter({'spam': 3})
+lunch_counter - breakfast_counter
+# Counter({'bacon': 1, 'eggs': 1})
+
+# finding the intersection of the counters
+breakfast_counter & egg_counter
+# Counter({'eggs': 1})  # note that the lower count is used
+
+# find the union of the counters
+breakfast_counter | lunch_counter
+# Counter({'spam': 3, 'eggs': 2, 'bacon': 1})  # note that this doesn't add the counts
+```
+
+Working with a deque (deque = stack + queue, pronounced _deck_)
+```python
+def palindrome(word):
+    from collections import deque
+    dq=deque(word)
+    while len(dq) > 1:
+        if dq.popleft() != dq.pop():
+            return False
+    return True
+    
+palindrome('a')
+# True
+palindrome('racecar')
+# True
+palindrome('')
+# True
+palindrome('halibut')
+# False
+```
+
+Iterate over code structures with `itertools`
+```python
+# run through all arguments as if they were a single iterable
+import itertools  
+for item in itertools.chain([1,2],['a','b']):
+    print(item)
+# 1
+# 2
+# a
+# b
+
+# infinitely cylcle through all arguments
+for item in itertools.cycle([1,2]):
+    print(item)
+# 1
+# 2
+# 1
+# 2
+# ...
+
+# calculate accumulated values
+for item in itertools.accumulate([1,2,3,4]):
+    print(item)
+# 1
+# 3
+# 6
+# 10
+
+# you can customize the accumulate function behaviour
+def multiply(a, b):
+    return a * b
+    
+for item in itertools.accumulate([1,2,3,4], multiply): 
+    print(item)
+# 1
+# 2
+# 6
+# 24
+```
+
+You can pretty print with `pprint()`
+```python
+from pprint import pprint
+quotes = OrderedDict([
+    ('Moe', 'A wise guy, huh?'),
+    ('Larry', 'Ow!'),
+    ('Curly', 'Nyuk nyuk!'),
+])
+
+pprint(quotes)
+# {'Moe': 'A wise guy, huh?',
+#  'Larry': 'Ow!',
+#  'Curly': 'Nyuk nyuk!'}
+```
+
+Measure the runtime of a code snippet with `timeit`:
+```python
+from timeit import timeit
+print(timeit('num = 5; num *= 2', number=1))
+# 1.9020008039660752e-06
+
+from timeit import repeat
+print(repeat('num = 5; num *= 2', number=1, repeat=3))
+# [1.691998477326706e-06, 4.070025170221925e-07, 2.4700057110749185e-07]
+```
+
+A more complicated `timeit` example:
+```python
+from timeit import timeit
+
+# create a list by appending 1000 values
+def make_list_1():
+  result = []
+  for value in range(1000):
+    result.append(value)
+  return result
+  
+# create a list by list comprehension
+def make_list_2():
+  result = [value for value in range(1000)]
+  return result
+  
+print('make_list_1 takes', timeit(make_list_1, number=1000), 'seconds')
+print('make_list_2 takes', timeit(make_list_2, number=1000), 'seconds')
+# make_list_1 takes 0.14117428699682932 seconds
+# make_list_2 takes 0.06174145900149597 second
 ```
