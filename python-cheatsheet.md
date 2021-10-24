@@ -30,15 +30,15 @@ These notes came from the following sources:
 [List Comprehensions](#list-comprehensions)  
 [Dictionary Comprehensions](#dictionary-comprehensions)  
 [Set Comprehensions](#set-comprehensions)  
-[Generator Comprehensions](#generator-comprehensions) 
+[Generator Comprehensions](#generator-comprehensions)  
 [Functions](#functions)  
 [Generator Function](#generator-function)  
 [Decorator Function](#decorator-function)  
 [Namespaces](#namespaces)  
 [Exception Handling](#exception-handling)  
 [Creating Modules](#creating-modules)  
-[Packages](#Packages)  
-[Objects](#objects)  
+[Creating Packages](#creating-packages)  
+[Objects and Classes](#objects-and-classes)  
 [Code Checking with Pylint](#code-checking-with-pylint)  
 [Unit Testing](#testing-with-unittest)  
 [Error Logging](#logging-error-messages-with-logging)  
@@ -185,14 +185,14 @@ But that is liquid which is moist and wet
 Fire that property can never get.
 Then 'tis not cold that doth the fire put out
 But 'tis the wet that makes it die, no doubt'''
-print(len(poem))              #249
-print(poem.startswith('All')) #True
-print(poem.endswith('Fin'))   #False
+print(len(poem))              # 249
+print(poem.startswith('All')) # True
+print(poem.endswith('Fin'))   # False
 word = 'the'
-print(poem.find(word))        #73
-print(poem.rfind(word))       #214  (reverse find)
-print(poem.count(word))       #3
-print(poem.isalnum())         #False (only letters or numbers?)
+print(poem.find(word))        # 73
+print(poem.rfind(word))       # 214  (reverse find)
+print(poem.count(word))       # 3
+print(poem.isalnum())         # False (no alphanumeric)
 ```
 
 Strip characters from string
@@ -241,6 +241,9 @@ print(setup.replace('a ','a famous ', 100))
 ```
 
 ### Lists
+
+* see also [Ranges](#ranges), [List Comprehensions](#list-comprehensions)  
+
 ```python
 empty_list = [ ]
 weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -262,17 +265,17 @@ print(list('cat'))   # ['c', 'a', 't']
 Convert a tuple to a list
 ```python
 a_tiple = ('ready', 'fire', 'aim')
-print(list(a_tiple))
+print(list(a_tiple))  # ['ready', 'fire', 'aim']
 ```
     ['ready', 'fire', 'aim']
 
 Access/assign elements in a list
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo']
-print(marxes[0])  #Groucho
-print(marxes[-1]) #Harpo
+print(marxes[0])  # Groucho
+print(marxes[-1]) # Harpo
 marxes[2] = 'Wanda'
-marxes;  #['Groucho', 'Chico', 'Wanda']
+marxes;  # ['Groucho', 'Chico', 'Wanda']
 ```
 
 Lists of lists
@@ -280,7 +283,9 @@ Lists of lists
 small_birds = ['hummingbird', 'finch']
 extinct_birds = ['dodo', 'pigeon']
 all_birds = [small_birds, extinct_birds, 'macaw']
-all_birds; all_birds[0]; allbirds[1][0];
+all_birds       # [['hummingbird', 'finch'], ['dodo', 'pigeon'], 'macaw']
+all_birds[0]    # ['hummingbird', 'finch']
+all_birds[1][0] # 'dodo'
 ```
     [['hummingbird', 'finch'], ['dodo', 'pigeon'], 'macaw']
     ['hummingbird', 'finch']
@@ -298,7 +303,7 @@ Slicing
 marxes = ['Groucho', 'Chico', 'Harpo']
 marxes[0:2]   # ['Groucho', 'Chico']
 marxes[::2]   # ['Groucho', 'Harpo']  (stepsize=2 right)
-marxes[::-2]  # ['Harpo', 'Groucho']  (start at end and go left)
+marxes[::-2]  # ['Harpo', 'Groucho']  (start at end and go left w/ stepsize=2)
 marxes[::-1]  # ['Harpo', 'Chico', 'Groucho']  (reverse the list)
 ```
 
@@ -306,37 +311,35 @@ Append single element to end of list
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo']
 marxes.append('Zeppo'); marxes
+# ['Groucho', 'Chico', 'Harpo', 'Zeppo']
 ```
-    ['Groucho', 'Chico', 'Harpo', 'Zeppo']
 
 Append single element at specific point in list
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo']
-marxes.insert(3, 'Gummo'); marxes
-marxes.insert(10, 'Karl'); marxes  # offset beyond end of list inserts at end
-marxes.insert(0, 'Bobbo'); marxes  # offset 0 inserts at beginning of list
+marxes.insert(3, 'Gummo')
+marxes  # ['Groucho', 'Chico', 'Gummo', 'Harpo']
+marxes.insert(10, 'Karl')  # offset beyond end of list inserts at end
+marxes  # ['Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
+marxes.insert(0, 'Bobbo')  # offset 0 inserts at beginning of list
+marxes  # ['Bobbo', 'Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
 ```
-    ['Groucho', 'Chico', 'Gummo', 'Harpo']
-    ['Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
-    ['Bobbo', 'Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
    
 Delete single element of a list   
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo', 'Gummo', 'Zeppo']
-del marxes[2]; marxes
-del marxes[-1]; marxes
+del marxes[2]; marxes   # ['Groucho', 'Chico', 'Gummo', 'Zeppo']
+del marxes[-1]; marxes  # ['Groucho', 'Chico', 'Gummo']
 ```
-    ['Groucho', 'Chico', 'Gummo', 'Zeppo']
-    ['Groucho', 'Chico', 'Gummo']
 
 Delete single element of list by name
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo', 'Gummo', 'Zeppo']
 marxes.remove('Gummo'); marxes
+# ['Groucho', 'Chico', 'Harpo', 'Zeppo']
 ```
-    ['Groucho', 'Chico', 'Harpo', 'Zeppo']
    
-Get item from list and delete using pop()   
+Get item from list and delete using `pop()` (like a stack/queue)
 * note that `pop(0)` returns head of the list, `pop(-1)` returns tail
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
@@ -357,8 +360,8 @@ Combine/merge lists
 marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
 others = ['Gummo', 'Karl']
 marxes.extend(others); marxes;  # alternatively, marxes += others
+# ['Groucho', 'Chico', 'Harpo', 'Zeppo', 'Gummo', 'Karl']
 ```
-    ['Groucho', 'Chico', 'Harpo', 'Zeppo', 'Gummo', 'Karl']
     
 Check for element in list
 ```python
@@ -382,13 +385,13 @@ marxes = ['Groucho', 'Chico', 'Harpo']
 Sort a list
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo']
-sorted_marxes = sorted(marxes)  # creates a copy
+sorted_marxes = sorted(marxes)  # METHOD 1: creates a copy
 sorted_marxes; # ['Chico', 'Groucho', 'Harpo']
-marxes.sort()  # overwrites original list
+marxes.sort()  # METHOD 2: overwrites original list
 marxes;        # ['Chico', 'Groucho', 'Harpo']
 numbers = [2, 1, 4.0, 3]
 numbers.sort(reverse=True)  # reverse sort
-numbers;       # [4.0, 3, 2, 1]
+numbers;  # [4.0, 3, 2, 1]
 ```
 
 Get length of list
@@ -398,17 +401,18 @@ len(marxes)  # 3
 ```
 
 Copy a list
-* note that if you just use `b=a` then `b` and `a` will point to the same object in memory, which you probably don't want
 ```python
 a = [1, 2, 3]
 b = a.copy()
 c = list(a)
 d = a[:]
+# [1, 2, 3] for all a, b, c, d
 ```
+* note that if you just used `b=a` then `b` and `a` will point to the same object in memory, which you probably don't want
 
 ### Tuples
 
-* tuples are just immutable lists and elements that can't be added or deleted after the tuple is defined
+* tuples are just immutable lists; elements can't be added or deleted after the tuple is defined
 
 ```python
 empty_tuple = ()
@@ -435,7 +439,7 @@ marx_list  = ['Groucho', 'Chico', 'Harpo']
 tuple(marx_list)  # ('Groucho', 'Chico', 'Harpo')
 ```
 
-* _named_ tuples are a subclass of tuples that allow you to access values via `.name` as well as position via `[offset]`. They are similar to objects but are more space (and time) efficient
+_Named tuples_ are a subclass of tuples that allow you to access values via `.name` as well as position via `[offset]`. They are similar to objects but are more space (and time) efficient
 ```python
 from collections import namedtuple
 
@@ -500,21 +504,23 @@ pythons = { 'Chapman':'Graham', 'Cleese':'John', 'Idle':'Eric', 'Jones':'Terry',
 pythons['Gilliam'] = 'Gerry'  # add an item
 pythons['Gilliam'] = 'Terry'  # change an item
 pythons
+# {'Cleese': 'John', 'Gilliam': 'Terry', 'Palin': 'Michael','Chapman': 'Graham', 'Idle': 'Eric', 'Jones': 'Terry'}
 ```
-    {'Cleese': 'John', 'Gilliam': 'Terry', 'Palin': 'Michael','Chapman': 'Graham', 'Idle': 'Eric', 'Jones': 'Terry'}
 
 Repeated entries are clobbered
 ```python
 pythons = {'Graham':'Chapman', 'John':'Cleese', 'Eric':'Idle', 'Terry':'Gilliam', 'Michael':'Palin', 'Terry':'Jones'}  # first Terry gets clobbered
 pythons
+# {'Terry':'Jones', 'Eric':'Idle', 'Graham':'Chapman', 'John':'Cleese', 'Michael':'Palin'}
 ```
-    {'Terry':'Jones', 'Eric':'Idle', 'Graham':'Chapman', 'John':'Cleese', 'Michael':'Palin'}
 
 Combine dictionaries
 ```python
-pythons= { 'Chapman':'Graham', 'Cleese':'John', 'Gilliam':'Terry', 'Idle':'Eric', 'Jones':'Terry', 'Palin':'Michael', }
+pythons= { 'Chapman':'Graham', 'Cleese':'John', 'Gilliam':'Terry', 'Idle':'Eric', 'Jones':'Terry', 'Palin':'Michael' }
 others = { 'Marx':'Groucho', 'Howard':'Moe' }
-python.update(others)  # entries will be mixed together
+pythons.update(others)  # entries will be mixed together
+pythons  
+# {'Chapman': 'Graham', 'Cleese': 'John', 'Gilliam': 'Terry', 'Idle': 'Eric', 'Jones': 'Terry', 'Palin': 'Michael', 'Marx': 'Groucho', 'Howard': 'Moe'}
 ```
 
 Combining dictionaries with repeated entries will cause the second to overwrite the first
@@ -529,6 +535,7 @@ Remove entries
 ```python
 others = { 'Marx':'Groucho', 'Howard':'Moe' }
 del others['Marx']
+others;  # {'Howard': 'Moe'}
 
 # remove all entries
 others.clear()
@@ -538,13 +545,14 @@ others;  # {}
 Test for a key in dictionaries
 ```python
 others = { 'Marx':'Groucho', 'Howard':'Moe' }
-'Marx' in python  # True
+'Marx' in others  # True
 ```
 
 Get item in dictionary
 ```python
 others = { 'Marx':'Groucho', 'Howard':'Moe' }
-others.get('Marx', 'not in dict!')  # 'Groucho'
+others.get('Marx', 'not in dict!')    # 'Groucho'
+others.get('Cleese', 'not in dict!')  # 'not in dict!'
 ```
 
 Get all keys in a dictionary
@@ -605,9 +613,11 @@ periodic_table
 ```
 
 Handle missing keys with `defaultdict()`. It can accept the following:
-`int`  -- returns 0
-`list` -- return empty list ([])
-`dict` -- return empty dictionary ({})
+```
+int  -- returns 0
+list -- return empty list []
+dict -- return empty dictionary {}
+```
 ```python
 # defaultdict() is similar to setdefault() but it sets a default for missing values
 from collections import defaultdict
@@ -622,7 +632,6 @@ periodic_table
 
 # an explicit example showing that the argument to defaultdict() must 
 # be a function returning the value to be assigned to a missing key
-from collections import defaultdict
 def no_idea():
     return 'Huh?'
 
@@ -635,8 +644,10 @@ bestiary['B']
 # 'Basilisk'
 bestiary['C']
 # 'Huh?'
+bestiary
+# defaultdict(<function no_idea at 0x7f555e6c3700>, {'A': 'Abominable Snowman', 'B': 'Basilisk', 'C': 'Huh?'})
 
-# an easier way
+# an easier way (see lambda function notes)
 bestiary = defaultdict(lambda: 'Huh?')
 bestiary('E')
 # 'Huh?'
@@ -666,7 +677,6 @@ Creating sets (sets are unsorted, like dictionary keys)
 ```python
 empty_set = set()
 even_numbers = {0, 2, 4, 6, 8}
-even_numbers # {0, 8, 2, 4, 6}
 ```
 
 Convert string, list, tuple, dictionary to set (discards duplicates)
@@ -759,7 +769,7 @@ dict_of_lists  # {'Stooges': ['Moe', 'Curly', 'Larry'],'Marxes': ['Groucho', 'Ch
 Comparison operators
 ```python
 ==  !=  <  <=  >  >=
-and  or  and not
+and    or    and not
 ```
 
 Structures considered `false`
@@ -789,7 +799,7 @@ if mybool:
         # do something else
 
 count = 1
-while count <=50
+while count <=50:
     # do something
     count += 1
     if count == 20
@@ -1040,7 +1050,7 @@ Gather multiple *keyword* arguments with `**`
 # the double asterisk groups a variable number of keyword arguments into a dictionary
 def print_kwargs(**kwargs):
     print('Keyword arguments:', kwargs)
-    # inside the function, kwargs is a dictionary
+    # inside this function, kwargs is a dictionary
     
 print_kwargs(wine='merlot', entree='mutton', dessert='macaroon')
 # Keyword arguments: {'dessert': 'macaroon', 'wine': 'merlot', 'entree': 'mutton'}
@@ -1063,7 +1073,7 @@ b()
 # "The knights say: 'Goose'"
 ```
 
-Anonymous functions (`lambda()`)
+Anonymous functions (`lambda`)
 ```python
 def edit_story(words, func):
     for word in words:
@@ -1080,7 +1090,7 @@ edit_story(stairs, enliven)
 # Thud!
 # Hiss!
 
-# alternatively, lambda() allows you to do it in one line:
+# alternatively, lambda allows you to do it in one line
 edit_story(stairs, lambda word: word.capitalize() + '!')
 # Thud!
 # Meow!
@@ -1281,7 +1291,7 @@ short_list[position]
 # IndexError: list index out of range
 ```
 
-`try` is run first; if an exception occurs then `except` is run
+As a debug measure: `try` is run first; if an exception occurs then `except` is run
 ```python
 short_list = [1, 2, 3]
 position = 5
@@ -1373,7 +1383,7 @@ $ python weatherman.py
 Today's weather: sleet
 ```
 
-### Packages
+### Creating Packages
 
 If modules are properly organized in a subdirectory then Python can treat the subdirectory as a package. Note that you will also need a file `./sources/__init__.py` to exist so that Python knows the subdirectory is intended to be a package.
 
@@ -1415,9 +1425,9 @@ Weekly forecast:
 7 hail
 ```
 
-### Objects
+### Objects and Classes
 
-Creating the simplest classes
+Creating the simplest class
 ```python
 # the simplest possible class
 class Simplest():
@@ -1427,8 +1437,7 @@ class Simplest():
 something = Simplest()
 ```
 
-Creating a non-trivial class (note that `__init__` is a special function that initializes an individual object from its class definition; `self` specifies that it refers to the individual object itself)
-The example below does the following:
+Now creating a non-trivial class... (note that `__init__` is a special function (a *constructor*) that initializes an individual object from its class definition; `self` specifies that it refers to the individual object itself). The example below does the following:
 1. looks up the definition of the `Person` class
 2. creates a new object in memory
 3. calls the object's `__init__` method, passing the newly-created object as `self` and the other argument as `name`
@@ -1454,18 +1463,18 @@ class Car():
     def exclaim(self):
         print("I'm a Car!")
 
-car = Car()
+mycar = Car()
 
 # method 1 (the usual way)
-car.exclaim()
-# "I'm a Car!
+mycar.exclaim()
+# I'm a Car!
 
 # method 2 (the illustrative way)
-Car.exclaim(car)
-# "I'm a Car!
+Car.exclaim(mycar)
+# I'm a Car!
 ```
 
-Inheritance
+Inheritance (child classes)
 ```python
 # define a parent class
 class Car():
@@ -1532,14 +1541,14 @@ print(lawyer.name)
 Adding a method to an inherited class
 ```python
 class Car():
-		def exclaim(self):
-				print("I'm a Car!")
+    def exclaim(self):
+        print("I'm a Car!")
 
 class Yugo(Car):
-		def exclaim(self):
+    def exclaim(self):
         print("I'm not just any Car, I'm a Yugo!")
-		def need_a_push(self):
-				print("A little help here?")
+    def need_a_push(self):
+        print("A little help here?")
 
 give_me_a_car  = Car()
 give_me_a_yugo = Yugo()
@@ -1556,13 +1565,13 @@ give_me_a_car.need_a_push()
 Call a parent class with `super()`. Note that when you define an `__init__()` method for a child class, you are replacing the `__init__` method of its parent class, so you need to call the parent one explicitly (i.e. it is not called automatically anymore)
 ```python
 class Person():
-		def __init__(self, name):
-				self.name = name
+    def __init__(self, name):
+        self.name = name
 
 class EmailPerson(Person):
-		def __init__(self, name, email):
-				super().__init__(name)
-				self.email = email
+    def __init__(self, name, email):
+        super().__init__(name)
+        self.email = email
 
 bob = EmailPerson('Bob Frapples', 'bob@frapples.com')
 bob.name
@@ -1572,9 +1581,9 @@ bob.email
 
 # the following (without inheritance) would have also worked:
 class EmailPerson2(Person):
-		def __init__(self, name, email):
-				self.name = name
-				self.name = email
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
 ```
 
 Note that all attributes and methods are public in Python and can be accessed directly, but you can also write _getters_ and _setters_ with `property` in Python (here the `name` property refers to a single attribute which we call `hidden_name` that is stored within the object)
@@ -1590,8 +1599,8 @@ class Duck():
     def set_name(self, input_name):
         print('inside the setter')
         self.hidden_name = input_name
-    # ...and finally define the getter and setter as properies of the 'name' attribute
-    # first argument to 'property' is the getter, second is the setter
+    # ...and finally define the getter and setter as properties of the 'name' attribute
+    # (first argument to 'property' is the getter, second is the setter)
     name = property(get_name, set_name)
         
 # now whenever you refer to the 'name' of any 'Duck' object, it calls the getter 
@@ -1663,7 +1672,7 @@ c.radius
 
 # we can refer to diameter as if it was an attibute like radius
 c.diameter
-#10
+# 10
 
 # changing the radius shows that diameter is a computed value
 c.radius = 7
@@ -1731,7 +1740,7 @@ Class A():
     # the first parameter to a class method is the class itself (note that
     # the word 'class' is reserved so we use 'cls')
     def kids(cls):
-        print("A has", cls.count, "objects.") # could have used A.count instead
+        print("A has", cls.count, "objects.") # could also have used A.count instead
 
 easy_A = A()
 breezy_A = A()
@@ -1810,6 +1819,15 @@ who_says(hunted2)
 # Daffy Duck says It's rabbit season!
 who_says(brook)
 # Brook says Babble
+
+# polymorphism illustrated using built-in functions
+# len() being used for a string
+print(len("geeks"))
+# 5
+
+# len() being used for a list
+print(len([10, 20, 30]))
+# 3
 ```
 
 Special methods begin and end with two underscores
@@ -1887,6 +1905,7 @@ first = Word('ha')
 first          # uses __repr__
 # Word('ha')
 print(first)   # uses __str__
+# ha
 ```
 
 Composition (aggregation) is better than inheritance when a child only needs a piece from the parent
@@ -1976,8 +1995,8 @@ import cap
 
 class TestCap(unittest.TestCase):
   
-  # setUp() and tearDown() are called before each test method to
-  # allocate/free resources, but not needed here
+  # setUp()/tearDown() are called before/after each test method to
+  # allocate/free resources, but not needed for this trivial example
   def setUp(self):
     pass
   def tearDown(self):
@@ -2041,7 +2060,7 @@ OK
 
 ### Logging Error Messages with `logging`
 
-The logging levels and their numeric values are (default is `WARNING` 
+The logging levels and their numeric values are (default is `WARNING`)
 * 0  `NOTSET`
 * 10 `DEBUG`
 * 20 `INFO`
