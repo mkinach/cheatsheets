@@ -42,6 +42,7 @@ These notes came from the following sources:
 [Code Checking with Pylint](#code-checking-with-pylint)  
 [Unit Testing](#testing-with-unittest)  
 [Error Logging](#logging-error-messages-with-logging)  
+[Virtual Environments](#virtual-environments-with-venv)  
 [Miscellaneous](#miscellaneous)  
 
 ---
@@ -2085,6 +2086,56 @@ logger.warning("I need my axe")
 ```
 DEBUG:bunyan:Where's my axe?
 WARNING:bunyan:I need my axe
+```
+
+### Virtual Environments with `venv`
+
+**NOTE:** virtual environments are not easily movable due to how they set up their paths. This means that you should be sure of where you want to setup your virtual environment before you do it. I recommend creating all environments somewhere in /usr/local but keeping your script files (and a list of installed packages) somewhere within your source directory
+
+To create a venv with name `test`
+```
+python3 -m venv /usr/local/venv/test
+```
+
+Note that in order to get the above command to work, you may have to install the following package (on Ubuntu/Debian systems)
+```
+$ sudo apt-get install python3-venv
+```
+
+Activate a virtual environment using
+```
+$ source /usr/local/venv/test/bin/activate
+```
+
+Now the default environment will be set to Python 3 and any packages installed will be in the `test` directory, as can be checked
+```
+>>> import sys
+>>> sys.prefix
+'/usr/local/venv/test'
+```
+
+To deactivate the virtual environment
+```
+(test) $ deactivate
+```
+
+You might want to update `pip` within the environment
+```
+(test) $ pip install --upgrade pip
+```
+
+Install packages in the virtual environment using
+```
+(test) $ pip install packagename
+```
+
+To export the package dependencies of your project
+```
+(test) $ pip freeze > requirements.txt
+```
+To recreate a virtual environment with packages from a list
+```
+(test) $ pip install -r requirements.txt
 ```
 
 ### Miscellaneous
