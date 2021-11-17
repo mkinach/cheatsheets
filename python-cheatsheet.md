@@ -409,6 +409,43 @@ d = a[:]
 ```
 * note that if you just used `b=a` then `b` and `a` will point to the same object in memory, which you probably don't want
 
+Counting items in lists
+```python
+from collections import Counter
+breakfast = ['spam', 'spam', 'eggs', 'spam']
+breakfast_counter = Counter(breakfast)
+breakfast_counter
+# Counter({'spam': 3, 'eggs': 1})
+
+# return all elements in descending order (or just the top n element)
+breakfast_counter.most_common()
+# [('spam', 3), ('eggs', 1)]
+breakfast_counter.most_common(1) # n=1
+# [('spam', 3)]
+
+# you can combine counters
+lunch = ['eggs', 'eggs', 'bacon']
+lunch_counter = Counter(lunch)
+lunch_counter 
+# Counter({'eggs': 2, 'bacon': 1})
+breakfast_counter + lunch_counter
+# Counter({'spam': 3, 'eggs': 3, 'bacon': 1})
+
+# finding the symmetric difference of the counters
+breakfast_counter - lunch_counter
+# Counter({'spam': 3})
+lunch_counter - breakfast_counter
+# Counter({'bacon': 1, 'eggs': 1})
+
+# finding the intersection of the counters
+breakfast_counter & egg_counter
+# Counter({'eggs': 1})  # note that the lower count is used
+
+# find the union of the counters
+breakfast_counter | lunch_counter
+# Counter({'spam': 3, 'eggs': 2, 'bacon': 1})  # note that this doesn't add the counts
+```
+
 ### Tuples
 
 * tuples are just immutable lists; elements can't be added or deleted after the tuple is defined
@@ -2161,43 +2198,6 @@ for place in sys.path:
 # /usr/lib/python3.8/lib-dynload
 # /usr/local/lib/python3.8/dist-packages
 # /usr/lib/python3/dist-packages
-```
-
-Counting items in lists
-```python
-from collections import Counter
-breakfast = ['spam', 'spam', 'eggs', 'spam']
-breakfast_counter = Counter(breakfast)
-breakfast_counter
-# Counter({'spam': 3, 'eggs': 1})
-
-# return all elements in descending order (or just the top n element)
-breakfast_counter.most_common()
-# [('spam', 3), ('eggs', 1)]
-breakfast_counter.most_common(1) # n=1
-# [('spam', 3)]
-
-# you can combine counters
-lunch = ['eggs', 'eggs', 'bacon']
-lunch_counter = Counter(lunch)
-lunch_counter 
-# Counter({'eggs': 2, 'bacon': 1})
-breakfast_counter + lunch_counter
-# Counter({'spam': 3, 'eggs': 3, 'bacon': 1})
-
-# finding the symmetric difference of the counters
-breakfast_counter - lunch_counter
-# Counter({'spam': 3})
-lunch_counter - breakfast_counter
-# Counter({'bacon': 1, 'eggs': 1})
-
-# finding the intersection of the counters
-breakfast_counter & egg_counter
-# Counter({'eggs': 1})  # note that the lower count is used
-
-# find the union of the counters
-breakfast_counter | lunch_counter
-# Counter({'spam': 3, 'eggs': 2, 'bacon': 1})  # note that this doesn't add the counts
 ```
 
 Working with a deque (deque = stack + queue, pronounced _deck_)
