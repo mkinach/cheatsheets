@@ -16,7 +16,7 @@
 
 * `ma` (where `a` is any letter) to bookmark current cursor positon
 * `mA` (where `a` is any CAPITAL letter) to create global bookmark
-* ``a` or ``A` (where `a` or `A` is any letter) to return to a bookmarked position
+* `a` or `A` (where `a` or `A` is any letter) to return to a bookmarked position
 
 ### Search-In-Text
 
@@ -43,7 +43,7 @@
 
 * `:sp [filename]` to open _filename_ (null for same file) with a horizontal (top/bottom) split
 
-* `:vsp [filename]` to open _filename_ (null for same file) with a vertical (up/down) split
+* `:vsp [filename]` to open _filename_ (null for same file) with a vertical (left/right) split
 
 * `Ctrl-w` then `>` or `<` to resize a vertical split (or `Ctrl-w n` to resize _n_ lines at once)
  
