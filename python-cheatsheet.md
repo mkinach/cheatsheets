@@ -1,8 +1,6 @@
 # Python 3 Cheatsheet
 #### References:
 
-These notes came from the following sources:
-
     INTRODUCING PYTHON (1st Edition)
     Bill Lubanovic
     O'Reilly 2015
@@ -2090,7 +2088,7 @@ WARNING:bunyan:I need my axe
 
 ### Virtual Environments with `venv`
 
-**NOTE:** virtual environments are not easily movable due to how they set up their paths. This means that you should be sure of where you want to setup your virtual environment before you do it. I recommend creating all environments somewhere in /usr/local but keeping your script files (and a list of installed packages) somewhere within your source directory
+**NOTE:** virtual environments are not easily movable due to how they set up their paths. This means that you should be sure of where you want to setup your virtual environment before you do it. I recommend creating all environments somewhere in `/usr/local` but keeping your script files (and a list of installed packages) somewhere within your source directory
 
 To create a venv with name `test`
 ```
