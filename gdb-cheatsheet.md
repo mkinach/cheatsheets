@@ -7,18 +7,20 @@
     [4] https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html#Debugging-Options
     [5] http://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html
 
-#### Index
+#### Index:
 
-[Basics](#basics)
-[Fortran Debugging](#fortran-debugging)
-[C Debugging](#c-debugging)
-[MPI Debugging](#mpi-debugging)
-[Miscellaneous](#miscellaneous)
+[Basics](#basics)<br>
+[Fortran Debugging](#fortran-debugging)<br>
+[C Debugging](#c-debugging)<br>
+[MPI Debugging](#mpi-debugging)<br>
+[Miscellaneous](#miscellaneous)<br>
+
+---
 
 ### Basics
 Assuming your executable is named `myprog`, start the debugger via
 ```
-gdb myprog
+$ gdb myprog
 ```
 
 To set a breakpoint at a specific line in the code
@@ -92,16 +94,16 @@ Look forward or backward in the code
 
 Print first `n` bytes from an array:
 ```
-print *myarray@n
+(gdb) print *myarray@n
 ```
 
 To analyze a core file
 ```
-gdb <app> <corefile>
+$ gdb <app> <corefile>
 ```
 
 ### Fortran Debugging
-Some useful debug flags (assuming `gfortran` compiler)
+Some useful debug flags (assuming `gfortran` or `mpifort`)
 ```
 # -ggdb: produce debugging info for GDB
 # -Wall: verbose warnings at compile time
@@ -117,7 +119,7 @@ F77_LOAD     = mpifort $(FDEBUGFLAGS) -fno-second-underscore -L/usr/local/lib
 You should also turn off any optimization flags (e.g. `-O3`). Some other possibly useful debug flags are listed in [4]
 
 ### C Debugging
-Some useful debug flags (assuming `gcc` compiler)
+Some useful debug flags (assuming `gcc` or `mpicc`)
 ```
 # -ggdb: produce debugging info for GDB
 # -Wall: verbose warnings at compile time
@@ -128,7 +130,7 @@ CCFLAGS			 =
 CC           = mpicc $(CDEBUGFLAGS)
 ```
 
-To enable additional core dumps on seg faults, NaNs, over/underflow errors, etc.
+To enable additional core dumps on seg faults, NaNs, over/underflow errors, etc., add the following lines to your code
 ```
 #include <fenv.h>
 feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
@@ -136,55 +138,53 @@ feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 
 ### MPI Debugging
 
-* NOTE: you can add compiler/linker debug flags (such as `-g`) to the Makefile and turn off optimization options (such as by using `-O0`), but you should actively avoid these flags when *building* OpenMPI, since this would lead you to step into internal MPI functions which you probably don't want
-
 To debug MPI jobs running locally on only a few processors:
-1. Launch a seperate gdb instance for each processor (replace `konsole` with the terminal emulator of your choice)
-```
-mpirun --oversubscribe -np <NP> konsole -e gdb my_mpi_application
-```
-Note that the MPI flag `--oversubscribe` can simulate more processors than may be available on your system
+1. Launch a seperate gdb instance for each processor (note that the MPI flag `--oversubscribe` can simulate more processors than may be available on your system)
+    ```
+    $ mpirun --oversubscribe -np <NP> konsole -e gdb my_mpi_application
+    ```
 
 2. If there are input files or arguments to your MPI program, enter the following in all of the gdb windows that launch
-```
-run [arg1] [arg2] ... [argn]
-```
+    ```
+    (gdb) run [arg1] [arg2] ... [argn]
+    ```
 
-To debug MPI jobs on a remote cluster with a small number of processors (up to maybe 8):
+<br>To debug MPI jobs on a remote cluster with a small number of processors (up to maybe 8):
 1. Assuming C, insert the following code somewhere in your application where you want the program to wait
-```
-{
-    volatile int i = 0;
-    char hostname[256];
-    gethostname(hostname, sizeof(hostname));
-    printf("PID %d on %s ready for attach\n", getpid(), hostname);
-    fflush(stdout);
-    while (0 == i)
-    sleep(5);
-}
-```
-then all the processes will wait until attached with a debugger.
+    ```
+    {   // ALL PROCESSES WILL WAIT HERE UNTIL ATTACHED TO DEBUGGER
+        volatile int i = 0;
+        char hostname[256];
+        gethostname(hostname, sizeof(hostname));
+        printf("PID %d on %s ready for attach\n", getpid(), hostname);
+        fflush(stdout);
+        while (0 == i)
+        sleep(5);
+    }
+    ```
 
 2. Attach gdb to each process by looking for the nodes where the jobs are running
-```
-$ squeue -u $USER
-```
+    ```
+    $ squeue -u $USER
+    ```
 
-3. SSH into the running nodes (e.g. `ssh user@gra1234`) and attach the gdb process
-```
-gdb --pid <pid> <app>
-```
-where the `<pid>` can be found in the output file of the job
+3. SSH into the running nodes (e.g. `ssh user@gra1234`) and attach the gdb process (`<pid>` can be found in the output file of the job)
+    ```
+    $ gdb --pid <pid> <app>
+    ```
+  
+4. Once in the debugger go to the frame with the above block of code and continue execution with
+    ```
+    (gdb) set var i = 7
+    ```
 
-4. Once in the debugger go to the frame with the above block of code and run
-```
-(gdb) set var i = 7
-```
 If you want live execution control, set a breakpoint and continue execution until the breakpoint is hit; then you will have full control.  You can also edit the above code to only pause in specific MPI processes (for example, by only pausing on rank 0, etc.)
+
+**NOTE**: you can add compiler/linker debug flags (such as `-g`) to the Makefile and turn off optimization options (such as by using `-O0`), but you should actively avoid these flags when *building* OpenMPI, since this would lead you to step into internal MPI functions which you probably don't want
 
 ### Miscellaneous
 
-* if you get errors like
+If you get errors like
 ```
 (gdb) error reading variable: value requires 1054728 bytes, which is more than max-value-size
 ```
@@ -193,25 +193,26 @@ it is because gdb cannot store values of large arrays. You can fix this by enter
 (gdb) set max-value-size unlimited
 ```
  
-* if core dumps are not being output, set soft limits to unlimited on your machine
+If core dumps are not being output, set soft limits to unlimited on your machine
 ```
-ulimit -Sc unlimited
+$ ulimit -Sc unlimited
 ```
+
 To generate a core dump on a hanging process
 ```
-gcore <pid>
+$ gcore <pid>
 ```
 or
 ```
-kill -ABRT <pid>
+$ kill -ABRT <pid>
 ```
- 
-* you may sometimes get an error like the following:
+
+You may sometimes get an error like the following:
 ```
 __math_divzero (sign=1) at ../sysdeps/ieee754/dbl-64/math_err.c:70
 70      ../sysdeps/ieee754/dbl-64/math_err.c: No such file or directory.
 ```
-You can step over this exception by using the 'step' command
+You can step over this exception by using the `step` command
 
-* it may be worthwhile to try `DDD`, a graphical frontend for gdb and other debuggers
+It may be worthwhile to try `DDD`, a graphical frontend for gdb and other debuggers
 
