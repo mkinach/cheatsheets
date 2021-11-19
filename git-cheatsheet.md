@@ -28,7 +28,7 @@ git show [HEAD~n] <file>        # show file contents from specific commit
 
 git checkout [HEAD~n] <file>    # restore file
 git checkout f22b25e            # detach HEAD state for some commit ID
-git checkout main             # reattach your HEAD
+git checkout main               # reattach your HEAD
 git checkout <branch>           # change to a different branch
 git checkout -- <file>          # revert file back to previous commit
 git checkout f22b25e -- <file>  # revert file back to specific commit
@@ -47,7 +47,7 @@ Create a temporary branch from a past commit
 ```
 git checkout -b temp-branch 56a4e5c08
 git log --oneline --decorate --graph --all  # see where branch pointers are pointing
-git checkout main                         # change back
+git checkout main                           # change back
 git branch -a                               # show branch structure
 git branch -d temp-branch                   # delete temp branch
 ```

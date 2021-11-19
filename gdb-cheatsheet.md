@@ -126,7 +126,7 @@ Some useful debug flags (assuming `gcc` or `mpicc`)
 # -Wfloat-equal: warning if floating point numbers are using in equality comparisons
 CDEBUGFLAGS  = -ggdb 
 CDEBUGFLAGS := $(CDEBUGFLAGS) -Wall -Wfloat-equal
-CCFLAGS			 = 
+CCFLAGS      = 
 CC           = mpicc $(CDEBUGFLAGS)
 ```
 
@@ -149,7 +149,7 @@ To debug MPI jobs running locally on only a few processors:
     (gdb) run [arg1] [arg2] ... [argn]
     ```
 
-<br>To debug MPI jobs on a remote cluster with a small number of processors (up to maybe 8):
+<br>To debug MPI jobs on a remote cluster with a small number of processors (up to maybe ~8?):
 1. Assuming C, insert the following code somewhere in your application where you want the program to wait
     ```
     {   // ALL PROCESSES WILL WAIT HERE UNTIL ATTACHED TO DEBUGGER
@@ -163,7 +163,7 @@ To debug MPI jobs running locally on only a few processors:
     }
     ```
 
-2. Attach gdb to each process by looking for the nodes where the jobs are running
+2. Prepare to attach gdb to each process by looking for the nodes where the jobs are running
     ```
     $ squeue -u $USER
     ```

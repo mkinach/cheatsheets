@@ -6,17 +6,41 @@
 
 * `"+` to access system clipboard (must have vim compiled with +clipboard; e.g. vim-gtk)
 
-* Ctrl-A to increment highlighted number, Ctrl-X to decrement
-
+* `ctrl-a` to increment highlighted number, `ctrl-x` to decrement
+ 
 * `:sh` to open a shell from Vim instance (`exit` to go back)
 * `:! cmd` to run shell command `cmd` from Vim instance (does not work with aliases)
 * `:! cmd %` to run shell command `cmd` from Vim instance with current file (`%`) as parameter
 * `:r! cmd` to put output of shell command `cmd` into current buffer
 * `:r file` to dump contents of `file` into current buffer
 
-* `ma` (where `a` is any letter) to bookmark current cursor positon
-* `mA` (where `a` is any CAPITAL letter) to create global bookmark
-* `a` or `A` (where `a` or `A` is any letter) to return to a bookmarked position
+* `%` to move to matching character: (), {}, []
+
+* `zz` to center screen about cursor
+
+* `q:` brings up command history
+* `q/` brings up search history
+* `g;` to jump to last edit
+
+### Visual Mode
+
+* `O` to move to other corner of block (when in visual mode)
+* `ab` to select current text surrounded by ()
+* `aB` to select current text surrounded by {}
+* `ib` to select current text surrounded by (), excluding the ()
+* `iB` to select current text surrounded by {}, excluding the {}
+
+### Marks
+
+* `'ma` (where `a` is any letter) to create local bookmark at current line
+* `mA` (where `A` is any CAPITAL letter) to create global bookmark on current line
+* `'a` or `'A` (where `a` or `A` is any letter) to return to a bookmarked position
+* `:delmarks aB` to delete mark `a`, `B`
+* `:delmarks a-d` to delete mark `a`, `b`, `c`, `d`
+* `:delmarks!` to delete all lowercase marks in current buffer (`a` to `z`)
+* `'.` to jump to last change in current buffer
+* `''` to jump to line in current buffer where jumped from
+* `ctrl+o` take you back to previous jump locations (including files, `ctrl+i` takes you forward
 
 ### Search-In-Text
 
@@ -30,7 +54,9 @@
 
 * `g*` to search forward on NON-EXACT word at cursor, `g#` to search backwards
 
-* after searching, `Ctrl+o` jumps back to original cursor, then `Ctrl+i` takes back to cursor of word found in search 
+* `ctrl+o` jumps back to original cursor after searching, then `ctrl+i` takes you forward again
+
+* to remove highlighting of search matches
 
 * `:%s/pattern//gn` to count number of matches of a word
 
@@ -38,16 +64,17 @@
 
 * `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
 
-
 ### Screen Splitting
 
 * `:sp [filename]` to open _filename_ (null for same file) with a horizontal (top/bottom) split
+    * `ctrl+ws` to split current buffer horizontally
 
 * `:vsp [filename]` to open _filename_ (null for same file) with a vertical (left/right) split
+    * `ctrl+wv` to split current buffer vertically
 
-* `Ctrl-w` then `>` or `<` to resize a vertical split (or `Ctrl-w n` to resize _n_ lines at once)
+* `ctrl-w` then `>` or `<` to resize a vertical split (or `ctrl-w n` to resize _n_ lines at once)
  
-* `Ctrl-w` then `+` or `-` to resize a horizontal split (or `Ctrl-w n` to resize _n_ lines at once)
+* `ctrl-w` then `+` or `-` to resize a horizontal split (or `ctrl-w n` to resize _n_ lines at once)
 
 
 ### Code Folding
