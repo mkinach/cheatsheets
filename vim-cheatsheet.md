@@ -7,7 +7,6 @@
 * `:! cmd %` to run shell command `cmd` from Vim instance with current file (`%`) as parameter
 * `:r! cmd` to put output of shell command `cmd` into current buffer
 * `:r file` to dump contents of `file` into current buffer
-
 * `%` to move to matching character: (), {}, []
 * `zz` to center screen about cursor
 * `q:` brings up command history
@@ -17,16 +16,14 @@
 * `"+` to access system clipboard (must have vim compiled with +clipboard; e.g. vim-gtk)
 * `:registers` to list all registers
 * `ctrl-a` to increment highlighted number, `ctrl-x` to decrement
-* `setlocal spell spelllang=en_CA` to enable spellcheck
-* `:set nospell` to disable spellcheck
 
 ### Visual Mode
 
 * `O` to move to other corner of block (when in visual mode)
-* `ab` to select current text surrounded by ()
-* `aB` to select current text surrounded by {}
-* `ib` to select current text surrounded by (), excluding the ()
-* `iB` to select current text surrounded by {}, excluding the {}
+* `ab` to select current text surrounded by `()`
+* `aB` to select current text surrounded by `{}`
+* `ib` to select current text surrounded by `()`, excluding the `(` and `)`
+* `iB` to select current text surrounded by `{}`, excluding the `{` and `}`
 
 ### Marks
 
@@ -49,7 +46,7 @@
 * `g*` to search forward on NON-EXACT word at cursor, `g#` to search backwards
 * `ctrl+o` jumps back to original cursor after searching, then `ctrl+i` takes you forward again
 * `:%s/pattern//gn` to count number of matches of a word
-* `:%s///gn` to repeat count occurances of work last last search for
+* `:%s///gn` to repeat count occurrences of work last last search for
 * `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
 
 ### Screen Splitting
@@ -74,3 +71,12 @@
 * `zr` decreases the fold level by one (globally)
 * `zM` closes all open folds to deepest level (globally)
 * `zR` opens all closed folds (globally)
+
+### Spellcheck
+
+* `setlocal spell spelllang=en_CA` to enable spellcheck
+* `:set nospell` to disable spellcheck
+* `]s` to move to next misspelled word, `[s` to move to previous
+* `z=` over misspelled word to select an alternative
+* `zg` to add word to dictionary
+* `zw` to mark a word spelling as incorrect
