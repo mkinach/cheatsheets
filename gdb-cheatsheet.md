@@ -118,6 +118,7 @@ F77_LOAD     = mpifort $(FDEBUGFLAGS) -fno-second-underscore -L/usr/local/lib
 ```
 You should also turn off any optimization flags (e.g. `-O3`). Some other possibly useful debug flags are listed in [4]
 
+
 ### C Debugging
 Some useful debug flags (assuming `gcc` or `mpicc`)
 ```
@@ -137,6 +138,8 @@ feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 ```
 
 ### MPI Debugging
+
+**NOTE**: for more advanced MPI debugging, you probably want to use a dedicated graphical debugger such as Arm DDT. See `PhD-tutorials/MPI` for more information
 
 To debug MPI jobs running locally on only a few processors:
 1. Launch a seperate gdb instance for each processor (note that the MPI flag `--oversubscribe` can simulate more processors than may be available on your system)
@@ -214,5 +217,4 @@ __math_divzero (sign=1) at ../sysdeps/ieee754/dbl-64/math_err.c:70
 ```
 You can step over this exception by using the `step` command
 
-It may be worthwhile to try `DDD`, a graphical frontend for gdb and other debuggers
 

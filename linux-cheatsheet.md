@@ -48,6 +48,14 @@ sstat
 sacct  # see man page for relevant format statements
 ```
 
+Alias for getting stats for completed job (assuming Slurm output is in cwd)
+```
+stats() {
+jobID=`ls | grep [0-9]*out | awk -F. '{print $1}'`
+seff ${jobID}
+}
+```
+
 Slurm file for submitting a serial job on a node
 ```
 #! /bin/bash
