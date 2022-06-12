@@ -14,7 +14,9 @@
 * `g;` to jump to last edit location
 * `R` in normal mode to mass-replace text (replace mode)
 * `"+` to access system clipboard (must have vim compiled with +clipboard; e.g. vim-gtk)
-* `:registers` to list all registers
+* `:reg` to list all registers
+* `wv` to write registers to `.viminfo` (to be accessed globally) 
+* `rv` to reload registers from `.viminfo`
 * `ctrl-a` to increment highlighted number, `ctrl-x` to decrement
 
 ### Visual Mode
