@@ -13,15 +13,16 @@
 * `q/` brings up search history
 * `g;` to jump to last edit location
 * `R` in normal mode to mass-replace text (replace mode)
-* `"+` to access system clipboard (must have vim compiled with +clipboard; e.g. vim-gtk)
+* `"+` to access system clipboard (must have Vim compiled with +clipboard; e.g. vim-gtk)
 * `:reg` to list all registers
-* `wv` to write registers to `.viminfo` (to be accessed globally) 
-* `rv` to reload registers from `.viminfo`
+* `:wv` to write registers to `.viminfo` (to be accessed globally) 
+* `:rv` to reload registers from `.viminfo`
 * `ctrl-a` to increment highlighted number, `ctrl-x` to decrement
 
 ### Visual Mode
 
-* `O` to move to other corner of block (when in visual mode)
+* `o` to move to other corner of block (when in visual mode)
+* `gv` to re-select last visual selection 
 * `ab` to select current text surrounded by `()`
 * `aB` to select current text surrounded by `{}`
 * `ib` to select current text surrounded by `()`, excluding the `(` and `)`
@@ -29,9 +30,10 @@
 
 ### Marks
 
-* `'ma` (where `a` is any letter) to create local bookmark at current line
+* `ma` (where `a` is any letter) to create local bookmark at current line
 * `mA` (where `A` is any CAPITAL letter) to create global bookmark on current line
 * `'a` or `'A` (where `a` or `A` is any letter) to return to a bookmarked position
+* `:marks` to list all marks
 * `:delmarks aB` to delete mark `a`, `B`
 * `:delmarks a-d` to delete mark `a`, `b`, `c`, `d`
 * `:delmarks!` to delete all lowercase marks in current buffer (`a` to `z`)
