@@ -92,3 +92,4 @@ Screen navigation
 * `ctrl+a p` to go to previous window
 * `ctrl+a d` to detach from current screen
 * `ctrl+a k` to kill current screen
+* `ctrl+a :sessionname mySessionName` to rename entire session
