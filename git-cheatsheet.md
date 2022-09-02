@@ -26,10 +26,14 @@ git diff f22b25e <file>         # diff using last few chars of some commit ID
 
 git show [HEAD~n] <file>        # show file contents from specific commit
 
+git checkout -b <newbranch>        # create and switch to a new branch
+git switch <branch>                # change to a different branch
+git branch -m <newname>            # rename the current branch
+git branch -m <oldname> <newname>  # rename a non-head branch
+
 git checkout [HEAD~n] <file>    # restore file
 git checkout f22b25e            # detach HEAD state for some commit ID
 git checkout main               # reattach your HEAD
-git checkout <branch>           # change to a different branch
 git checkout -- <file>          # revert file back to previous commit
 git checkout f22b25e -- <file>  # revert file back to specific commit
 

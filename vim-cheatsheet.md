@@ -62,6 +62,7 @@
     * `ctrl+wv` to split current buffer vertically
 * `ctrl-w` then `>` or `<` to resize a vertical split (or `ctrl-w n` to resize _n_ lines at once)
 * `ctrl-w` then `+` or `-` to resize a horizontal split (or `ctrl-w n` to resize _n_ lines at once)
+* `:set scrollbind` in both windows to scroll multiple split windows at once
 
 ### Code Folding
 
