@@ -86,3 +86,24 @@
 * `z=` over misspelled word to select an alternative
 * `zg` to add word to dictionary
 * `zw` to mark a word spelling as incorrect
+
+### Netrw
+
+* `Enter` to open a file/window or enter a directory
+* `-` to go up to parent directory
+* `gh` to toggle hidden files
+* `%` to create a new file
+* `d` to create a new directory
+* `R` to rename a file or directory
+* `D` to delete a file or empty directory
+* `x` to open in default system application
+* `mf` to mark a file
+* `mF` to unmark a file
+* `mt` to assign target
+* `mc` to copy marved files to target
+* `mm` to move marved files to target
+* `md` to diff marked files (up to 3)
+* `mb` to create a bookmark
+* `gb` to go to most recent bookmark
+* `qb` to list bookmarked files
+* `ctrl+o` to go back to Netrw from opened file 
