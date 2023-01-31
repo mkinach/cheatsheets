@@ -18,3 +18,12 @@ Screen navigation
 * `ctrl+a d` to detach from current screen
 * `ctrl+a k` to kill current screen
 * `ctrl+a :sessionname mySessionName` to rename entire session
+
+
+### Miscellaneous
+
+Display shared library dependencies of a binary
+```
+ldd executable         # for trusted binaries
+objdump -p executable  # for untrusted binaries
+```

@@ -100,8 +100,8 @@
 * `mf` to mark a file
 * `mF` to unmark a file
 * `mt` to assign target
-* `mc` to copy marved files to target
-* `mm` to move marved files to target
+* `mc` to copy marked files to target
+* `mm` to move marked files to target
 * `md` to diff marked files (up to 3)
 * `mb` to create a bookmark
 * `gb` to go to most recent bookmark

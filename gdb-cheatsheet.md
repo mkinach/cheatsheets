@@ -26,6 +26,8 @@ $ gdb myprog
 To set a breakpoint at a specific line in the code
 ```
 (gdb) b 43
+(gdb) b main.f:43
+(gdb) info breakpoints
 ```
 
 Run the program
@@ -64,14 +66,24 @@ Go up or down a frame
 (gdb) down
 ```
 
-List all the variables within a frame
+List all (local) variables within a frame
 ```
 (gdb) info locals
+```
+
+List all arguments passed to the current frame
+```
+(gdb) info args
 ```
 
 Print the value of a variable `myvar` at a specific step within a frame
 ```
 (gdb) print myvar
+```
+
+Set the value of a variable `myvar` within the current frame
+```
+(gdb) set variable myvar=10
 ```
 
 Get the data type of a variable/symbol
