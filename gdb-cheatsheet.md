@@ -50,6 +50,11 @@ Step over (instead of into) functions
 (gdb) next
 ```
 
+Continue execution until next breakpoint or exception
+```
+(gdb) continue
+```
+
 List all (nested) frames with
 ```
 (gdb) backtrace

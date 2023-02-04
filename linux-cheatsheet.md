@@ -27,3 +27,12 @@ Display shared library dependencies of a binary
 ldd executable         # for trusted binaries
 objdump -p executable  # for untrusted binaries
 ```
+
+Remove `apt` packages
+```
+sudo apt remove <package>   # keep config files
+sudo apt purge <package>    # purge config files
+sudo apt clean              # clear the cache
+sudo apt autoremove         # remove unneeded dependencies
+```
+
