@@ -2307,3 +2307,27 @@ print('make_list_2 takes', timeit(make_list_2, number=1000), 'seconds')
 # make_list_1 takes 0.14117428699682932 seconds
 # make_list_2 takes 0.06174145900149597 second
 ```
+
+Using the `subprocess` module:
+```
+import subprocess
+
+# the first element is a shell command, others are options/switches/arguments 
+subprocess.run(["ls","-l"])
+
+# supress output
+subprocess.run(["ls","-l"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+# capture output (this also supresses output unless explicitly printed)
+output = subprocess.run(["ls","-l"], capture_output=True, text=True)
+print(output)
+print(output.stdout)
+print(output.stderr)
+
+# raise an exception if shell command exits with non-zero exit status
+subprocess.run(["ls","/nonexistent/"], check=True)
+
+# execute shells commands or scripts directly
+subprocess.run("ls -l", shell=True)
+subprocess.run(["./myscript.sh"], shell=True)
+```
