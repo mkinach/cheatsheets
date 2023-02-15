@@ -2309,7 +2309,7 @@ print('make_list_2 takes', timeit(make_list_2, number=1000), 'seconds')
 ```
 
 Using the `subprocess` module:
-```
+```python
 import subprocess
 
 # the first element is a shell command, others are options/switches/arguments 
