@@ -7,26 +7,16 @@
 * `:! cmd %` to run shell command `cmd` from Vim instance with current file (`%`) as parameter
 * `:r! cmd` to put output of shell command `cmd` into current buffer
 * `:r file` to dump contents of `file` into current buffer
-* `%` to move to matching character: (), {}, []
-* `zz` to center screen about cursor
 * `q:` brings up command history
 * `q/` brings up search history
-* `g;` to jump to last edit location
-* `R` in normal mode to mass-replace text (replace mode)
 * `"+` to access system clipboard (must have Vim compiled with +clipboard; e.g. vim-gtk)
 * `:reg` to list all registers
 * `:wv` to write registers to `.viminfo` (to be accessed globally) 
 * `:rv` to reload registers from `.viminfo`
 * `ctrl-a` to increment highlighted number, `ctrl-x` to decrement
-
-### Visual Mode
-
 * `o` to move to other corner of block (when in visual mode)
 * `gv` to re-select last visual selection 
-* `ab` to select current text surrounded by `()`
-* `aB` to select current text surrounded by `{}`
-* `ib` to select current text surrounded by `()`, excluding the `(` and `)`
-* `iB` to select current text surrounded by `{}`, excluding the `{` and `}`
+* `ctrl+o` take you back to previous jump locations (including files), `ctrl+i` takes you forward
 
 ### Marks
 
@@ -39,7 +29,6 @@
 * `:delmarks!` to delete all lowercase marks in current buffer (`a` to `z`)
 * `'.` to jump to last change in current buffer
 * `''` to jump to line in current buffer where jumped from
-* `ctrl+o` take you back to previous jump locations (including files), `ctrl+i` takes you forward
 
 ### Search-In-Text
 
@@ -48,7 +37,6 @@
 * `ggn` to jump to first match, `GN` to jump to last
 * `*` to search forward on EXACT word at cursor, `#` to search backwards
 * `g*` to search forward on NON-EXACT word at cursor, `g#` to search backwards
-* `ctrl+o` jumps back to original cursor after searching, then `ctrl+i` takes you forward again
 * `:%s/pattern//gn` to count number of matches of a word
 * `:%s///gn` to repeat count occurrences of work last last search for
 * `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
@@ -78,6 +66,7 @@
 * `zr` decreases the fold level by one (globally)
 * `zM` closes all open folds to deepest level (globally)
 * `zR` opens all closed folds (globally)
+* `zf` to define a fold from visual selection (if `foldmethod=manual`)
 
 ### Spellcheck
 
