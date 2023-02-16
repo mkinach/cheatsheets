@@ -2312,7 +2312,7 @@ Using the `subprocess` module:
 ```python
 import subprocess
 
-# the first element is a shell command, others are options/switches/arguments 
+# the first element is a shell command, others are options/switches
 subprocess.run(["ls","-l"])
 
 # supress output

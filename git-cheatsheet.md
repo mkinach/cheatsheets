@@ -6,6 +6,8 @@ git config --list
 git config --global user.name "User Name"
 git config --global user.email "user@domain.com"
 git config --global core.editor "vim"
+git config --global diff.guitool kdiff3
+git config --global merge.tool kdiff3 
 ```
 
 For email privacy
@@ -19,10 +21,11 @@ git add <file>
 git add <directory-with-files>  # add subdirectory files all at once
 
 git diff
-git diff HEAD <file>            # compare with most recent commit
-git diff HEAD~1 <file>          # compare with most recent commit before last
-git diff [--staged]             # diff added but not-yet-committed files
-git diff f22b25e <file>         # diff using last few chars of some commit ID
+git diff HEAD <file>              # compare with most recent commit
+git diff HEAD~1 <file>            # compare with most recent commit before last
+git diff [--staged]               # diff added but not-yet-committed files
+git diff f22b25e <file>           # diff using last few chars of some commit ID
+git difftool <commit1> <commit2>  # diff using GUI tool
 
 git show [HEAD~n] <file>        # show file contents from specific commit
 

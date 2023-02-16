@@ -1,5 +1,39 @@
 # Vim Cheatsheet
 
+[Code Folding](#Code Folding)  
+[Marks](#Marks)
+[Miscellaneous](#Miscellaneous)
+[Netrw](#Netrw)
+[Screen Splitting](#Screen Splitting)
+[Search](#Search)
+[Spellcheck](#Spellcheck)
+
+### Code Folding
+
+* choose the folding mode:
+`:set foldmethod=indent`
+`:set foldmethod=syntax`
+`:set foldmethod=manual`
+* `zc` to fold code, `zo` to open code by one level at the cursor
+* `za` will toggle open/close fold by one level at the cursor
+* capital letters (`zC`, `zO`, `zA`) will apply opening/closing to ALL levels of folding for the current focused group
+* `zm` increases the fold level by one (globally)
+* `zr` decreases the fold level by one (globally)
+* `zM` closes all open folds to deepest level (globally)
+* `zR` opens all closed folds (globally)
+* `zf` to define a fold from visual selection (if `foldmethod=manual`)
+
+### Marks
+
+* `ma` (where `a` is any letter) to create local bookmark at current line
+* `mA` (where `A` is any CAPITAL letter) to create global bookmark on current line
+* `'a` or `'A` to return to the start of a bookmarked line
+* ```a`` or ```A`` to return to a bookmarked line *and* position
+* `:marks` to list all marks
+* `:delmarks aB` to delete mark `a`, `B`
+* `:delmarks a-d` to delete mark `a`, `b`, `c`, `d`
+* `:delmarks!` to delete all lowercase marks in current buffer (`a` to `z`)
+
 ### Miscellaneous
 
 * `:sh` to open a shell from Vim instance (`exit` to go back)
@@ -17,65 +51,6 @@
 * `o` to move to other corner of block (when in visual mode)
 * `gv` to re-select last visual selection 
 * `ctrl+o` take you back to previous jump locations (including files), `ctrl+i` takes you forward
-
-### Marks
-
-* `ma` (where `a` is any letter) to create local bookmark at current line
-* `mA` (where `A` is any CAPITAL letter) to create global bookmark on current line
-* `'a` or `'A` (where `a` or `A` is any letter) to return to a bookmarked position
-* `:marks` to list all marks
-* `:delmarks aB` to delete mark `a`, `B`
-* `:delmarks a-d` to delete mark `a`, `b`, `c`, `d`
-* `:delmarks!` to delete all lowercase marks in current buffer (`a` to `z`)
-* `'.` to jump to last change in current buffer
-* `''` to jump to line in current buffer where jumped from
-
-### Search-In-Text
-
-* `*` to search for word under cursor
-* `n` to search forward, `N` to search backwards
-* `ggn` to jump to first match, `GN` to jump to last
-* `*` to search forward on EXACT word at cursor, `#` to search backwards
-* `g*` to search forward on NON-EXACT word at cursor, `g#` to search backwards
-* `:%s/pattern//gn` to count number of matches of a word
-* `:%s///gn` to repeat count occurrences of work last last search for
-* `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
-* `:%s/old/new/gc` to search-and-replace, but confirm before making each change
-* `:'<,'>s/\%Vold/new/g` to search-and-replace inside visual block (note the `\%V`)
-
-### Screen Splitting
-
-* `:sp [filename]` to open _filename_ (null for same file) with a horizontal (top/bottom) split
-    * `ctrl+ws` to split current buffer horizontally
-* `:vsp [filename]` to open _filename_ (null for same file) with a vertical (left/right) split
-    * `ctrl+wv` to split current buffer vertically
-* `ctrl-w` then `>` or `<` to resize a vertical split (or `ctrl-w n` to resize _n_ lines at once)
-* `ctrl-w` then `+` or `-` to resize a horizontal split (or `ctrl-w n` to resize _n_ lines at once)
-* `:set scrollbind` in both windows to scroll multiple split windows at once
-
-### Code Folding
-
-* choose the folding mode:
-`:set foldmethod=indent`
-`:set foldmethod=syntax`
-`:set foldmethod=manual`
-* `zc` to fold code, `zo` to open code by one level at the cursor
-* `za` will toggle open/close fold by one level at the cursor
-* capital letters (`zC`, `zO`, `zA`) will apply opening/closing to ALL levels of folding for the current focused group
-* `zm` increases the fold level by one (globally)
-* `zr` decreases the fold level by one (globally)
-* `zM` closes all open folds to deepest level (globally)
-* `zR` opens all closed folds (globally)
-* `zf` to define a fold from visual selection (if `foldmethod=manual`)
-
-### Spellcheck
-
-* `setlocal spell spelllang=en_CA` to enable spellcheck
-* `:set nospell` to disable spellcheck
-* `]s` to move to next misspelled word, `[s` to move to previous
-* `z=` over misspelled word to select an alternative
-* `zg` to add word to dictionary
-* `zw` to mark a word spelling as incorrect
 
 ### Netrw
 
@@ -97,3 +72,35 @@
 * `gb` to go to most recent bookmark
 * `qb` to list bookmarked files
 * `ctrl+o` to go back to Netrw from opened file 
+
+### Screen Splitting
+
+* `:sp [filename]` to open _filename_ (null for same file) with a horizontal (top/bottom) split
+    * `ctrl+ws` to split current buffer horizontally
+* `:vsp [filename]` to open _filename_ (null for same file) with a vertical (left/right) split
+    * `ctrl+wv` to split current buffer vertically
+* `ctrl-w` then `>` or `<` to resize a vertical split (or `ctrl-w n` to resize _n_ lines at once)
+* `ctrl-w` then `+` or `-` to resize a horizontal split (or `ctrl-w n` to resize _n_ lines at once)
+* `:set scrollbind` in both windows to scroll multiple split windows at once
+
+### Search
+
+* `*` to search for word under cursor
+* `n` to search forward, `N` to search backwards
+* `ggn` to jump to first match, `GN` to jump to last
+* `*` to search forward on EXACT word at cursor, `#` to search backwards
+* `g*` to search forward on NON-EXACT word at cursor, `g#` to search backwards
+* `:%s/pattern//gn` to count number of matches of a word
+* `:%s///gn` to repeat count occurrences of work last last search for
+* `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
+* `:%s/old/new/gc` to search-and-replace, but confirm before making each change
+* `:'<,'>s/\%Vold/new/g` to search-and-replace inside visual block (note the `\%V`)
+
+### Spellcheck
+
+* `setlocal spell spelllang=en_CA` to enable spellcheck
+* `:set nospell` to disable spellcheck
+* `]s` to move to next misspelled word, `[s` to move to previous
+* `z=` over misspelled word to select an alternative
+* `zg` to add word to dictionary
+* `zw` to mark a word spelling as incorrect
