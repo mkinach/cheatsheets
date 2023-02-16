@@ -71,7 +71,6 @@ git remote -v
 Undo most recent commit, but leave all files on disk unchanged
 ```
 git reset --soft HEAD~1  # reset but leave the changes staged
-git reset HEAD~1         # reset but do not leave the changes staged
 ```
 
 Undo every change in working directory since last commit
