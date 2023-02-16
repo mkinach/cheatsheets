@@ -17,57 +17,49 @@ git config --global user.email "user@users.noreply.github.com"
 
 Basic repository commands
 ```
-git add <file>
-git add <directory-with-files>  # add subdirectory files all at once
+git add <directory-with-files>  # add all contents of a subdirectory
 
-git diff
-git diff HEAD <file>              # compare with most recent commit
-git diff HEAD~1 <file>            # compare with most recent commit before last
-git diff [--staged]               # diff added but not-yet-committed files
-git diff f22b25e <file>           # diff using last few chars of some commit ID
-git difftool <commit1> <commit2>  # diff using GUI tool
+git diff HEAD <file>                  # compare with most recent commit
+git diff HEAD~1 <file>                # compare with most recent commit before last
+git diff <commitID> <file>            # diff against a specific commit
+git diff --staged                     # diff added but not-yet-committed files
+git difftool <commitID1> <commitID2>  # diff using GUI tool
 
-git show [HEAD~n] <file>        # show file contents from specific commit
+git show <commitID> <file>            # show file contents from specific commit
+git show [HEAD~n] <file>
 
-git checkout -b <newbranch>        # create and switch to a new branch
-git switch <branch>                # change to a different branch
-git branch -m <newname>            # rename the current branch
-git branch -m <oldname> <newname>  # rename a non-head branch
+git switch -c <newbranch>             # create and switch to a new branch
+git switch -c <newbranch> <commitID>  # create a branch based on an old commit
+git branch -m <newname>               # rename the current branch
+git branch -m <oldname> <newname>     # rename a non-HEAD branch
+git branch -a                         # list all branches
+git branch -d                         # delete a branch
 
-git checkout [HEAD~n] <file>    # restore file
-git checkout f22b25e            # detach HEAD state for some commit ID
-git checkout main               # reattach your HEAD
-git checkout -- <file>          # revert file back to previous commit
-git checkout f22b25e -- <file>  # revert file back to specific commit
+git checkout -- <file>                # revert file back to previous commit
+git checkout <commitID> <file>        # revert file back to specific commit
+git checkout [HEAD~n] <file>
 
-git commit --amend              # add to most recent commit & edit commit msg
-```
+git commit --amend         # add to most recent commit & edit commit msg
+git commit -a              # automatically stage all changes and commit them
+git commit -m <message>    # specify the commit message from the command line
 
-Stash both staged and unstaged changes (basically, temporarily revert to last commit)
-```
-git stash
-git stash list
-git stash pop  # restore
-```
+git stash                  # save uncommited changes to the stash stack
+git stash list             # list contents of the stash stack
+git stash drop <stashID>   # delete a specific stash from the stash stack
+git stash apply <stashID>  # apply a specific stash to the working directory
+git stash pop              # apply most recent stash, then delete it
 
-Create a temporary branch from a past commit
-```
-git checkout -b temp-branch 56a4e5c08
-git log --oneline --decorate --graph --all  # see where branch pointers are pointing
-git checkout main                           # change back
-git branch -a                               # show branch structure
-git branch -d temp-branch                   # delete temp branch
+git log --oneline --decorate --graph --all  # pretty print branch structure
 ```
 
 Ignoring files and subdirectories
 ```
 echo *.dat >> .gitignore
-echo results/ >> .gitignore    # an entire directory
+echo results/ >> .gitignore    # ignore an entire directory
 echo !final.dat >> .gitignore  # except final.dat
-git add .gitignore
 git add -f <file>              # override .gitignore to explicitly include a file
 git rm --cached <file>         # untrack (but do not delete) a file previously committed
-git status --ignored
+git status --ignored           # list files which are untracked or ignored
 ```
 
 Connect to remote repository for the first time
@@ -76,26 +68,14 @@ git remote add origin https://github.com/path
 git remote -v
 ```
 
-Push/pull changes from remote repository
-```
-git push origin main
-git pull origin main
-```
-
-Rename, remove files, etc.
-```
-git mv <file1> <file2>
-git rm <file1>
-git rm --cached <file>  # stop tracking file but keep it on disk
-```
-
 Undo most recent commit, but leave all files on disk unchanged
 ```
-git reset HEAD~
+git reset --soft HEAD~1  # reset but leave the changes staged
+git reset HEAD~1         # reset but do not leave the changes staged
 ```
 
-Undo every change in cwd since last commit
+Undo every change in working directory since last commit
 ```
-git reset HEAD --hard  # BE CAREFUL
-git clean -fd          # remove untracked files & directories
+git reset --hard HEAD~1  # BE CAREFUL
+git clean -fd            # remove untracked files & directories
 ```

@@ -863,6 +863,13 @@ else:  # break not encountered
 
 Loop through iterable objects
 ```python
+# range
+for i in range(1,4):
+    print(i)
+# 1    
+# 2    
+# 3    
+
 # list
 rabbits = ['Flopsy', 'Mopsy', 'Cottontail', 'Peter']
 for rabbit in rabbits:
