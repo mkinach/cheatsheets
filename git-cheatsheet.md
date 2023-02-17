@@ -58,7 +58,7 @@ echo *.dat >> .gitignore
 echo results/ >> .gitignore    # ignore an entire directory
 echo !final.dat >> .gitignore  # except final.dat
 git add -f <file>              # override .gitignore to explicitly include a file
-git rm --cached <file>         # untrack (but do not delete) a file previously committed
+git rm --cached <file>         # untrack (but do not delete) a file previously added or committed 
 git status --ignored           # list files which are untracked or ignored
 ```
 
@@ -75,6 +75,6 @@ git reset --soft HEAD~1  # reset but leave the changes staged
 
 Undo every change in working directory since last commit
 ```
-git reset --hard HEAD~1  # BE CAREFUL
-git clean -fd            # remove untracked files & directories
+git reset --hard HEAD  # BE CAREFUL
+git clean -fd          # remove untracked files & directories
 ```
