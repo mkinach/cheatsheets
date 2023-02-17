@@ -1,10 +1,10 @@
 # Vim Cheatsheet
 
-[Code Folding](#Code Folding)  
+[Code Folding](#CodeFolding)  
 [Marks](#Marks)
 [Miscellaneous](#Miscellaneous)
 [Netrw](#Netrw)
-[Screen Splitting](#Screen Splitting)
+[Screen Splitting](#ScreenSplitting)
 [Search](#Search)
 [Spellcheck](#Spellcheck)
 
@@ -28,7 +28,7 @@
 * `ma` (where `a` is any letter) to create local bookmark at current line
 * `mA` (where `A` is any CAPITAL letter) to create global bookmark on current line
 * `'a` or `'A` to return to the start of a bookmarked line
-* ```a`` or ```A`` to return to a bookmarked line *and* position
+* `` `a `` or `` `A `` to return to a bookmarked line *and* position
 * `:marks` to list all marks
 * `:delmarks aB` to delete mark `a`, `B`
 * `:delmarks a-d` to delete mark `a`, `b`, `c`, `d`
