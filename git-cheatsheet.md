@@ -55,11 +55,12 @@ git log --oneline --decorate --graph --all  # pretty print branch structure
 Ignoring files and subdirectories
 ```
 echo *.dat >> .gitignore
-echo results/ >> .gitignore    # ignore an entire directory
-echo !final.dat >> .gitignore  # except final.dat
-git add -f <file>              # override .gitignore to explicitly include a file
-git rm --cached <file>         # untrack (but do not delete) a file previously added or committed 
-git status --ignored           # list files which are untracked or ignored
+echo results/ >> .gitignore      # ignore an entire directory
+echo !final.dat >> .gitignore    # except final.dat
+git add -f <file>                # override .gitignore to explicitly include a file
+git rm --cached <file>           # untrack (but do not delete) a file previously added or committed 
+git status --ignored             # list files which are untracked or ignored
+git ls-tree -r HEAD --name-only  # list all files being tracked on current branch
 ```
 
 Connect to remote repository for the first time
