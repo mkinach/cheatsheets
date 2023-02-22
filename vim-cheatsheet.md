@@ -95,6 +95,7 @@
 * `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
 * `:%s/old/new/gc` to search-and-replace, but confirm before making each change
 * `:'<,'>s/\%Vold/new/g` to search-and-replace inside visual block (note the `\%V`)
+* `:%s//new/g` to automatically replace the last searched-for string 
 
 ### Spellcheck
 
