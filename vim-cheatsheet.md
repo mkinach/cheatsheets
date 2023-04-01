@@ -1,6 +1,6 @@
 # Vim Cheatsheet
 
-[Buffers](#Buffers)
+[Buffers](#Buffers)  
 [Code Folding](#CodeFolding)   
 [Marks](#Marks)  
 [Miscellaneous](#Miscellaneous)   
