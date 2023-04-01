@@ -11,16 +11,16 @@
 
 ### Buffers
 
-`:e` to reload current buffer
-`:e <file>` to open file in buffer
-`:enew` to open new (empty) buffer
-`:ls` to list open buffers
-`:bn` to move to next buffer
-`:bp` to move to prev buffer
-`:b #` to switch to buffer by number
-`:b <name>` to switch to buffer by name
-`:bd` to delete current buffer
-`:ball` to open all buffers in new split
+`:e` to reload current buffer  
+`:e <file>` to open file in buffer  
+`:enew` to open new (empty) buffer  
+`:ls` to list open buffers  
+`:bn` to move to next buffer  
+`:bp` to move to prev buffer  
+`:b #` to switch to buffer by number  
+`:b <name>` to switch to buffer by name  
+`:bd` to delete current buffer  
+`:ball` to open all buffers in new split  
 
 ### Code Folding
 
