@@ -1,5 +1,6 @@
 # Vim Cheatsheet
 
+[Buffers](#Buffers)
 [Code Folding](#CodeFolding)   
 [Marks](#Marks)  
 [Miscellaneous](#Miscellaneous)   
@@ -7,6 +8,19 @@
 [Screen Splitting](#ScreenSplitting)  
 [Search](#Search)  
 [Spellcheck](#Spellcheck)   
+
+### Buffers
+
+`:e` to reload current buffer
+`:e <file>` to open file in buffer
+`:enew` to open new (empty) buffer
+`:ls` to list open buffers
+`:bn` to move to next buffer
+`:bp` to move to prev buffer
+`:b #` to switch to buffer by number
+`:b <name>` to switch to buffer by name
+`:bd` to delete current buffer
+`:ball` to open all buffers in new split
 
 ### Code Folding
 
@@ -55,6 +69,7 @@
 ### Netrw
 
 * `Enter` to open a file/window or enter a directory
+* `i` to cycle through view types
 * `-` to go up to parent directory
 * `gh` to toggle hidden files
 * `%` to create a new file
@@ -72,6 +87,7 @@
 * `gb` to go to most recent bookmark
 * `qb` to list bookmarked files
 * `ctrl+o` to go back to Netrw from opened file 
+* `ctrl+l` to refresh Netrw listings
 
 ### Screen Splitting
 
@@ -95,7 +111,7 @@
 * `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
 * `:%s/old/new/gc` to search-and-replace, but confirm before making each change
 * `:'<,'>s/\%Vold/new/g` to search-and-replace inside visual block (note the `\%V`)
-* `:%s//new/g` to automatically replace the last searched-for string 
+* `:%s//new/g` to automatically replace the last-searched-for string 
 
 ### Spellcheck
 

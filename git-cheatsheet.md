@@ -6,8 +6,8 @@ git config --list
 git config --global user.name "User Name"
 git config --global user.email "user@domain.com"
 git config --global core.editor "vim"
-git config --global diff.guitool kdiff3
-git config --global merge.tool kdiff3 
+git config --global diff.guitool kompare  # could also use kdiff3
+git config --global merge.tool kompare    # could also use kdiff3 
 ```
 
 For email privacy

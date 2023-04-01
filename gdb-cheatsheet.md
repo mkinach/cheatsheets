@@ -127,11 +127,11 @@ Some useful debug flags (assuming `gfortran` or `mpifort`)
 # -fcheck=bounds: runtime check array bounds
 # -ffpe-trap=underflow,denormal,overflow,invalid: stop execution for FPEs
 # -finit-real=snan: check uninitialized variables
-FDEBUGFLAGS  = -ggdb -fcheck=bounds -ffpe-trap=overflow,invalid,zero -finit-real=snan
+FDEBUGFLAGS  := -ggdb -fcheck=bounds -ffpe-trap=overflow,invalid,zero -finit-real=snan
 #FDEBUGFLAGS := $(FDEBUGFLAGS) -ffpe-trap=underflow,denormal  # usually not a meaningful error
 FDEBUGFLAGS := $(FDEBUGFLAGS) -Wall
-F77          = mpifort $(FDEBUGFLAGS) -fno-second-underscore
-F77_LOAD     = mpifort $(FDEBUGFLAGS) -fno-second-underscore -L/usr/local/lib
+F77         := mpifort $(FDEBUGFLAGS) -fno-second-underscore
+F77_LOAD    := mpifort $(FDEBUGFLAGS) -fno-second-underscore -L/usr/local/lib
 ```
 You should also turn off any optimization flags (e.g. `-O3`). Some other possibly useful debug flags are listed in [4]
 
@@ -142,10 +142,10 @@ Some useful debug flags (assuming `gcc` or `mpicc`)
 # -ggdb: produce debugging info for GDB
 # -Wall: verbose warnings at compile time
 # -Wfloat-equal: warning if floating point numbers are using in equality comparisons
-CDEBUGFLAGS  = -ggdb 
+CDEBUGFLAGS := -ggdb 
 CDEBUGFLAGS := $(CDEBUGFLAGS) -Wall -Wfloat-equal
-CCFLAGS      = 
-CC           = mpicc $(CDEBUGFLAGS)
+CCFLAGS     := 
+CC          := mpicc $(CDEBUGFLAGS)
 ```
 
 To enable additional core dumps on seg faults, NaNs, over/underflow errors, etc., add the following lines to your code
