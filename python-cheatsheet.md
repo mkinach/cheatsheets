@@ -1397,9 +1397,22 @@ except OopsException as exc:
 # panic
 ```
 
+When defining classes, you can raise the `NotImplementedError()` when a method is not fully implemented (or when an abstract parent class expects a child class to override them)
+```python
+class MyClass():
+  def __init__(self, width, height):
+    raise NotImplementedError()
+    
+something = MyClass(1,2)
+#Traceback (most recent call last):
+#File "<stdin>", line 1, in <module>
+#File "<stdin>", line 3, in __init__
+#NotImplementedError
+```
+
 ### Creating Modules
 
-A module called `report.py`:
+A module called `report.py`
 ```python
 def get_description():  # note the docstring
     """Return random weather, just like the pros"""
@@ -1408,7 +1421,7 @@ def get_description():  # note the docstring
     return choice(possibilities)
 ```
 
-The main program called `weatherman.py`:
+The main program called `weatherman.py`
 ```python
 import report
 
@@ -1416,7 +1429,7 @@ description = report.get_description()  # a function within the module
 print("Today's weather:", description)
 ```
 
-Putting it together:
+Putting it together
 ```python
 $ python weatherman.py
 Today's weather: who knows
@@ -1478,6 +1491,9 @@ class Simplest():
     
 # create an object from a class
 something = Simplest()
+
+# check whether the object belongs to the class
+print(isinstance(something, Simplest))  # True
 ```
 
 Now creating a non-trivial class... (note that `__init__` is a special function (a *constructor*) that initializes an individual object from its class definition; `self` specifies that it refers to the individual object itself). The example below does the following:
@@ -2132,7 +2148,7 @@ WARNING:bunyan:I need my axe
 
 ### Virtual Environments with `venv`
 
-**NOTE:** virtual environments are not easily movable due to how they set up their paths. This means that you should be sure of where you want to setup your virtual environment before you do it. I recommend creating all environments somewhere in `/usr/local` but keeping your script files (and a list of installed packages) somewhere within your source directory
+**NOTE:** virtual environments are not easily movable due to how they set up their paths. This means that you should be sure of where you want to setup your virtual environment before you do it. I recommend creating all environments somewhere in `/usr/local` (with proper write permissions) but keeping your script files (and a list of installed packages) somewhere within your source directory
 
 To create a venv with name `test`
 ```
@@ -2282,7 +2298,7 @@ pprint(quotes)
 #  'Curly': 'Nyuk nyuk!'}
 ```
 
-Measure the runtime of a code snippet with `timeit`:
+Measure the runtime of a code snippet with `timeit`
 ```python
 from timeit import timeit
 print(timeit('num = 5; num *= 2', number=1))
@@ -2293,7 +2309,7 @@ print(repeat('num = 5; num *= 2', number=1, repeat=3))
 # [1.691998477326706e-06, 4.070025170221925e-07, 2.4700057110749185e-07]
 ```
 
-A more complicated `timeit` example:
+A more complicated `timeit` example
 ```python
 from timeit import timeit
 
@@ -2315,7 +2331,7 @@ print('make_list_2 takes', timeit(make_list_2, number=1000), 'seconds')
 # make_list_2 takes 0.06174145900149597 second
 ```
 
-Using the `subprocess` module:
+Using the `subprocess` module
 ```python
 import subprocess
 
