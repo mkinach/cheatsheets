@@ -40,6 +40,7 @@
 [Code Checking with Pylint](#code-checking-with-pylint)  
 [Unit Testing](#testing-with-unittest)  
 [Error Logging](#logging-error-messages-with-logging)  
+[Anaconda](#anaconda)  
 [Virtual Environments](#virtual-environments-with-venv)  
 [Miscellaneous](#miscellaneous)  
 
@@ -237,6 +238,20 @@ String replacement up to 100 times
 ```python
 print(setup.replace('a ','a famous ', 100))
 # a famous duck goes into a famous bar...
+```
+
+You can use curly braces for dynamic string construction and formatting
+```python
+name = "Alice"
+age = 30
+height = 165.5
+
+print("Name: {}, Age: {}, Height: {}".format(name, age, height))
+# Name: Alice, Age: 30, Height: 165.5
+
+# you can also specify the position of placeholders using indexing
+print("Name: {0}, Height: {2}, Age: {1}".format(name, age, height))
+# Name: Alice, Height: 165.5, Age: 30
 ```
 
 ### Lists
@@ -2146,18 +2161,107 @@ DEBUG:bunyan:Where's my axe?
 WARNING:bunyan:I need my axe
 ```
 
+### Anaconda
+
+**NOTE:** these commands assume you have Anaconda properly initialized
+
+To list Anaconda environments
+```
+$ conda info --envs
+```
+
+To create a new environment
+```
+$ conda create --name test
+$ conda create --name test python=3.9  # use a specific Python version
+```
+
+To clone an environment
+```
+$ conda create --clone test --name test2
+```
+
+To remove an environment
+```
+$ conda remove --name test --all
+```
+
+To load an environment
+```
+$ conda activate test
+```
+
+To unload an environment
+```
+$ conda deactivate
+```
+
+To search for packages
+```
+$ conda search scipy
+```
+
+To install packages
+```
+$ conda install scipy
+$ conda install scipy --channel conda-forge  # use a specific channel
+```
+
+To list installed packages
+```
+$ conda list
+```
+
+To update a package
+```
+$ conda update scipy
+```
+
+To revert environment to previous version
+```
+$ conda list --revisions      # shows install history
+$ conda install --revision 2  # revert to previous revision
+```
+
+To save/create environment to/from text file
+```
+$ conda list --explicit > myenv.txt  # save
+$ conda env create --file myenv.txt  # create
+```
+
+To create a `requirements.txt` file
+```
+$ conda list -e > requirements.txt
+```
+
+To install using a `requirements.txt` file
+```
+$ conda install --file requirements.txt             # install in existing env
+$ conda create --name test --file requirements.txt  # install in new env
+```
+
+To list available Python versions
+```
+$ conda search python
+```
+
+To update Anaconda itself
+```
+$ conda update conda
+```
+
 ### Virtual Environments with `venv`
 
 **NOTE:** virtual environments are not easily movable due to how they set up their paths. This means that you should be sure of where you want to setup your virtual environment before you do it. I recommend creating all environments somewhere in `/usr/local` (with proper write permissions) but keeping your script files (and a list of installed packages) somewhere within your source directory
 
-To create a venv with name `test`
-```
-python3 -m venv /usr/local/venv/test
-```
-
-Note that in order to get the above command to work, you may have to install the following package (on Ubuntu/Debian systems)
+To use virtual environments, you may have to install the following package (on Ubuntu/Debian systems)
 ```
 $ sudo apt-get install python3-venv
+```
+
+To create a venv with name `test`
+```
+$ python3 -m venv /usr/local/venv/test
 ```
 
 Activate a virtual environment using
@@ -2166,7 +2270,7 @@ $ source /usr/local/venv/test/bin/activate
 ```
 
 Now the default environment will be set to Python 3 and any packages installed will be in the `test` directory, as can be checked
-```
+```python
 >>> import sys
 >>> sys.prefix
 '/usr/local/venv/test'
