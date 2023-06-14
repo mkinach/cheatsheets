@@ -153,7 +153,7 @@ Note the split behaviour for repeating separator strings
 ```python
 splitme = 'a/b//c/d///e'
 print(splitme.split('/'))
-#  ['a', 'b', '', 'c', 'd', '', '', 'e']
+# ['a', 'b', '', 'c', 'd', '', '', 'e']
 
 print(splitme.split('//'))
 # ['a/b', 'c/d', '/e']
