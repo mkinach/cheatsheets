@@ -144,6 +144,7 @@ df.loc[['USA', 'GBR'], ['2012']]
 # list all row and column labels
 df.index   # Index(['USA', 'CHN', 'GBR'], dtype='object')
 df.column  # Index(['2012', '2016'], dtype='object')
+list(df.columns)  # alternate way
 
 # get basic info on dataset
 df.info()
@@ -168,6 +169,18 @@ df.describe(include='all')
 # 50%    38.000000  27.000000
 # 75%    42.000000  36.500000
 # max    46.000000  46.000000
+
+# get value counts
+df["2012"].value_counts()
+# 46    1
+# 38    1
+# 29    1
+# Name: 2012, dtype: int64
+df["2012"].value_counts(normalize=True,ascending=True)
+# 46    0.333333
+# 38    0.333333
+# 29    0.333333
+# Name: 2012, dtype: float64
 ```
 
 Modifying dataframes
