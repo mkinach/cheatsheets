@@ -2186,6 +2186,11 @@ To remove an environment
 $ conda remove --name test --all
 ```
 
+To rename an environment
+```
+$ conda rename -n old_name  new_name 
+```
+
 To load an environment
 ```
 $ conda activate test
@@ -2231,7 +2236,8 @@ $ conda env create --file myenv.txt  # create
 
 To create a `requirements.txt` file
 ```
-$ conda list -e > requirements.txt
+$ conda list -e > requirements.txt  # conda-compatible
+$ pip list --format=freeze > requirements_pip.txt  # pip-compatible
 ```
 
 To install using a `requirements.txt` file
@@ -2256,7 +2262,7 @@ $ conda update conda
 
 To use virtual environments, you may have to install the following package (on Ubuntu/Debian systems)
 ```
-$ sudo apt-get install python3-venv
+$ sudo apt install python3-venv
 ```
 
 To create a venv with name `test`
