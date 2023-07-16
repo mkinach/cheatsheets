@@ -2228,19 +2228,19 @@ $ conda list --revisions      # shows install history
 $ conda install --revision 2  # revert to previous revision
 ```
 
-To save/create environment to/from text file
+To save/create environment to/from YAML file
 ```
-$ conda list --explicit > myenv.txt  # save
-$ conda env create --file myenv.txt  # create
+$ conda list --explicit > env.yaml  # save
+$ conda env create --file env.yaml  # create
 ```
 
-To create a `requirements.txt` file
+To save installed packages a `requirements.txt` file
 ```
 $ conda list -e > requirements.txt  # conda-compatible
 $ pip list --format=freeze > requirements_pip.txt  # pip-compatible
 ```
 
-To install using a `requirements.txt` file
+To install packages using a `requirements.txt` file
 ```
 $ conda install --file requirements.txt             # install in existing env
 $ conda create --name test --file requirements.txt  # install in new env
