@@ -1256,6 +1256,35 @@ add_ints5(3,5)
 
  ```
 
+The `@staticmethod` decorator is a method that belongs to the class itself (rather than an instance of the class)
+```python
+class MyClass:
+    class_variable = "Hello world!"
+
+    @staticmethod
+    def static_method():
+        return MyClass.class_variable
+
+# you can call the static method without creating an instance of MyClass
+# (it is basically a function, but associated with a class)
+result = MyClass.static_method()
+print(result)  # Hello world!
+```
+
+The `@property` decorator allows you to define methods which behave like attributes
+```python
+class MyClass:
+    def __init__(self):
+        self._value = 42
+
+    @property
+    def value(self):
+        return self._value
+
+obj = MyClass()
+print(obj.value)  # 42
+```
+
 ### Namespaces
 
 Namespaces are sections within which a particular name is unique
@@ -2236,13 +2265,13 @@ $ conda env create --file env.yaml  # create
 
 To save installed packages a `requirements.txt` file
 ```
-$ conda list -e > requirements.txt  # conda-compatible
+$ conda list -e > requirements_conda.txt  # conda-compatible
 $ pip list --format=freeze > requirements_pip.txt  # pip-compatible
 ```
 
 To install packages using a `requirements.txt` file
 ```
-$ conda install --file requirements.txt             # install in existing env
+$ conda install --file requirements_conda.txt       # install in existing env
 $ conda create --name test --file requirements.txt  # install in new env
 ```
 
