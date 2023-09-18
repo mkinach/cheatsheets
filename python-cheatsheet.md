@@ -1275,7 +1275,7 @@ The `@property` decorator allows you to define methods which behave like attribu
 ```python
 class MyClass:
     def __init__(self):
-        self._value = 42
+        self._value = 42  # note the underscore (protected)
 
     @property
     def value(self):
@@ -2239,6 +2239,7 @@ To install packages
 ```
 $ conda install scipy
 $ conda install scipy --channel conda-forge  # use a specific channel
+$ conda install scipy=1.10.1                 # use a specific version
 ```
 
 To list installed packages

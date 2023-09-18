@@ -36,3 +36,8 @@ sudo apt clean              # clear the cache
 sudo apt autoremove         # remove unneeded dependencies
 ```
 
+Generate and push SSH keys
+```
+ssh-keygen -t rsa
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@remoteserver
+```

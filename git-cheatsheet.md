@@ -50,6 +50,9 @@ git stash apply <stashID>  # apply a specific stash to the working directory
 git stash pop              # apply most recent stash, then delete it
 
 git log --oneline --decorate --graph --all  # pretty print branch structure
+
+git fetch  # fetch from remote repo (but do not merge)
+git pull   # fetch from remote repo and auto-merge
 ```
 
 Ignoring files and subdirectories

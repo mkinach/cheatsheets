@@ -1,13 +1,17 @@
 # Vim Cheatsheet
 
-[Buffers](#Buffers)  
-[Code Folding](#Code-Folding)   
-[Marks](#Marks)  
-[Miscellaneous](#Miscellaneous)   
-[Netrw](#Netrw)  
-[Screen Splitting](#Screen-Splitting)  
-[Search](#Search)  
-[Spellcheck](#Spellcheck)   
+#### Index:
+
+[Buffers](#Buffers)<br>
+[Code Folding](#Code-Folding)<br>
+[Marks](#Marks)<br>
+[Miscellaneous](#Miscellaneous)<br>
+[Netrw](#Netrw)<br>
+[Screen Splitting](#Screen-Splitting)<br>
+[Search](#Search)<br>
+[Spellcheck](#Spellcheck)<br>
+
+---
 
 ### Buffers
 
