@@ -15,16 +15,16 @@
 
 ### Buffers
 
-* `:e` to reload current buffer  
-* `:e <file>` to open file in buffer  
-* `:enew` to open new (empty) buffer  
-* `:ls` to list open buffers  
-* `:bn` to move to next buffer  
-* `:bp` to move to prev buffer  
-* `:b #` to switch to buffer by number  
-* `:b <name>` to switch to buffer by name  
-* `:bd` to delete current buffer  
-* `:ball` to open all buffers in new split  
+* `:e` to reload current buffer
+* `:e <file>` to open file in buffer
+* `:enew` to open new (empty) buffer
+* `:ls` to list open buffers
+* `:bn` to move to next buffer
+* `:bp` to move to prev buffer
+* `:b #` to switch to buffer by number
+* `:b <name>` to switch to buffer by name
+* `:bd` to delete current buffer
+* `:ball` to open all buffers in new split
 
 ### Code Folding
 
@@ -63,12 +63,14 @@
 * `q/` brings up search history
 * `"+` to access system clipboard (must have Vim compiled with +clipboard; e.g. vim-gtk)
 * `:reg` to list all registers
-* `:wv` to write registers to `.viminfo` (to be accessed globally) 
+* `:wv` to write registers to `.viminfo` (to be accessed globally)
 * `:rv` to reload registers from `.viminfo`
 * `ctrl-a` to increment highlighted number, `ctrl-x` to decrement
 * `o` to move to other corner of block (when in visual mode)
-* `gv` to re-select last visual selection 
+* `gv` to re-select last visual selection
 * `ctrl+o` take you back to previous jump locations (including files), `ctrl+i` takes you forward
+* `:set listchars=trail:~` and `:set list` to highlight trailing whitespace with tildes
+* `:highlight TrailingSpaces ctermbg=red guibg=red` and `:match TrailingSpaces /\s\+$/` to highlight trialing whitespace in red
 
 ### Netrw
 
@@ -90,7 +92,7 @@
 * `mb` to create a bookmark
 * `gb` to go to most recent bookmark
 * `qb` to list bookmarked files
-* `ctrl+o` to go back to Netrw from opened file 
+* `ctrl+o` to go back to Netrw from opened file
 * `ctrl+l` to refresh Netrw listings
 
 ### Screen Splitting
@@ -115,7 +117,7 @@
 * `:10,50s/pattern//gn` to count number of matches between lines 10 and 50
 * `:%s/old/new/gc` to search-and-replace, but confirm before making each change
 * `:'<,'>s/\%Vold/new/g` to search-and-replace inside visual block (note the `\%V`)
-* `:%s//new/g` to automatically replace the last-searched-for string 
+* `:%s//new/g` to automatically replace the last-searched-for string
 
 ### Spellcheck
 

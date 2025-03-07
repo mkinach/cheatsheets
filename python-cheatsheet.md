@@ -72,7 +72,7 @@ print(esc)
 # "I did nothing!" he said. "Not that either! Or the other thing."
 ```
 
-Triple quotes are useful for multiline strings without having to use \n (note that if you had used single quotes here, you would get an EOL error)
+Triple quotes are useful for multiline strings without having to use `\n` (note that if you had used single quotes here, you would get an EOL error)
 ```python
 multi = '''
 Here is a multiline string
@@ -278,10 +278,9 @@ print(list('cat'))   # ['c', 'a', 't']
 
 Convert a tuple to a list
 ```python
-a_tiple = ('ready', 'fire', 'aim')
-print(list(a_tiple))  # ['ready', 'fire', 'aim']
+a_tuple = ('ready', 'fire', 'aim')
+print(list(a_tuple))  # ['ready', 'fire', 'aim']
 ```
-    ['ready', 'fire', 'aim']
 
 Access/assign elements in a list
 ```python
@@ -301,9 +300,6 @@ all_birds       # [['hummingbird', 'finch'], ['dodo', 'pigeon'], 'macaw']
 all_birds[0]    # ['hummingbird', 'finch']
 all_birds[1][0] # 'dodo'
 ```
-    [['hummingbird', 'finch'], ['dodo', 'pigeon'], 'macaw']
-    ['hummingbird', 'finch']
-    'dodo' 
     
 Slicing
 * think of indices as pointing between elements
@@ -836,7 +832,7 @@ None    # null
 set()   # empty set
 ```
 
-Example control structures
+`if` statement
 ```python
 mybool1 = True
 mybool2 = True
@@ -848,7 +844,10 @@ if mybool:
         # do something else
     else:
         # do something else
+```
 
+`while` statement
+```python
 count = 1
 while count <=50:
     # do something
@@ -860,7 +859,7 @@ while count <=50:
         break
 ```
 
-`while` with a "break checker"
+`while` statement with a "break checker"
 ```python
 numbers = [1, 3, 5]
 position = 0
@@ -1548,7 +1547,7 @@ Now creating a non-trivial class... (note that `__init__` is a special function 
 5. returns the object
 ```python
 # a non-trivial class example. Note that __init__() is called
-# automatically every time the class is used to create an object.
+# automatically every time the class is used to create an object
 class Person():
     def __init__(self, name):
         self.name = name
@@ -1665,7 +1664,7 @@ give_me_a_car.need_a_push()
 # AttributeError: 'Car' object has no attribute 'need_a_push'
 ```
 
-Call a parent class with `super()`. Note that when you define an `__init__()` method for a child class, you are replacing the `__init__` method of its parent class, so you need to call the parent one explicitly (i.e. it is not called automatically anymore)
+Call a parent class with `super()`. Note that when you define an `__init__()` method for a child class, you are replacing the `__init__` method of its parent class, so you need to call the parent one explicitly (i.e., it is not called automatically anymore)
 ```python
 class Person():
     def __init__(self, name):
@@ -2264,7 +2263,7 @@ $ conda list --explicit > env.yaml  # save
 $ conda env create --file env.yaml  # create
 ```
 
-To save installed packages a `requirements.txt` file
+To save installed packages using a `requirements.txt` file
 ```
 $ conda list -e > requirements_conda.txt  # conda-compatible
 $ pip list --format=freeze > requirements_pip.txt  # pip-compatible
