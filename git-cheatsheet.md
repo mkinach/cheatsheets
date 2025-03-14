@@ -7,7 +7,7 @@ git config --global user.name "User Name"
 git config --global user.email "user@domain.com"
 git config --global core.editor "vim"
 git config --global diff.guitool kompare  # could also use kdiff3
-git config --global merge.tool kompare    # could also use kdiff3 
+git config --global merge.tool kompare    # could also use kdiff3
 ```
 
 For email privacy
@@ -86,7 +86,7 @@ echo *.dat >> .gitignore         # ignore files matching pattern
 echo results/ >> .gitignore      # ignore an entire directory
 echo !final.dat >> .gitignore    # exclude final.dat from .gitignore
 git add -f <file>                # override .gitignore to explicitly include a file
-git rm --cached <file>           # untrack (but do not delete) a file previously added or committed 
+git rm --cached <file>           # untrack (but do not delete) a file previously added or committed
 git status --ignored             # list files which are untracked or ignored
 git ls-tree -r HEAD --name-only  # list all files being tracked on current branch
 ```

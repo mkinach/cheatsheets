@@ -2,7 +2,7 @@
 
 #### Index:
 
-[Pandas](#pandas)  
+[Pandas](#pandas)
 
 ---
 
@@ -120,7 +120,7 @@ df.iloc[1]
 # 2012    38
 # 2016    26
 # Name: CHN, dtype: int64
- 
+
 # index a dataframe by row (via label)
 df.loc['CHN']
 # 2012    38

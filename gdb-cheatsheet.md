@@ -105,7 +105,7 @@ Print 10 lines around the exception, or around some specific line
 
 Look forward or backward in the code
 ```
-(gdb) list 
+(gdb) list
 (gdb) list -
 ```
 
@@ -142,9 +142,9 @@ Some useful debug flags (assuming `gcc` or `mpicc`)
 # -ggdb: produce debugging info for GDB
 # -Wall: verbose warnings at compile time
 # -Wfloat-equal: warning if floating point numbers are using in equality comparisons
-CDEBUGFLAGS := -ggdb 
+CDEBUGFLAGS := -ggdb
 CDEBUGFLAGS := $(CDEBUGFLAGS) -Wall -Wfloat-equal
-CCFLAGS     := 
+CCFLAGS     :=
 CC          := mpicc $(CDEBUGFLAGS)
 ```
 
@@ -192,7 +192,7 @@ To debug MPI jobs running locally on only a few processors:
     ```
     $ gdb --pid <pid> <app>
     ```
-  
+
 4. Once in the debugger go to the frame with the above block of code and continue execution with
     ```
     (gdb) set var i = 7
@@ -212,7 +212,7 @@ it is because gdb cannot store values of large arrays. You can fix this by enter
 ```
 (gdb) set max-value-size unlimited
 ```
- 
+
 If core dumps are not being output, set soft limits to unlimited on your machine
 ```
 $ ulimit -Sc unlimited
@@ -233,5 +233,3 @@ __math_divzero (sign=1) at ../sysdeps/ieee754/dbl-64/math_err.c:70
 70      ../sysdeps/ieee754/dbl-64/math_err.c: No such file or directory.
 ```
 You can step over this exception by using the `step` command
-
-

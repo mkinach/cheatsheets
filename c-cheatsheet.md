@@ -60,7 +60,7 @@ int main()
   char str[] = "Hello";                                 // automatically null-terminated (treated as string)
 
   // note that character constants use '' while strings use ""
-  char ch = 'x';        // 1 byte 
+  char ch = 'x';        // 1 byte
   char ch_str[] = "x";  // 2 bytes (due to null character)
 
   // strings are really arrays, so they are really just char pointers

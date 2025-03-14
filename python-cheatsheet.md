@@ -9,48 +9,53 @@
     * Ch. 7 on string manip/regex, binary data handling
     * Ch. 8 on file I/O
     * Ch. 10 on system functions, including time functions
-    * Ch. 12 on debugging with pdb 
+    * Ch. 12 on debugging with `pdb`
     * Appendix C on SciPy and NumPy
     * Appendix D on installing Python
 
 #### Index:
 
-[Strings](#strings)  
-[Lists](#lists)  
-[Tuples](#tuples)  
-[Dictionaries](#dictionaries)  
-[Sets](#sets)  
-[Combining Data Structures](#combining-data-structures)  
-[If/While Statements](#if-while)  
-[For Loops](#for)  
-[Zip](#zip)  
-[Ranges](#ranges)  
-[List Comprehensions](#list-comprehensions)  
-[Dictionary Comprehensions](#dictionary-comprehensions)  
-[Set Comprehensions](#set-comprehensions)  
-[Generator Comprehensions](#generator-comprehensions)  
-[Functions](#functions)  
-[Generator Function](#generator-function)  
-[Decorator Function](#decorator-function)  
-[Namespaces](#namespaces)  
-[Exception Handling](#exception-handling)  
-[Creating Modules](#creating-modules)  
-[Creating Packages](#creating-packages)  
-[Objects and Classes](#objects-and-classes)  
-[Code Checking with Pylint](#code-checking-with-pylint)  
-[Unit Testing](#testing-with-unittest)  
-[Error Logging](#logging-error-messages-with-logging)  
-[Anaconda](#anaconda)  
-[Virtual Environments](#virtual-environments-with-venv)  
-[Miscellaneous](#miscellaneous)  
+[Strings](#strings)
+[Lists](#lists)
+[Tuples](#tuples)
+[Dictionaries](#dictionaries)
+[Sets](#sets)
+[Combining Data Structures](#combining-data-structures)
+[If/While Statements](#if-while)
+[For Loops](#for)
+[Zip](#zip)
+[Ranges](#ranges)
+[List Comprehensions](#list-comprehensions)
+[Dictionary Comprehensions](#dictionary-comprehensions)
+[Set Comprehensions](#set-comprehensions)
+[Generator Comprehensions](#generator-comprehensions)
+[Functions](#functions)
+[Generator Function](#generator-function)
+[Decorator Function](#decorator-function)
+[Namespaces](#namespaces)
+[Exception Handling](#exception-handling)
+[Creating Modules](#creating-modules)
+[Creating Packages](#creating-packages)
+[Objects and Classes](#objects-and-classes)
+[Code Checking with Pylint](#code-checking-with-pylint)
+[Unit Testing](#testing-with-unittest)
+[Error Logging](#logging-error-messages-with-logging)
+[Anaconda](#anaconda)
+[Virtual Environments](#virtual-environments-with-venv)
+[Miscellaneous](#miscellaneous)
 
 ---
 
 ### Strings
 
-The `print()` function adds spaces between strings, and a newline at the end
+The `print()` function adds spaces between strings and a new line at the end
 ```python
 print(99,'bottles','would be enough.\n')   # 99 bottles would be enough
+```
+
+Print a string without a new line
+```python
+print("Hello", end="")  # no new line is added
 ```
 
 Strings can be enclosed by either single or double quotes
@@ -61,8 +66,8 @@ b = "crackle"; print(b,'\n')    # crackle
 
 You can combine quotes so that strings can contain ' or "
 ```python
-c = "and I said 'nay' to him"; print(c)     # and I said 'nay' to him 
-d = 'a captive double quote (")'; print(d)  # a captive double quote (") 
+c = "and I said 'nay' to him"; print(c)     # and I said 'nay' to him
+d = 'a captive double quote (")'; print(d)  # a captive double quote (")
 ```
 
 You can also just use escape characters
@@ -84,10 +89,10 @@ containing a double quote (")
 
 Empty strings can be created in a number of ways
 ```python
-e = ''; 
-f = ""; 
-g = ''''''; 
-h = """"""; 
+e = '';
+f = "";
+g = '''''';
+h = """""";
 ```
 
 Note that Python does not add spaces when concatenating strings, but the `print()` function does!
@@ -256,7 +261,7 @@ print("Name: {0}, Height: {2}, Age: {1}".format(name, age, height))
 
 ### Lists
 
-* see also [Ranges](#ranges), [List Comprehensions](#list-comprehensions)  
+* see also [Ranges](#ranges), [List Comprehensions](#list-comprehensions)
 
 ```python
 empty_list = [ ]
@@ -300,7 +305,7 @@ all_birds       # [['hummingbird', 'finch'], ['dodo', 'pigeon'], 'macaw']
 all_birds[0]    # ['hummingbird', 'finch']
 all_birds[1][0] # 'dodo'
 ```
-    
+
 Slicing
 * think of indices as pointing between elements
 ```     +---+---+---+---+---+
@@ -334,8 +339,8 @@ marxes  # ['Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
 marxes.insert(0, 'Bobbo')  # offset 0 inserts at beginning of list
 marxes  # ['Bobbo', 'Groucho', 'Chico', 'Gummo', 'Harpo', 'Karl']
 ```
-   
-Delete single element of a list   
+
+Delete single element of a list
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo', 'Gummo', 'Zeppo']
 del marxes[2]; marxes   # ['Groucho', 'Chico', 'Gummo', 'Zeppo']
@@ -348,7 +353,7 @@ marxes = ['Groucho', 'Chico', 'Harpo', 'Gummo', 'Zeppo']
 marxes.remove('Gummo'); marxes
 # ['Groucho', 'Chico', 'Harpo', 'Zeppo']
 ```
-   
+
 Get item from list and delete using `pop()` (like a stack/queue)
 * note that `pop(0)` returns head of the list, `pop(-1)` returns tail
 ```python
@@ -358,13 +363,13 @@ marxes;        # ['Groucho', 'Chico', 'Harpo']
 marxes.pop(1); # 'Chico'
 marxes;        # ['Groucho', 'Harpo']
 ```
-  
+
 Get index of item in list by name
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
 marxes.index('Chico')  # 1
 ```
-  
+
 Combine/merge lists
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
@@ -372,7 +377,7 @@ others = ['Gummo', 'Karl']
 marxes.extend(others); marxes;  # alternatively, marxes += others
 # ['Groucho', 'Chico', 'Harpo', 'Zeppo', 'Gummo', 'Karl']
 ```
-    
+
 Check for element in list
 ```python
 marxes = ['Groucho', 'Chico', 'Harpo', 'Zeppo']
@@ -410,6 +415,11 @@ marxes = ['Groucho', 'Chico', 'Harpo']
 len(marxes)  # 3
 ```
 
+Swap elements of a list
+```python
+lst[j], lst[j-1] = lst[j-1], lst[j]
+```
+
 Copy a list
 ```python
 a = [1, 2, 3]
@@ -437,7 +447,7 @@ breakfast_counter.most_common(1) # n=1
 # you can combine counters
 lunch = ['eggs', 'eggs', 'bacon']
 lunch_counter = Counter(lunch)
-lunch_counter 
+lunch_counter
 # Counter({'eggs': 2, 'bacon': 1})
 breakfast_counter + lunch_counter
 # Counter({'spam': 3, 'eggs': 3, 'bacon': 1})
@@ -455,6 +465,48 @@ breakfast_counter & egg_counter
 # find the union of the counters
 breakfast_counter | lunch_counter
 # Counter({'spam': 3, 'eggs': 2, 'bacon': 1})  # note that this doesn't add the counts
+```
+
+Iterate through a list
+```python
+my_list = [1, 2, 3]
+iterator = iter(my_list)
+
+print(next(iterator))  # 1
+print(next(iterator))  # 2
+print(next(iterator))  # 3
+print(next(iterator))  # this will raise StopIteration as the iterator is exhausted
+
+iterator = iter([1, 2, 3])
+
+print(next(iterator))  # 1
+print(next(iterator))  # 2
+print(next(iterator))  # 3
+print(next(iterator, 'No more items'))  # prevents exception
+
+iterator = iter([1, 2, 3])
+
+while True:
+    try:
+        print(next(iterator))
+    except StopIteration:
+        break
+# 1
+# 2
+# 3
+```
+
+Multidimensional lists
+```python
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+for index, row in enumerate(matrix):
+    print(f"Row index: {index}, Row values: {row}")
+# Row index: 0, Row values: [1, 2]
+# Row index: 1, Row values: [3, 4]
 ```
 
 ### Tuples
@@ -566,7 +618,7 @@ Combine dictionaries
 pythons= { 'Chapman':'Graham', 'Cleese':'John', 'Gilliam':'Terry', 'Idle':'Eric', 'Jones':'Terry', 'Palin':'Michael' }
 others = { 'Marx':'Groucho', 'Howard':'Moe' }
 pythons.update(others)  # entries will be mixed together
-pythons  
+pythons
 # {'Chapman': 'Graham', 'Cleese': 'John', 'Gilliam': 'Terry', 'Idle': 'Eric', 'Jones': 'Terry', 'Palin': 'Michael', 'Marx': 'Groucho', 'Howard': 'Moe'}
 ```
 
@@ -646,9 +698,9 @@ print(periodic_table)
 
 # if the key is not already in the dictionary then a new value is set
 carbon = periodic_table.setdefault('Carbon', 12)
-carbon 
+carbon
 # 12
-periodic_table 
+periodic_table
 # {'Helium': 2, 'Carbon': 12, 'Hydrogen': 1}
 
 # if the already exists in the dictionary then its original value is returned
@@ -677,7 +729,7 @@ periodic_table['Lead']
 periodic_table
 # defaultdict(<class 'int'>, {'Lead': 0, 'Hydrogen': 1})
 
-# an explicit example showing that the argument to defaultdict() must 
+# an explicit example showing that the argument to defaultdict() must
 # be a function returning the value to be assigned to a missing key
 def no_idea():
     return 'Huh?'
@@ -687,7 +739,7 @@ bestiary['A'] = 'Abominable Snowman'
 bestiary['B'] = 'Basilisk'
 bestiary['A']
 # 'Abominable Snowman'
-bestiary['B'] 
+bestiary['B']
 # 'Basilisk'
 bestiary['C']
 # 'Huh?'
@@ -782,7 +834,7 @@ for name, contents in drinks.items():
         if contents & {'vermouth', 'orange juice'}
             print(name)
 # screwdriver
-# martini 
+# martini
 # manhattan
 
 # exclude some values
@@ -836,7 +888,7 @@ set()   # empty set
 ```python
 mybool1 = True
 mybool2 = True
-color   = "red" 
+color   = "red"
 if mybool:
     if mybool2:
         # do something
@@ -880,9 +932,9 @@ Loop through iterable objects
 # range
 for i in range(1,4):
     print(i)
-# 1    
-# 2    
-# 3    
+# 1
+# 2
+# 3
 
 # list
 rabbits = ['Flopsy', 'Mopsy', 'Cottontail', 'Peter']
@@ -1050,7 +1102,7 @@ def knight(saying):
     def inner(quote):
         return "The knights say: '%s'" % quote
     return inner(saying)
-    
+
 knights('Ni!')
 # "The knights say: 'Ni!'"
 ```
@@ -1059,7 +1111,7 @@ Keyword arguments can prevent positional argument confusion
 ```python
 def menu(wine, entree, dessert):
     return {'wine': wine, 'entree': entree, 'dessert': dessert}
-    
+
 menu('beef', 'bagel', 'bordeaux') # bad
 # {'dessert': 'bordeaux', 'wine': 'beef', 'entree': 'bagel'}
 
@@ -1084,7 +1136,7 @@ Gather multiple *positional* arguments with `*`
 # the asterisk groups a variable number of position arguments into a tuple
 def print_args(*args):
     print('Positional argument tuple:', args)
-    
+
 print_args()
 # Positional argument tuple: ()
 
@@ -1095,7 +1147,7 @@ def print_more(required1, required2, *args):
     print('Needed:', required1)
     print('Needed:', required2)
     print('All the rest:', args)
-   
+
 print_more('a', 'b', 'c', 'd', 'e')
 # Needed: a
 # Needed: b
@@ -1108,7 +1160,7 @@ Gather multiple *keyword* arguments with `**`
 def print_kwargs(**kwargs):
     print('Keyword arguments:', kwargs)
     # inside this function, kwargs is a dictionary
-    
+
 print_kwargs(wine='merlot', entree='mutton', dessert='macaroon')
 # Keyword arguments: {'dessert': 'macaroon', 'wine': 'merlot', 'entree': 'mutton'}
 ```
@@ -1119,7 +1171,7 @@ def knight(saying):
     def inner():
         return "The knights say: '%s'" % saying
     return inner
-    
+
 a = knights('Duck')   # a new function called 'a'
 b = knights('Goose')  # a new function called 'b'
 
@@ -1136,7 +1188,7 @@ def edit_story(words, func):
     for word in words:
         print(func(word))
 
-def enliven(word): 
+def enliven(word):
     return word.capitalize() + '!'
 
 stairs = ['thud', 'meow', 'thud', 'hiss']
@@ -1164,7 +1216,7 @@ def my_range(first=0, last=10, step=1):
     while number < last:
         yield number  # note the yield instead of return
         number += step
-        
+
 # it's a normal function that returns a generator object
 my_range                 # <function my_range at 0x10193e268>
 ranger = my_range(1, 5)  # <generator object my_range at 0x101a0a168>
@@ -1198,7 +1250,7 @@ def document_it(func):
         print('Result:', result)
         return result
     return new_function
-    
+
 def add_ints(a, b):
     return a+b
 
@@ -1213,7 +1265,7 @@ add_ints2(3,5)
 @document_it  # alternative decorator assignment
 def add_ints3(a, b):
     return a + b
-    
+
 add_ints3(3, 5)
 # Start function add_ints3
 # Positional arguments: (3, 5)
@@ -1233,7 +1285,7 @@ def square_it(func):
 @square_it
 def add_ints4(a, b):
     return a + b
- 
+
 add_ints4(3,5)
 # Running function: new_function
 # Positional arguments: (3, 5)
@@ -1245,7 +1297,7 @@ add_ints4(3,5)
 @document_it
 def add_ints5(a, b):
     return a + b
-    
+
 add_ints5(3,5)
 # Running function: add_ints
 # Positional arguments: (3, 5)
@@ -1304,20 +1356,20 @@ print('at the top level:', animal)
 def change_and_print_global():
   print('inside change_and_print_global', animal)
   animal = 'wombat'  # ERROR
-  print('after the change', animal) 
+  print('after the change', animal)
 
 # if you *only* change a global variable then you essentially define a local variable
 def change_local():
   animal = 'wombat'  # this one is defined in the function's local namespace
   print('inside change_local:', animal, id(animal))
-  
+
 change_local()
 # inside change_local: wombat 4330406160
 
 animal
 # 'fruitbat'
 id(animal)
-# 4330390832 
+# 4330390832
 ```
 
 If you don't say `global` within a function then variables are assumed to be in the function's local namespace
@@ -1328,7 +1380,7 @@ def change_and_print_global2():
     global animal
     animal = 'wombat'
     print('inside change_and_print_global2', animal)
-    
+
 animal
 # 'fruitbat'
 
@@ -1345,7 +1397,7 @@ animal = 'fruitbat'
 def change_local():
   animal = 'wombat' # local variable
   print('locals:', locals())
-  
+
 animal
 # 'fruitbat'
 
@@ -1367,6 +1419,21 @@ animal
 
 ### Exception Handling
 
+Common exceptions
+```
+AttributeError     Raised by syntax obj.foo, if obj has no member named foo
+EOFError           Raised if "end of file" reached for console or file input
+IOError            Raised upon failure of I/O operation (e.g., opening file)
+IndexError         Raised if index to sequence is out of bounds
+KeyError           Raised if nonexistent key requested for set or dictionary
+KeyboardInterrupt  Raised if user types Ctrl-C while program is executing
+NameError          Raised if nonexistent identifier used
+StopIteration      Raised by next(iterator) if no element
+TypeError          Raised when wrong type of parameter is sent to a function
+ValueError         Raised when parameter has invalid value (e.g., sqrt(−5))
+ZeroDivisionError  Raised when any division operator used with 0 as divisor
+```
+
 A generic exception
 ```python
 short_list = [1, 2, 3]
@@ -1381,7 +1448,7 @@ As a debug measure: `try` is run first; if an exception occurs then `except` is 
 ```python
 short_list = [1, 2, 3]
 position = 5
-try: 
+try:
     short_list[position]
 except:
     print('An exception occured')
@@ -1402,7 +1469,7 @@ while True:
         print('Bad index:', position)
     except Exception as other:
         print('Something else broke:', other)
-        
+
 # Position [q to quit]? 1
 # 2
 # Position [q to quit]? 0
@@ -1423,7 +1490,7 @@ You can define your own exceptions
 # an exception is a class (a child of the class 'Exception')
 class UppercaseException(Exception):
     pass  # let the parent class figure out what to print
-    
+
 words = ['eenie', 'meenie', 'miny', 'MO']
 for word in words:
     if word.isupper():
@@ -1445,7 +1512,7 @@ When defining classes, you can raise the `NotImplementedError()` when a method i
 class MyClass():
   def __init__(self, width, height):
     raise NotImplementedError()
-    
+
 something = MyClass(1,2)
 #Traceback (most recent call last):
 #File "<stdin>", line 1, in <module>
@@ -1531,7 +1598,7 @@ Creating the simplest class
 # the simplest possible class
 class Simplest():
     pass  # indicate the class is empty (just as we did w/ functions)
-    
+
 # create an object from a class
 something = Simplest()
 
@@ -1551,9 +1618,9 @@ Now creating a non-trivial class... (note that `__init__` is a special function 
 class Person():
     def __init__(self, name):
         self.name = name
-    
+
 # create an object for the Person class
-hunter = Person('Elmer Fudd')    
+hunter = Person('Elmer Fudd')
 
 print(hunter.name)
 # Elmer Fudd
@@ -1582,11 +1649,11 @@ Inheritance (child classes)
 class Car():
     def exclaim(self):
         print("I'm a Car!")
-        
+
 # define a child class
 class Yugo(Car):
     pass
-    
+
 give_me_a_car  = Car()
 give_me_a_yugo = Yugo()
 
@@ -1601,12 +1668,12 @@ Overriding a method
 class Car():
     def exclaim(self):
         print("I'm a Car!")
-        
+
 # define a child class
 class Yugo(Car):
     def exclaim(self):
         print("I'm not just any Car, I'm a Yugo!")
-    
+
 give_me_a_car  = Car()
 give_me_a_yugo = Yugo()
 
@@ -1623,11 +1690,11 @@ class Person():
 class MDPerson(Person):
     def __init__(self, name):
         self.name = "Doctor " + name
-        
+
 class JDPerson(Person):
     def __init__(self, name):
         self.name = name + ", Esquire"
-        
+
 person = Person('Fudd')
 doctor = MDPerson('Fudd')
 lawyer = JDPerson('Fudd')
@@ -1637,7 +1704,7 @@ print(person.name)
 print(doctor.name)
 # Doctor Fudd
 print(lawyer.name)
-# Fudd, Esquire 
+# Fudd, Esquire
 ```
 
 Adding a method to an inherited class
@@ -1704,8 +1771,8 @@ class Duck():
     # ...and finally define the getter and setter as properties of the 'name' attribute
     # (first argument to 'property' is the getter, second is the setter)
     name = property(get_name, set_name)
-        
-# now whenever you refer to the 'name' of any 'Duck' object, it calls the getter 
+
+# now whenever you refer to the 'name' of any 'Duck' object, it calls the getter
 fowl = Duck('Howard')
 fowl.name
 # inside the getter
@@ -1744,7 +1811,7 @@ class Duck():
     def set_name(self, input_name):
         print('inside the setter')
         self.hidden_name = input_name
- 
+
 # note that now there are no visible get_name() or set_name() methods
 fowl = Duck('Howard')
 fowl.name
@@ -1766,7 +1833,7 @@ class Circle():
     @property
     def diameter(self):
         return 2 * self.radius
-        
+
 # create a circle object with some radius
 c = Circle(5)
 c.radius
@@ -1823,7 +1890,7 @@ fowl.__name
 
 # internally, the name has been mangled to make it unlikely for
 # external code to access it, but here it is:
-fowl._Duck__name 
+fowl._Duck__name
 # 'Donald'  # notice that it doesn't print 'inside the getter'
 ```
 
@@ -1834,10 +1901,10 @@ Class A():
     count = 0
     def __init__(self):
         # note we use A.count (class attribute) instead of self.count (object instance attribute)
-        A.count += 1 
+        A.count += 1
     def exclaim(self):
         print("I'm an A!")
-    # we need a decorator to indicate that a function is a class method 
+    # we need a decorator to indicate that a function is a class method
     @classmethod
     # the first parameter to a class method is the class itself (note that
     # the word 'class' is reserved so we use 'cls')
@@ -1857,7 +1924,7 @@ class CoyoteWeapon():
     @staticmethod
     def commercial():
         print('This CoyoteWeapon has been brought to you by Acme')
-    
+
 CoyoteWeapon.commercial()
 # This CoyoteWeapon has been brought to you by Acme
 ```
@@ -1874,13 +1941,13 @@ class Quote():
     # return the saved 'words' string with a period
     def says(self):
         return self.words + '.'
-        
+
 # note that __init__ is not redefined so Python calls the __init__ method of the parent class
 # automatically to store 'person' and 'words', which is why we can access 'self.words'
 class QuestionQuote(Quote):
     def says(self):  # redefine the says() method
-        return self.words + '?'  
-        
+        return self.words + '?'
+
 class ExclamationQuote(Quote):
     def says(self):  # redefine the says() method
         return self.words + '!'
@@ -1912,7 +1979,7 @@ brook = BabblingBrook()
 # they are completely unrelated to one another (polymorphism)
 def who_says(obj):
     print(obj.who(), 'says', obj.says())
-    
+
 who_says(hunter)
 # Elmer Fudd says I'm hunting wabbits.
 who_says(hunted1)
@@ -1938,10 +2005,10 @@ Special methods begin and end with two underscores
 class Word():
     def __init__(self, text):
         self.text = text
-    
+
     def equals(self, word2):
         return self.text.lower() == word2.text.lower()
-        
+
 first = Word('ha')
 second = Word('HA')
 third = Word('eh')
@@ -1968,7 +2035,7 @@ first2 == third2
 # False
 ```
 
-Here is a list of common special methods:
+Common special methods
 ```
 __eq__(self,other)     self==other
 __ne__(self,other)     self!=other
@@ -2002,7 +2069,7 @@ class Word():
         return self.text
     def __repr__(self):
         return 'Word("'  self.text  '")'
-        
+
 first = Word('ha')
 first          # uses __repr__
 # Word('ha')
@@ -2015,18 +2082,18 @@ Composition (aggregation) is better than inheritance when a child only needs a p
 class Bill():
     def __init__(self, description):
         self.description = description
-        
+
 class Tail():
     def __init__(self, length):
         self.length = length
-        
+
 class Duck():
     def __init__(self, bill, tail):
         self.bill = bill
         self.tail = tail
     def about(self):
         print('This duck has a', bill.description, 'bill and a', tail.length, 'tail')
-        
+
 tail = Tail('long')
 bill = Bill('wide orange')
 duck = Duck(bill, tail)
@@ -2043,7 +2110,7 @@ b = 2
 print(a)
 print(b)
 print(c)
-``` 
+```
 
 ...then running `pylint` on it:
 ```
@@ -2096,21 +2163,21 @@ import unittest
 import cap
 
 class TestCap(unittest.TestCase):
-  
+
   # setUp()/tearDown() are called before/after each test method to
   # allocate/free resources, but not needed for this trivial example
   def setUp(self):
     pass
   def tearDown(self):
     pass
-    
+
   # the first test
   def test_one_word(self):
     text = 'duck'
     result = cap.just_do_it(text)
     self.assertEqual(result, 'Duck')
-    
-  # the second test 
+
+  # the second test
   def test_multiple_words(self):
     text = 'a veritable flock of ducks'
     result = cap.just_do_it(text)
@@ -2200,8 +2267,8 @@ $ conda info --envs
 
 To create a new environment
 ```
-$ conda create --name test
-$ conda create --name test python=3.9  # use a specific Python version
+$ conda create pip --name test
+$ conda create pip --name test python=3.9  # use a specific Python version
 ```
 
 To clone an environment
@@ -2216,7 +2283,7 @@ $ conda remove --name test --all
 
 To rename an environment
 ```
-$ conda rename -n old_name  new_name 
+$ conda rename -n old_name  new_name
 ```
 
 To load an environment
@@ -2283,6 +2350,13 @@ $ conda search python
 To update Anaconda itself
 ```
 $ conda update conda
+```
+
+To locate the package installation directory not associated with Anaconda
+```
+$ python -c "import site; print(site.getsitepackages())"  # list system-wide location (installed via 'apt' or 'sudo pip')
+$ python -m site --user-site                              # list user-specific location (installed via 'pip')
+$ pip uninstall -y -r <(pip freeze --user)                # uninstall user-specific packages from the non-Anaconda directory
 ```
 
 ### Virtual Environments with `venv`
@@ -2354,7 +2428,7 @@ Display the Python search path (note the empty line is an empty string `''` whic
 import sys
 for place in sys.path:
     print(place)
-#    
+#
 # /usr/lib/python38.zip
 # /usr/lib/python3.8
 # /usr/lib/python3.8/lib-dynload
@@ -2371,7 +2445,7 @@ def palindrome(word):
         if dq.popleft() != dq.pop():
             return False
     return True
-    
+
 palindrome('a')
 # True
 palindrome('racecar')
@@ -2385,7 +2459,7 @@ palindrome('halibut')
 Iterate over code structures with `itertools`
 ```python
 # run through all arguments as if they were a single iterable
-import itertools  
+import itertools
 for item in itertools.chain([1,2],['a','b']):
     print(item)
 # 1
@@ -2413,8 +2487,8 @@ for item in itertools.accumulate([1,2,3,4]):
 # you can customize the accumulate function behaviour
 def multiply(a, b):
     return a * b
-    
-for item in itertools.accumulate([1,2,3,4], multiply): 
+
+for item in itertools.accumulate([1,2,3,4], multiply):
     print(item)
 # 1
 # 2
@@ -2458,12 +2532,12 @@ def make_list_1():
   for value in range(1000):
     result.append(value)
   return result
-  
+
 # create a list by list comprehension
 def make_list_2():
   result = [value for value in range(1000)]
   return result
-  
+
 print('make_list_1 takes', timeit(make_list_1, number=1000), 'seconds')
 print('make_list_2 takes', timeit(make_list_2, number=1000), 'seconds')
 # make_list_1 takes 0.14117428699682932 seconds
