@@ -7,12 +7,12 @@
 
 #### Index:
 
-[Text Handling](#text-handling)
-[Control Structures](#control-structures)
-[Functions](#functions)
-[Pointers and Arrays](#pointers-and-arrays)
-[Scope and Storage Classes](#scope-and-storage-classes)
-[Miscellaneous](#miscellaneous)
+[Text Handling](#text-handling)<br>
+[Control Structures](#control-structures)<br>
+[Functions](#functions)<br>
+[Pointers and Arrays](#pointers-and-arrays)<br>
+[Scope and Storage Classes](#scope-and-storage-classes)<br>
+[Miscellaneous](#miscellaneous)<br>
 
 ---
 

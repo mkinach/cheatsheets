@@ -15,34 +15,34 @@
 
 #### Index:
 
-[Strings](#strings)
-[Lists](#lists)
-[Tuples](#tuples)
-[Dictionaries](#dictionaries)
-[Sets](#sets)
-[Combining Data Structures](#combining-data-structures)
-[If/While Statements](#if-while)
-[For Loops](#for)
-[Zip](#zip)
-[Ranges](#ranges)
-[List Comprehensions](#list-comprehensions)
-[Dictionary Comprehensions](#dictionary-comprehensions)
-[Set Comprehensions](#set-comprehensions)
-[Generator Comprehensions](#generator-comprehensions)
-[Functions](#functions)
-[Generator Function](#generator-function)
-[Decorator Function](#decorator-function)
-[Namespaces](#namespaces)
-[Exception Handling](#exception-handling)
-[Creating Modules](#creating-modules)
-[Creating Packages](#creating-packages)
-[Objects and Classes](#objects-and-classes)
-[Code Checking with Pylint](#code-checking-with-pylint)
-[Unit Testing](#testing-with-unittest)
-[Error Logging](#logging-error-messages-with-logging)
-[Anaconda](#anaconda)
-[Virtual Environments](#virtual-environments-with-venv)
-[Miscellaneous](#miscellaneous)
+[Strings](#strings)<br>
+[Lists](#lists)<br>
+[Tuples](#tuples)<br>
+[Dictionaries](#dictionaries)<br>
+[Sets](#sets)<br>
+[Combining Data Structures](#combining-data-structures)<br>
+[If/While Statements](#if-while)<br>
+[For Loops](#for)<br>
+[Zip](#zip)<br>
+[Ranges](#ranges)<br>
+[List Comprehensions](#list-comprehensions)<br>
+[Dictionary Comprehensions](#dictionary-comprehensions)<br>
+[Set Comprehensions](#set-comprehensions)<br>
+[Generator Comprehensions](#generator-comprehensions)<br>
+[Functions](#functions)<br>
+[Generator Function](#generator-function)<br>
+[Decorator Function](#decorator-function)<br>
+[Namespaces](#namespaces)<br>
+[Exception Handling](#exception-handling)<br>
+[Creating Modules](#creating-modules)<br>
+[Creating Packages](#creating-packages)<br>
+[Objects and Classes](#objects-and-classes)<br>
+[Code Checking with Pylint](#code-checking-with-pylint)<br>
+[Unit Testing](#testing-with-unittest)<br>
+[Error Logging](#logging-error-messages-with-logging)<br>
+[Anaconda](#anaconda)<br>
+[Virtual Environments](#virtual-environments-with-venv)<br>
+[Miscellaneous](#miscellaneous)<br>
 
 ---
 
