@@ -515,8 +515,8 @@ for index, row in enumerate(matrix):
 
 ```python
 empty_tuple = ()
-one_marx    = ('Groucho')                    # ('Groucho',)
-marx_tuple  = ('Groucho', 'Chico', 'Harpo')  # ('Groucho', 'Chico', 'Harpo')
+one_marx    = ('Groucho')
+marx_tuple  = ('Groucho', 'Chico', 'Harpo')
 a, b, c = marx_tuple
 a  # 'Groucho'
 b  # 'Chico'
