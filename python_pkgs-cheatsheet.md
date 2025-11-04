@@ -497,8 +497,8 @@ df.loc[['USA', 'GBR'], ['2012']]
 # GBR    29
 
 # list all row and column labels
-df.index   # Index(['USA', 'CHN', 'GBR'], dtype='object')
-df.column  # Index(['2012', '2016'], dtype='object')
+df.index    # Index(['USA', 'CHN', 'GBR'], dtype='object')
+df.columns  # Index(['2012', '2016'], dtype='object')
 list(df.columns)  # alternate way
 
 # get basic info on dataset

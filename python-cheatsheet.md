@@ -42,6 +42,7 @@
 [Error Logging](#logging-error-messages-with-logging)<br>
 [Anaconda](#anaconda)<br>
 [Virtual Environments](#virtual-environments-with-venv)<br>
+[Jupyter](#jupyter)<br>
 [Miscellaneous](#miscellaneous)<br>
 
 ---
@@ -576,39 +577,39 @@ duck.color = 'green'
 
 Converting tuples/lists to dictionaries
 ```python
-# Convert a list (of two-item lists) to dict
+# convert a list (of two-item lists) to dict
 alphabet1 = [ ['a', 'b'], ['c', 'd'], ['e', 'f'] ]
 dict(alphabet1)  # {'c': 'd', 'a': 'b', 'e': 'f'}
 
-# Convert a list (of two-item tuples) to dict
+# convert a list (of two-item tuples) to dict
 alphabet2 = [ ('a', 'b'), ('c', 'd'), ('e', 'f') ]
 dict(alphabet2)  # {'c': 'd', 'a': 'b', 'e': 'f'}
 
-# Convert a tuple (of two-item lists) to dict
+# convert a tuple (of two-item lists) to dict
 alphabet3 = ( ['a', 'b'], ['c', 'd'], ['e', 'f'] )
 dict(alphabet3)  # {'c': 'd', 'a': 'b', 'e': 'f'}
 
-# Convert a tuple (of two-character strings) to dict
+# convert a tuple (of two-character strings) to dict
 alphabet4 = [ 'ab', 'cd', 'ef' ]
 dict(alphabet4)  # {'c': 'd', 'a': 'b', 'e': 'f'}
 
-# Convert a list (of two-character strings) to dict
-alphabet4 = ( 'ab', 'cd', 'ef' )
-dict(alphabet4)  # {'c': 'd', 'a': 'b', 'e': 'f'}
+# convert a list (of two-character strings) to dict
+alphabet5 = ( 'ab', 'cd', 'ef' )
+dict(alphabet5)  # {'c': 'd', 'a': 'b', 'e': 'f'}
 ```
 
 Add or change item by key
 ```python
-pythons = { 'Chapman':'Graham', 'Cleese':'John', 'Idle':'Eric', 'Jones':'Terry', 'Palin':'Michael', }
+pythons = { 'Chapman':'Graham', 'Cleese':'John', 'Idle':'Eric', 'Jones':'Terry', 'Palin':'Michael' }
 pythons['Gilliam'] = 'Gerry'  # add an item
 pythons['Gilliam'] = 'Terry'  # change an item
 pythons
-# {'Cleese': 'John', 'Gilliam': 'Terry', 'Palin': 'Michael','Chapman': 'Graham', 'Idle': 'Eric', 'Jones': 'Terry'}
+# {'Cleese': 'John', 'Gilliam': 'Terry', 'Palin': 'Michael', 'Chapman': 'Graham', 'Idle': 'Eric', 'Jones': 'Terry'}
 ```
 
 Repeated entries are clobbered
 ```python
-pythons = {'Graham':'Chapman', 'John':'Cleese', 'Eric':'Idle', 'Terry':'Gilliam', 'Michael':'Palin', 'Terry':'Jones'}  # first Terry gets clobbered
+pythons = { 'Graham':'Chapman', 'John':'Cleese', 'Eric':'Idle', 'Terry':'Gilliam', 'Michael':'Palin', 'Terry':'Jones' }  # first Terry gets clobbered
 pythons
 # {'Terry':'Jones', 'Eric':'Idle', 'Graham':'Chapman', 'John':'Cleese', 'Michael':'Palin'}
 ```
@@ -686,7 +687,6 @@ letters2 = letters.copy()
 letters['g'] = 'h'
 letters2  # {'a':'b', 'c':'d', 'e':'f'}
 letters   # {'a':'b', 'c':'d', 'e':'f', 'g':'h'}
-}
 ```
 
 Handle missing keys with `setdefault()`
@@ -704,7 +704,7 @@ periodic_table
 # {'Helium': 2, 'Carbon': 12, 'Hydrogen': 1}
 
 # if the already exists in the dictionary then its original value is returned
-helium = periodic_table.setdefault('Helium',947)
+helium = periodic_table.setdefault('Helium', 947)
 helium
 # 2
 periodic_table
@@ -713,7 +713,7 @@ periodic_table
 
 Handle missing keys with `defaultdict()`. It can accept the following:
 ```
-int  -- returns 0
+int  -- return 0
 list -- return empty list []
 dict -- return empty dictionary {}
 ```
@@ -813,17 +813,16 @@ a > b              # false  PROPER SUPERSET
 Test for values in a set
 ```python
 # create a dict
-drinks = {
-...     'martini': {'vodka', 'vermouth'},
-...     'black russian': {'vodka', 'kahlua'},
-...     'white russian': {'cream', 'kahlua', 'vodka'},
-...     'manhattan': {'rye', 'vermouth', 'bitters'},
-...     'screwdriver': {'orange juice', 'vodka'}}
+drinks = { 'martini': {'vodka', 'vermouth'},
+           'black russian': {'vodka', 'kahlua'},
+           'white russian': {'cream', 'kahlua', 'vodka'},
+           'manhattan': {'rye', 'vermouth', 'bitters'},
+           'screwdriver': {'orange juice', 'vodka'} }
 
 for name, contents in drinks.items():
-        if 'vodka' in contents and not ('vermouth' in contents or
-...        'cream' in contents):
-            print(name)
+    if 'vodka' in contents and not ('vermouth' in contents or
+       'cream' in contents):
+        print(name)
 # screwdriver
 # black russian
 ```
@@ -831,16 +830,16 @@ for name, contents in drinks.items():
 Find common values in a set
 ```python
 for name, contents in drinks.items():
-        if contents & {'vermouth', 'orange juice'}
-            print(name)
+    if contents & {'vermouth', 'orange juice'}:
+        print(name)
 # screwdriver
 # martini
 # manhattan
 
 # exclude some values
 for name, contents in drinks.items():
-        if 'vodka' in contents and not contents & {'vermouth', 'cream'}
-            print(name)
+    if 'vodka' in contents and not contents & {'vermouth', 'cream'}:
+        print(name)
 # screwdriver
 # black russian
 ```
@@ -853,7 +852,7 @@ marxes  = ['Groucho', 'Chico', 'Harpo']
 pythons = ['Chapman', 'Cleese', 'Gilliam', 'Jones', 'Palin']
 stooges = ['Moe', 'Curly', 'Larry']
 
-tuple_of_lists = marxes,python,stooges
+tuple_of_lists = marxes, pythons, stooges
 tuple_of_lists  # (['Groucho', 'Chico', 'Harpo'],['Chapman', 'Cleese', 'Gilliam', 'Jones', 'Palin'],['Moe', 'Curly', 'Larry'])
 
 list_of_lists = [marxes, pythons, stooges]
@@ -896,6 +895,14 @@ if mybool:
         # do something else
     else:
         # do something else
+```
+
+Ternary conditional
+```python
+age = 18
+can_vote = "yes" if age >= 18 else "no"
+print(can_vote)
+# yes
 ```
 
 `while` statement
@@ -1103,7 +1110,7 @@ def knight(saying):
         return "The knights say: '%s'" % quote
     return inner(saying)
 
-knights('Ni!')
+knight('Ni!')
 # "The knights say: 'Ni!'"
 ```
 
@@ -1172,8 +1179,8 @@ def knight(saying):
         return "The knights say: '%s'" % saying
     return inner
 
-a = knights('Duck')   # a new function called 'a'
-b = knights('Goose')  # a new function called 'b'
+a = knight('Duck')   # a new function called 'a'
+b = knight('Goose')  # a new function called 'b'
 
 a()
 # "The knights say: 'Duck'"
@@ -2268,7 +2275,7 @@ $ conda info --envs
 To create a new environment
 ```
 $ conda create pip --name test
-$ conda create pip --name test python=3.9  # use a specific Python version
+$ conda create python=3.9 pip --name test  # use a specific Python version
 ```
 
 To clone an environment
@@ -2338,8 +2345,8 @@ $ pip list --format=freeze > requirements_pip.txt  # pip-compatible
 
 To install packages using a `requirements.txt` file
 ```
-$ conda install --file requirements_conda.txt       # install in existing env
-$ conda create --name test --file requirements.txt  # install in new env
+$ conda install --file requirements_conda.txt             # install in existing env
+$ conda create --name test --file requirements_conda.txt  # install in new env
 ```
 
 To list available Python versions
@@ -2402,11 +2409,50 @@ Install packages in the virtual environment using
 
 To export the package dependencies of your project
 ```
-(test) $ pip freeze > requirements.txt
+(test) $ pip freeze > requirements_pip.txt
 ```
 To recreate a virtual environment with packages from a list
 ```
-(test) $ pip install -r requirements.txt
+(test) $ pip install -r requirements_pip.txt
+```
+
+### Jupyter
+
+Some useful settings
+```python
+# allow multiple outputs in one cell
+if True:
+    from IPython.core.interactiveshell import InteractiveShell
+    InteractiveShell.ast_node_interactivity = "all"
+
+# ignore warnings
+if True:
+    import warnings
+    warnings.filterwarnings('ignore')
+
+# make any element fully scrollable
+from IPython.display import HTML
+def scroll(content, max_height=500, max_width=1300):
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_colwidth', None)
+
+    try:
+        if hasattr(content, '_repr_html_'):
+            html = content._repr_html_()
+        else:
+            html = f"<pre>{str(content)}</pre>"
+
+        return HTML(f'''
+        <div style="max-height:{max_height}px; max-width:{max_width}px; overflow:auto; border:1px solid #ccc; padding:10px;">
+            {html}
+        </div>
+        ''')
+
+    finally:
+        pd.reset_option('display.max_rows')
+        pd.reset_option('display.max_columns')
+        pd.reset_option('display.max_colwidth')
 ```
 
 ### Miscellaneous
