@@ -51,6 +51,46 @@ docker run -it --rm ubuntu:latest
 docker rmi ubuntu:latest
 ```
 
+Create a custom interactive Ubuntu container with a non-root user
+```
+mkdir -p /tmp/ubuntu-nonroot
+cd /tmp/ubuntu-nonroot
+vi Dockerfile
+```
+```
+# use the official Ubuntu image
+FROM ubuntu:latest
+
+# set environment variables to avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# update package list and install necessary packages
+RUN apt update && \
+    apt install -y sudo && \
+    apt clean
+#    apt clean && \
+#    rm -rf /var/lib/apt/lists/*
+
+# create a non-root user
+RUN useradd -m -s /bin/bash user && \
+    echo "user:user" | chpasswd && \
+    usermod -aG sudo user  # add user to the sudo group
+
+# switch to the new user
+USER user
+
+# set the working directory
+WORKDIR /home/user
+
+# start a shell when the container runs
+CMD ["/bin/bash"]
+```
+```
+docker build -t ubuntu-nonroot .
+docker run -it --rm --name ubuntu-nonroot ubuntu-nonroot
+# the username for the non-root user is `user` and the password is `user`
+```
+
 ### GNU Screen
 
 Useful aliases
